@@ -1,4 +1,5 @@
 from .db import db
+import datetime
 
 
 class Comment(db.Model):
