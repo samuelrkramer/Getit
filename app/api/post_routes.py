@@ -51,6 +51,19 @@ def edit_post(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+@post_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_post(id):
+    post = Post.query.get(id)
+    if not post:
+        return {'errors': ["not found"]}, 404
+    if post.id != current_user.id:
+        return {'errors': ["not yours"]}, 403
+    db.session.delete(post)
+    db.session.commit
+    return jsonify(deleted=True)
+
+
 @post_routes.route('/<int:id>')
 # @login_required
 def post(id):
