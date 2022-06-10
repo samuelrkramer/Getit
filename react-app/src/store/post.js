@@ -23,7 +23,7 @@ const loadAllPosts = (posts) => ({
 });
 
 // CREATE POST
-const createPost = (post) = async (dispatch) => {
+const createPost = (post) => async (dispatch) => {
   const response = await fetch('/api/posts', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
