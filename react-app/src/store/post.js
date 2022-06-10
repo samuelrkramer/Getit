@@ -14,7 +14,7 @@ export const getAllPosts = () => async (dispatch) => {
     dispatch(loadAllPosts(posts));
     return posts;
   }
-  return response;
+  return response; // idk how this will work out so try and see for error handling
 }
 
 const loadAllPosts = (posts) => ({
@@ -29,6 +29,12 @@ const createPost = (post) = async (dispatch) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(post),
   });
+  if (response.ok) {
+    const newPost = await response.json();
+    dispatch(addPost(newPost));
+    return newPost;
+  }
+  return response; // idk how this will work out so try and see for error handling
 }
 
 const addPost = (post) => ({
@@ -36,97 +42,9 @@ const addPost = (post) => ({
   post,
 });
 
-// const removeUser = () => ({
-//   type: REMOVE_USER,
-// })
-
 const initialState = {
   postsArr: [],
 };
-
-// export const authenticate = () => async (dispatch) => {
-//   const response = await fetch('/api/auth/', {
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   });
-//   if (response.ok) {
-//     const data = await response.json();
-//     if (data.errors) {
-//       return;
-//     }
-  
-//     dispatch(setUser(data));
-//   }
-// }
-
-// export const login = (email, password) => async (dispatch) => {
-//   const response = await fetch('/api/auth/login', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     },
-//     body: JSON.stringify({
-//       email,
-//       password
-//     })
-//   });
-  
-  
-//   if (response.ok) {
-//     const data = await response.json();
-//     dispatch(setUser(data))
-//     return null;
-//   } else if (response.status < 500) {
-//     const data = await response.json();
-//     if (data.errors) {
-//       return data.errors;
-//     }
-//   } else {
-//     return ['An error occurred. Please try again.']
-//   }
-
-// }
-
-// export const logout = () => async (dispatch) => {
-//   const response = await fetch('/api/auth/logout', {
-//     headers: {
-//       'Content-Type': 'application/json',
-//     }
-//   });
-
-//   if (response.ok) {
-//     dispatch(removeUser());
-//   }
-// };
-
-
-// export const signUp = (username, email, password) => async (dispatch) => {
-//   const response = await fetch('/api/auth/signup', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({
-//       username,
-//       email,
-//       password,
-//     }),
-//   });
-  
-//   if (response.ok) {
-//     const data = await response.json();
-//     dispatch(setUser(data))
-//     return null;
-//   } else if (response.status < 500) {
-//     const data = await response.json();
-//     if (data.errors) {
-//       return data.errors;
-//     }
-//   } else {
-//     return ['An error occurred. Please try again.']
-//   }
-// }
 
 export default function post_reducer(state = initialState, action) {
   let newState = clone(state)
@@ -137,9 +55,102 @@ export default function post_reducer(state = initialState, action) {
       });
       newState.postsArr = action.posts
       return newState;
+    case ADD_POST:
+      newState.posts[action.post.id] = action.post;
+      newState.postsArr.push(action.post);
+      return newState;
     // case REMOVE_USER:
     //   return { user: null }
     default:
       return state;
   }
 }
+
+        // const removeUser = () => ({
+        //   type: REMOVE_USER,
+        // })
+        
+        
+        // export const authenticate = () => async (dispatch) => {
+        //   const response = await fetch('/api/auth/', {
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     }
+        //   });
+        //   if (response.ok) {
+        //     const data = await response.json();
+        //     if (data.errors) {
+        //       return;
+        //     }
+          
+        //     dispatch(setUser(data));
+        //   }
+        // }
+        
+        // export const login = (email, password) => async (dispatch) => {
+        //   const response = await fetch('/api/auth/login', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //       email,
+        //       password
+        //     })
+        //   });
+          
+          
+        //   if (response.ok) {
+        //     const data = await response.json();
+        //     dispatch(setUser(data))
+        //     return null;
+        //   } else if (response.status < 500) {
+        //     const data = await response.json();
+        //     if (data.errors) {
+        //       return data.errors;
+        //     }
+        //   } else {
+        //     return ['An error occurred. Please try again.']
+        //   }
+        
+        // }
+        
+        // export const logout = () => async (dispatch) => {
+        //   const response = await fetch('/api/auth/logout', {
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     }
+        //   });
+        
+        //   if (response.ok) {
+        //     dispatch(removeUser());
+        //   }
+        // };
+        
+        
+        // export const signUp = (username, email, password) => async (dispatch) => {
+        //   const response = await fetch('/api/auth/signup', {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //       username,
+        //       email,
+        //       password,
+        //     }),
+        //   });
+          
+        //   if (response.ok) {
+        //     const data = await response.json();
+        //     dispatch(setUser(data))
+        //     return null;
+        //   } else if (response.status < 500) {
+        //     const data = await response.json();
+        //     if (data.errors) {
+        //       return data.errors;
+        //     }
+        //   } else {
+        //     return ['An error occurred. Please try again.']
+        //   }
+        // }
