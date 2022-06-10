@@ -10,18 +10,15 @@ post_routes = Blueprint('posts', __name__)
 @post_routes.route('', methods=['POST'])
 @login_required
 def new_post():
-    print("########## new_post() fired in routes")
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if True: #form.validate_on_submit():
-        print("########## in if block, currently bypassed the if")
+    if form.validate_on_submit():
         post = Post(
-            # userId=form.data['userId'],
+            # userId=form.data['userId'],  # console.log() and print() so I can find this line later
             userId=current_user.id,
             title=form.data['title'],
             body=form.data['body']
         )
-        print("   ###    ### Here's the new post:", post, post.to_dict())
         db.session.add(post)
         db.session.commit()
         return post.to_dict()
@@ -43,10 +40,7 @@ def edit_post(id):
         return {'errors': ["not found"]}, 404
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if True: #form.validate_on_submit():
-        print("          ##############")
-        print("post:", post.to_dict())
-        print("current-user:", current_user.to_dict())
+    if form.validate_on_submit():
         if post.userId != current_user.id:
             return {'errors': ["not yours"]}, 403
         post.title = form.data['title']
