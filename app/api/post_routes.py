@@ -7,18 +7,21 @@ from .auth_routes import validation_errors_to_error_messages
 post_routes = Blueprint('posts', __name__)
 
 
-@post_routes.route('/', methods=['POST'])
+@post_routes.route('', methods=['POST'])
 @login_required
 def new_post():
+    print("########## new_post() fired in routes")
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+    if True: #form.validate_on_submit():
+        print("########## in if block, currently bypassed the if")
         post = Post(
             # userId=form.data['userId'],
             userId=current_user.id,
             title=form.data['title'],
             body=form.data['body']
         )
+        print("   ###    ### Here's the new post:", post, post.to_dict())
         db.session.add(post)
         db.session.commit()
         return post.to_dict()
@@ -40,8 +43,11 @@ def edit_post(id):
         return {'errors': ["not found"]}, 404
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        if post.id != current_user.id:
+    if True: #form.validate_on_submit():
+        print("          ##############")
+        print("post:", post.to_dict())
+        print("current-user:", current_user.to_dict())
+        if post.userId != current_user.id:
             return {'errors': ["not yours"]}, 403
         post.title = form.data['title']
         post.body=form.data['body']
@@ -57,10 +63,10 @@ def delete_post(id):
     post = Post.query.get(id)
     if not post:
         return {'errors': ["not found"]}, 404
-    if post.id != current_user.id:
+    if post.userId != current_user.id:
         return {'errors': ["not yours"]}, 403
     db.session.delete(post)
-    db.session.commit
+    db.session.commit()
     return jsonify(deleted=True)
 
 
