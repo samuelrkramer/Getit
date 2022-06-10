@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 // import { signUp } from '../../store/session';
 
-const PostForm = () => {
+const PostForm = ({mode}) => {
   const [errors, setErrors] = useState([]);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -85,7 +85,7 @@ const PostForm = () => {
           required={true}
         ></input>
       </div> */}
-      <button type='submit'>Create Post</button>
+      <button type='submit'>{mode} Post</button>
     </form>
   );
 };

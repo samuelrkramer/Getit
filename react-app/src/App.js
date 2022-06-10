@@ -47,7 +47,10 @@ function App() {
           <PostsList />
         </Route>
         <ProtectedRoute path='/posts/new' exact={true} >
-          <PostForm />
+          <PostForm mode="Create" />
+        </ProtectedRoute>
+        <ProtectedRoute path='/posts/:postId/edit' exact={true} >
+          <PostForm mode="Edit" />
         </ProtectedRoute>
         <Route path='/posts/:postId' exact={true} >
           <SinglePost />
