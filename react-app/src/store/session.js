@@ -57,6 +57,34 @@ export const login = (email, password) => async (dispatch) => {
 
 }
 
+export const loginDemo = () => async (dispatch) => {
+  const response = await fetch('/api/auth/demologin', {
+    method: 'POST',
+    // headers: {
+    //   'Content-Type': 'application/json'
+    // },
+    // body: JSON.stringify({
+    //   email,
+    //   password
+    // })
+  });
+  
+  
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again. Perhaps the database is not seeded?']
+  }
+
+}
+
 export const logout = () => async (dispatch) => {
   const response = await fetch('/api/auth/logout', {
     headers: {
