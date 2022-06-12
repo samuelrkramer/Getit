@@ -80,11 +80,11 @@ export default function post_reducer(state = initialState, action) {
       });
       return newState;
     case ADD_POST:
-      newState.posts[action.post.id] = action.post;
+      newState.obj[action.post.id] = action.post;
       // newState.postsArr.push(action.post);
       return newState;
     case EDIT_POST:
-      newState.posts[action.post.id] = action.post;
+      newState.obj[action.post.id] = action.post;
       // newState.postsArr.push(action.post); // THIS DEFINITELY DOESN'T WORK if I decide to use it, it's just a relic from the ADD_POST case
       return newState;
     // case REMOVE_USER:
