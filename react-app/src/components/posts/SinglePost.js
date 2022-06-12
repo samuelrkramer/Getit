@@ -3,21 +3,25 @@ import { useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 
 function SinglePost() {
-  const [post, setPost] = useState({});
-  const { postId }  = useParams();
+  let { postId } = useParams();
+  // postId = parseInt(postId);
+  const post = useSelector(state => state.posts.obj[postId]);
+
+  // const [post, setPost] = useState({});
+  // const { postId }  = useParams();
   const user = useSelector(state => state.session.user)
 
-  console.log("In SinglePost component, postId:", postId)
+  // console.log("In SinglePost component, postId:", postId)
 
   useEffect(() => {
     if (!postId) {
-      return;
+      return ("Loading...");
     }
-    (async () => {
-      const response = await fetch(`/api/posts/${postId}`);
-      const post = await response.json();
-      setPost(post);
-    })();
+    // (async () => {
+    //   const response = await fetch(`/api/posts/${postId}`);
+    //   const post = await response.json();
+    //   setPost(post);
+    // })();
   }, [postId]);
 
   if (!post) {

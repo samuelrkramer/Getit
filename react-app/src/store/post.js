@@ -8,7 +8,7 @@ const ADD_POST = 'posts/ADD_POST';
 
 // GET ALL POSTS
 export const getAllPosts = () => async (dispatch) => {
-  console.log("## getAllPosts thunk fired")
+  // console.log("## getAllPosts thunk fired")
   const response = await fetch('/api/posts');
   if (response.ok) {
     const posts = await response.json();
@@ -52,7 +52,7 @@ export default function post_reducer(state = initialState, action) {
   let newState = clone(state)
   switch (action.type) {
     case LOAD_POSTS:
-      console.log(" %% LOAD_POSTS in reducer", action.posts)
+      // console.log(" %% LOAD_POSTS in reducer", action.posts)
       // newState.marker = "hey here's a marker";
       action.posts.forEach(post => {
         newState.obj[post.id] = post
