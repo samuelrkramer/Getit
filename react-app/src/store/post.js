@@ -25,7 +25,7 @@ const loadAllPosts = (payload) => ({
 });
 
 // CREATE POST
-const createPost = (post) => async (dispatch) => {
+export const createPost = (post) => async (dispatch) => {
   const response = await fetch('/api/posts', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -45,7 +45,7 @@ const addPost = (post) => ({
 });
 
 // EDIT POST
-const editPost = (post) => async (dispatch) => {
+export const editPost = (post) => async (dispatch) => {
   const response = await fetch(`/api/posts/${post.id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
