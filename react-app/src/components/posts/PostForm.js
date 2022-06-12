@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom';
-// import { signUp } from '../../store/session';
+import { createPost, editPost } from '../../store/post'
 
 const PostForm = ({mode}) => {
   let { postId } = useParams();
@@ -23,7 +23,22 @@ const PostForm = ({mode}) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    
+    setErrors([]);
+    const newPost = {
+      title, body
+    };
+    // let thunk = createPost;
+    let result;
+    if (mode === "Edit") {
+      newPost.id = postId;
+      // thunk = editPost;
+      result = await dispatch(editPost(newPost));
+    } else {
+      result = await dispatch(createPost(newPost));
+    }
+    // const result = await dispatch(thunk(newPost));
+    if (result && result.errors) setErrors(result.errors);
+    else history.push(`/posts/${result.id}`)
   };
 
   const deleteHandler = async (e) => {
