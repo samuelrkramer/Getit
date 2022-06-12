@@ -43,7 +43,7 @@ const addPost = (post) => ({
 });
 
 const initialState = {
-  postsArr: [],
+  // postsArr: [],
 };
 
 export default function post_reducer(state = initialState, action) {
@@ -53,11 +53,11 @@ export default function post_reducer(state = initialState, action) {
       action.posts.forEach(post => {
         newState.posts[post.id] = post
       });
-      newState.postsArr = action.posts
+      // newState.postsArr = action.posts
       return newState;
     case ADD_POST:
       newState.posts[action.post.id] = action.post;
-      newState.postsArr.push(action.post);
+      // newState.postsArr.push(action.post);
       return newState;
     // case REMOVE_USER:
     //   return { user: null }
