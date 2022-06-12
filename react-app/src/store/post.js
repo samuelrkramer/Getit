@@ -5,6 +5,7 @@ const clone = rfdc()
 const LOAD_POSTS = 'posts/LOAD_POSTS';
 const ADD_POST = 'posts/ADD_POST';
 const EDIT_POST = 'posts/EDIT_POST';
+const DELETE_POST = 'posts/DELETE_POST';
 // const REMOVE_USER = 'session/REMOVE_USER';
 
 // GET ALL POSTS
@@ -64,6 +65,24 @@ const modifyPost = (post) => ({
   post,
 });
 
+// DELETE POST
+export const deletePost = (postId) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${postId}`, {
+    method: "DELETE"
+  });
+  if (response.ok) {
+    // const newPost = await response.json();
+    dispatch(removePost(postId));
+    return true;
+  }
+  return response; // idk how this will work out so try and see for error handling
+}
+
+const removePost = (postId) => ({
+  type: DELETE_POST,
+  postId,
+});
+
 const initialState = {
   // postsArr: [],
   obj: {},
@@ -86,6 +105,10 @@ export default function post_reducer(state = initialState, action) {
     case EDIT_POST:
       newState.obj[action.post.id] = action.post;
       // newState.postsArr.push(action.post); // THIS DEFINITELY DOESN'T WORK if I decide to use it, it's just a relic from the ADD_POST case
+      return newState;
+    case DELETE_POST:
+      // console.log(action.postId);
+      delete newState.obj[action.postId];
       return newState;
     // case REMOVE_USER:
     //   return { user: null }

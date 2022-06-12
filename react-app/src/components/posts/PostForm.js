@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom';
-import { createPost, editPost } from '../../store/post'
+import { createPost, deletePost, editPost } from '../../store/post'
 
 const PostForm = ({mode}) => {
   let { postId } = useParams();
@@ -43,6 +43,10 @@ const PostForm = ({mode}) => {
 
   const deleteHandler = async (e) => {
     e.preventDefault();
+    setErrors([]);
+    const result = await dispatch(deletePost(postId));
+    if (result && result.errors) setErrors(result.errors);
+    else history.push('/posts');
   }
 
   const cancelHandler = e => {
