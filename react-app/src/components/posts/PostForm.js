@@ -1,26 +1,58 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-// import { signUp } from '../../store/session';
+import { useParams, useHistory } from 'react-router-dom';
+import { createPost, deletePost, editPost } from '../../store/post'
 
 const PostForm = ({mode}) => {
+  let { postId } = useParams();
+  postId = parseInt(postId);
+  const oldPost = useSelector(state => state.posts.obj[postId]);
+  let post = {};
+  if (mode === "Edit") {
+    post = { ...oldPost };
+  }
+
   const [errors, setErrors] = useState([]);
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [title, setTitle] = useState(post.title || '');
+  const [body, setBody] = useState(post.body || '');
   // const [password, setPassword] = useState('');
   // const [repeatPassword, setRepeatPassword] = useState('');
   // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // if (password === repeatPassword) {
-    //   const data = await dispatch(signUp(username, email, password));
-    //   if (data) {
-    //     setErrors(data)
-    //   }
-    // }
+    setErrors([]);
+    const newPost = {
+      title, body
+    };
+    // let thunk = createPost;
+    let result;
+    if (mode === "Edit") {
+      newPost.id = postId;
+      // thunk = editPost;
+      result = await dispatch(editPost(newPost));
+    } else {
+      result = await dispatch(createPost(newPost));
+    }
+    // const result = await dispatch(thunk(newPost));
+    if (result && result.errors) setErrors(result.errors);
+    else history.push(`/posts/${result.id}`)
   };
+
+  const deleteHandler = async (e) => {
+    e.preventDefault();
+    setErrors([]);
+    const result = await dispatch(deletePost(postId));
+    if (result && result.errors) setErrors(result.errors);
+    else history.push('/posts');
+  }
+
+  const cancelHandler = e => {
+    e.preventDefault();
+    history.goBack();
+  }
 
   // const updateUsername = (e) => {
   //   setUsername(e.target.value);
@@ -86,6 +118,10 @@ const PostForm = ({mode}) => {
         ></input>
       </div> */}
       <button type='submit'>{mode} Post</button>
+      {mode === "Edit" && (
+        <button onClick={deleteHandler}>Delete</button>
+      )}
+      <button onClick={cancelHandler}>Cancel</button>
     </form>
   );
 };

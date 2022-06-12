@@ -4,10 +4,13 @@ const clone = rfdc()
 // constants
 const LOAD_POSTS = 'posts/LOAD_POSTS';
 const ADD_POST = 'posts/ADD_POST';
+const EDIT_POST = 'posts/EDIT_POST';
+const DELETE_POST = 'posts/DELETE_POST';
 // const REMOVE_USER = 'session/REMOVE_USER';
 
 // GET ALL POSTS
 export const getAllPosts = () => async (dispatch) => {
+  // console.log("## getAllPosts thunk fired")
   const response = await fetch('/api/posts');
   if (response.ok) {
     const posts = await response.json();
@@ -17,13 +20,13 @@ export const getAllPosts = () => async (dispatch) => {
   return response; // idk how this will work out so try and see for error handling
 }
 
-const loadAllPosts = (posts) => ({
+const loadAllPosts = (payload) => ({
   type: LOAD_POSTS,
-  posts,
+  posts: payload.posts,
 });
 
 // CREATE POST
-const createPost = (post) => async (dispatch) => {
+export const createPost = (post) => async (dispatch) => {
   const response = await fetch('/api/posts', {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -42,22 +45,70 @@ const addPost = (post) => ({
   post,
 });
 
+// EDIT POST
+export const editPost = (post) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${post.id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(post),
+  });
+  if (response.ok) {
+    const newPost = await response.json();
+    dispatch(modifyPost(newPost));
+    return newPost;
+  }
+  return response; // idk how this will work out so try and see for error handling
+}
+
+const modifyPost = (post) => ({
+  type: EDIT_POST,
+  post,
+});
+
+// DELETE POST
+export const deletePost = (postId) => async (dispatch) => {
+  const response = await fetch(`/api/posts/${postId}`, {
+    method: "DELETE"
+  });
+  if (response.ok) {
+    // const newPost = await response.json();
+    dispatch(removePost(postId));
+    return true;
+  }
+  return response; // idk how this will work out so try and see for error handling
+}
+
+const removePost = (postId) => ({
+  type: DELETE_POST,
+  postId,
+});
+
 const initialState = {
-  postsArr: [],
+  // postsArr: [],
+  obj: {},
 };
 
 export default function post_reducer(state = initialState, action) {
   let newState = clone(state)
   switch (action.type) {
     case LOAD_POSTS:
+      // console.log(" %% LOAD_POSTS in reducer", action.posts)
+      // newState.marker = "hey here's a marker";
       action.posts.forEach(post => {
-        newState.posts[post.id] = post
+        newState.obj[post.id] = post
       });
-      newState.postsArr = action.posts
       return newState;
     case ADD_POST:
-      newState.posts[action.post.id] = action.post;
-      newState.postsArr.push(action.post);
+      newState.obj[action.post.id] = action.post;
+      // newState.postsArr.push(action.post);
+      return newState;
+    case EDIT_POST:
+      newState.obj[action.post.id] = action.post;
+      // newState.postsArr.push(action.post); // THIS DEFINITELY DOESN'T WORK if I decide to use it, it's just a relic from the ADD_POST case
+      return newState;
+    case DELETE_POST:
+      // console.log(action.postId);
+      delete newState.obj[action.postId];
       return newState;
     // case REMOVE_USER:
     //   return { user: null }
