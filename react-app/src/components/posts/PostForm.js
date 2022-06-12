@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 // import { signUp } from '../../store/session';
 
 const PostForm = ({mode}) => {
+  let { postId } = useParams();
+  postId = parseInt(postId);
+  const oldPost = useSelector(state => state.posts[postId]);
+  let post = {};
+  if (mode === "Edit") {
+    post = { ...oldPost };
+  }
+
   const [errors, setErrors] = useState([]);
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [title, setTitle] = useState(post.title || '');
+  const [body, setBody] = useState(post.body || '');
   // const [password, setPassword] = useState('');
   // const [repeatPassword, setRepeatPassword] = useState('');
   // const user = useSelector(state => state.session.user);
@@ -14,12 +22,8 @@ const PostForm = ({mode}) => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // if (password === repeatPassword) {
-    //   const data = await dispatch(signUp(username, email, password));
-    //   if (data) {
-    //     setErrors(data)
-    //   }
-    // }
+    
+
   };
 
   // const updateUsername = (e) => {

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useParams, Link } from 'react-router-dom';
 
 function SinglePost() {
   const [post, setPost] = useState({});
   const { postId }  = useParams();
+  const user = useSelector(state => state.session.user)
 
   console.log("In SinglePost component, postId:", postId)
 
@@ -37,6 +39,9 @@ function SinglePost() {
         <li>
           <strong>Body</strong> {post.body}
         </li>
+      )}
+      {post.userId === user.id && (
+        <Link to={`/posts/${post.id}/edit`} >Edit</Link>
       )}
     </ul>
   );
