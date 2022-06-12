@@ -6,7 +6,7 @@ import { useParams, Redirect } from 'react-router-dom';
 const PostForm = ({mode}) => {
   let { postId } = useParams();
   postId = parseInt(postId);
-  const oldPost = useSelector(state => state.posts[postId]);
+  const oldPost = useSelector(state => state.posts.obj[postId]);
   let post = {};
   if (mode === "Edit") {
     post = { ...oldPost };
