@@ -31,6 +31,10 @@ function SinglePost() {
     dispatch(getPostsComments(postId))
   }, [postId, dispatch])
 
+  useEffect(() => {
+    if (!user) setCForm(false);
+  }, [user])
+
   if (!post) {
     return null;
   }
