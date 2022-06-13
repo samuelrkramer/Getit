@@ -75,4 +75,5 @@ def post(postId):
 # @login_required
 def comments(postId):
     comments = Comment.query.filter(Comment.postId == postId)
-    return jsonify({comm.id: comm.to_dict() for comm in comments})
+    # return jsonify({comm.id: comm.to_dict() for comm in comments})
+    return {'comments': [comment.to_dict() for comment in comments]}
