@@ -14,7 +14,7 @@ function SinglePost() {
 
   const [cForm, setCForm ] = useState(false);
   
-  const user = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session.user) || {};
 
   useEffect(() => {
     if (!post) {
