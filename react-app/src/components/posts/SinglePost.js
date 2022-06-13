@@ -14,7 +14,7 @@ function SinglePost() {
 
   const [cForm, setCForm ] = useState(false);
   // const hideCForm = () => setCForm(false);
-  console.log("singlepost render, setCForm:", setCForm);
+  // console.log("singlepost render, setCForm:", setCForm);
   // console.log("singlepost render, hideCForm:", hideCForm);
 
   const [editing, setEditing ] = useState(0)
@@ -65,20 +65,20 @@ function SinglePost() {
           <Link to={`/posts/${post.id}/edit`} >Edit</Link>
           )}
       </ul>
-      { !cForm && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
-      { cForm && (<CommentForm mode="Create" postId setCForm={setCForm} />)}
+      { cForm !== true && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
+      { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       {cIds.length > 0 && (
         <div>
           <h2>Comments:</h2>
           {cIds.map(cId => (
             <div key={cId}>
-              {editing === cId && (<CommentForm mode="Edit" postId comment={comments[cId]} setCForm={setCForm} />)}
-              {editing !== cId && (
+              {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comments[cId]} setCForm={setCForm} />)}
+              {cForm !== cId && (
                 <ul>
                   <li><i>Comment ID: {cId}</i></li>
                   <li>{comments[cId].body}</li>
                   <li><i>From: ID#{comments[cId].userId}</i></li>
-                  { comments[cId].userId === user.id && (<Link onClick={() => setEditing(cId)}>Edit</Link>)}
+                  { comments[cId].userId === user.id && (<Link onClick={() => setCForm(cId)}>Edit</Link>)}
                 </ul>
               )}
             </div>

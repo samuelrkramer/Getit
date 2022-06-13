@@ -13,19 +13,21 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
   //   post = { ...oldPost };
   // }
 
+  console.log("Comment form rendered with postId:", postId);
   const [errors, setErrors] = useState([]);
   const [body, setBody] = useState(comment.body || '');
   // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   // const history = useHistory();
 
-  console.log("commentform render, setCForm:", setCForm);
+  // console.log("commentform render, setCForm:", setCForm);
   // console.log("commentform render, hideCForm:", hideCForm);
   // const hideForm = hideCForm();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setErrors([]);
+    console.log("comment submithandler fired, postId:", postId)
     const newComment = {
       postId, body
     };
@@ -58,6 +60,7 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
     e.preventDefault();
     // history.goBack();
     setCForm(false);
+    // setEditing(0);
   }
 
   return (
