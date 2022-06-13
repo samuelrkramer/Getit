@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { getPostsComments } from '../../store/comment';
+import CommentForm from './CommentForm';
 
 function SinglePost() {
   let { postId } = useParams();
@@ -11,11 +12,9 @@ function SinglePost() {
   const comments = useSelector(state => state.comments.onPost[postId]);
   const cIds = Object.keys(comments || {});
 
-  // const [post, setPost] = useState({});
-  // const { postId }  = useParams();
+  const [cForm, setCForm ] = useState(false);
+  
   const user = useSelector(state => state.session.user)
-
-  // console.log("In SinglePost component, postId:", postId)
 
   useEffect(() => {
     if (!post) {
@@ -57,16 +56,22 @@ function SinglePost() {
           <Link to={`/posts/${post.id}/edit`} >Edit</Link>
           )}
       </ul>
+      { cForm !== true && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
+      { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       {cIds.length > 0 && (
         <div>
           <h2>Comments:</h2>
           {cIds.map(cId => (
             <div key={cId}>
-              <ul>
-                <li><i>Comment ID: {cId}</i></li>
-                <li>{comments[cId].body}</li>
-                <li><i>From: ID#{comments[cId].userId}</i></li>
-              </ul>
+              {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comments[cId]} setCForm={setCForm} />)}
+              {cForm !== cId && (
+                <ul>
+                  <li><i>Comment ID: {cId}</i></li>
+                  <li>{comments[cId].body}</li>
+                  <li><i>From: ID#{comments[cId].userId}</i></li>
+                  { comments[cId].userId === user.id && (<Link onClick={() => setCForm(cId)}>Edit</Link>)}
+                </ul>
+              )}
             </div>
           ))}
         </div>
