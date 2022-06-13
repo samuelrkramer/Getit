@@ -13,17 +13,8 @@ function SinglePost() {
   const cIds = Object.keys(comments || {});
 
   const [cForm, setCForm ] = useState(false);
-  // const hideCForm = () => setCForm(false);
-  // console.log("singlepost render, setCForm:", setCForm);
-  // console.log("singlepost render, hideCForm:", hideCForm);
-
-  const [editing, setEditing ] = useState(0)
-
-  // const [post, setPost] = useState({});
-  // const { postId }  = useParams();
+  
   const user = useSelector(state => state.session.user)
-
-  // console.log("In SinglePost component, postId:", postId)
 
   useEffect(() => {
     if (!post) {
