@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom';
 import { createPost, deletePost, editPost } from '../../store/post'
@@ -54,25 +54,15 @@ const PostForm = ({mode}) => {
     history.goBack();
   }
 
-  // const updateUsername = (e) => {
-  //   setUsername(e.target.value);
-  // };
-
-  // const updateEmail = (e) => {
-  //   setEmail(e.target.value);
-  // };
-
-  // const updatePassword = (e) => {
-  //   setPassword(e.target.value);
-  // };
-
-  // const updateRepeatPassword = (e) => {
-  //   setRepeatPassword(e.target.value);
-  // };
-
-  // if (user) {
-  //   return <Redirect to='/' />;
-  // }
+  useEffect(() => {
+    if (mode === "Create") {
+      setTitle("");
+      setBody("");
+    } else {
+      setTitle(post.title);
+      setBody(post.body);
+    }
+  }, [mode]);
 
   return (
     <form onSubmit={submitHandler}>
