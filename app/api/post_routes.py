@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Post
+from app.models import db, Post, Comment
 from app.forms import PostForm
 from .auth_routes import validation_errors_to_error_messages
 
@@ -32,10 +32,10 @@ def posts():
     return {'posts': [post.to_dict() for post in posts]}
 
 
-@post_routes.route('/<int:id>', methods=['PUT'])
+@post_routes.route('/<int:postId>', methods=['PUT'])
 @login_required
-def edit_post(id):
-    post = Post.query.get(id)
+def edit_post(postId):
+    post = Post.query.get(postId)
     if not post:
         return {'errors': ["not found"]}, 404
     form = PostForm()
@@ -51,10 +51,10 @@ def edit_post(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-@post_routes.route('/<int:id>', methods=['DELETE'])
+@post_routes.route('/<int:postId>', methods=['DELETE'])
 @login_required
-def delete_post(id):
-    post = Post.query.get(id)
+def delete_post(postId):
+    post = Post.query.get(postId)
     if not post:
         return {'errors': ["not found"]}, 404
     if post.userId != current_user.id:
@@ -64,8 +64,16 @@ def delete_post(id):
     return jsonify(deleted=True)
 
 
-@post_routes.route('/<int:id>')
+@post_routes.route('/<int:postId>')
 # @login_required
-def post(id):
-    post = Post.query.get(id)
+def post(postId):
+    post = Post.query.get(postId)
     return post.to_dict()
+
+
+@post_routes.route('/<int:postId>/comments')
+# @login_required
+def comments(postId):
+    comments = Comment.query.filter(Comment.postId == postId)
+    # return jsonify({comm.id: comm.to_dict() for comm in comments})
+    return {'comments': [comment.to_dict() for comment in comments]}

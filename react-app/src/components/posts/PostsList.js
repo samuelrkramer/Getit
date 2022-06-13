@@ -7,7 +7,7 @@ function PostsList() {
   const dispatch = useDispatch();
   // const [posts, setPosts] = useState([]);
 
-  const posts = useSelector(state => state.posts.obj)
+  const posts = useSelector(state => state.posts.obj);
   const postIds = Object.keys(posts);
 
   useEffect(() => {
