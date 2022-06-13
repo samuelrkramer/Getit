@@ -14,7 +14,7 @@ function SinglePost() {
 
   const [cForm, setCForm ] = useState(false);
   
-  const user = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session.user) || false;
 
   useEffect(() => {
     if (!post) {
@@ -30,6 +30,10 @@ function SinglePost() {
   useEffect(() => {
     dispatch(getPostsComments(postId))
   }, [postId, dispatch])
+
+  useEffect(() => {
+    if (!user) setCForm(false);
+  }, [user])
 
   if (!post) {
     return null;
@@ -56,7 +60,7 @@ function SinglePost() {
           <Link to={`/posts/${post.id}/edit`} >Edit</Link>
           )}
       </ul>
-      { cForm !== true && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
+      { cForm !== true && user && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
       { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       {cIds.length > 0 && (
         <div>
