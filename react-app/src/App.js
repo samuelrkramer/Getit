@@ -11,6 +11,7 @@ import PostsList from './components/posts/PostsList';
 import SinglePost from './components/posts/SinglePost';
 import PostForm from './components/posts/PostForm';
 import { authenticate } from './store/session';
+import './Global.css';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
