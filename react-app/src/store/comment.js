@@ -89,7 +89,7 @@ const initialState = {
   onPost: {},
 };
 
-export default function post_reducer(state = initialState, action) {
+export default function comment_reducer(state = initialState, action) {
   let newState = clone(state)
   switch (action.type) {
     case LOAD_POST_COMMENTS:
