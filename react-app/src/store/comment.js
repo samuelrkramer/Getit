@@ -115,7 +115,7 @@ export default function comment_reducer(state = initialState, action) {
       // console.log(action.postId);
       delete newState.obj[action.commentId];
       for (let i in newState.onPost) {
-        delete newState.onPost[i][commentId];
+        delete newState.onPost[i][action.commentId];
       }
       return newState;
     // case REMOVE_USER:
