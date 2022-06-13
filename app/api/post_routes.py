@@ -25,7 +25,7 @@ def new_post():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
-@post_routes.route('/')
+@post_routes.route('')
 # @login_required
 def posts():
     posts = Post.query.all()
