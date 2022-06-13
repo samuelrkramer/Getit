@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 // import { createPost, deletePost, editPost } from '../../store/post'
 import { createComment, deleteComment, editComment } from '../../store/comment';
 
-const CommentForm = ({mode, postId, comment={}, setCForm, hideCForm }) => {
+const CommentForm = ({mode, postId, comment={}, setCForm }) => {
   // let { postId } = useParams();
   // postId = parseInt(postId);
   // const oldComment = useSelector(state => state.comments.obj[postId]);
@@ -14,16 +14,14 @@ const CommentForm = ({mode, postId, comment={}, setCForm, hideCForm }) => {
   // }
 
   const [errors, setErrors] = useState([]);
-  // const [title, setTitle] = useState(post.title || '');
   const [body, setBody] = useState(comment.body || '');
-  // const [password, setPassword] = useState('');
-  // const [repeatPassword, setRepeatPassword] = useState('');
   // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
   // const history = useHistory();
 
   console.log("commentform render, setCForm:", setCForm);
-  console.log("commentform render, hideCForm:", hideCForm);
+  // console.log("commentform render, hideCForm:", hideCForm);
+  // const hideForm = hideCForm();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -31,7 +29,7 @@ const CommentForm = ({mode, postId, comment={}, setCForm, hideCForm }) => {
     const newComment = {
       postId, body
     };
-    // let thunk = createPost;
+    // let thunk = createComment;
     // let result = await dispatch(createComment(newComment));
     let result;
     if (mode === "Edit") {
@@ -44,7 +42,7 @@ const CommentForm = ({mode, postId, comment={}, setCForm, hideCForm }) => {
     // const result = await dispatch(thunk(newComment));
     if (result && result.errors) setErrors(result.errors);
     // else history.push(`/posts/${result.id}`)
-    // hideCForm(false);
+    setCForm(false);
   };
 
   const deleteHandler = async (e) => {
@@ -53,13 +51,13 @@ const CommentForm = ({mode, postId, comment={}, setCForm, hideCForm }) => {
     const result = await dispatch(deleteComment(comment.id));
     if (result && result.errors) setErrors(result.errors);
     // else history.push('/posts');
-    // hideCForm(false);
+    setCForm(false);
   }
 
   const cancelHandler = e => {
     e.preventDefault();
     // history.goBack();
-    // hideCForm(false);
+    setCForm(false);
   }
 
   return (

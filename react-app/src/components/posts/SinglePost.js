@@ -13,9 +13,9 @@ function SinglePost() {
   const cIds = Object.keys(comments || {});
 
   const [cForm, setCForm ] = useState(false);
-  const hideCForm = () => setCForm(false);
+  // const hideCForm = () => setCForm(false);
   console.log("singlepost render, setCForm:", setCForm);
-  console.log("singlepost render, hideCForm:", hideCForm);
+  // console.log("singlepost render, hideCForm:", hideCForm);
 
   const [editing, setEditing ] = useState(0)
 
@@ -66,13 +66,13 @@ function SinglePost() {
           )}
       </ul>
       { !cForm && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
-      { cForm && (<CommentForm mode="Create" postId setCForm hideCForm />)}
+      { cForm && (<CommentForm mode="Create" postId setCForm={setCForm} />)}
       {cIds.length > 0 && (
         <div>
           <h2>Comments:</h2>
           {cIds.map(cId => (
             <div key={cId}>
-              {editing === cId && (<CommentForm mode="Edit" postId comment={comments[cId]} hideCForm />)}
+              {editing === cId && (<CommentForm mode="Edit" postId comment={comments[cId]} setCForm={setCForm} />)}
               {editing !== cId && (
                 <ul>
                   <li><i>Comment ID: {cId}</i></li>
