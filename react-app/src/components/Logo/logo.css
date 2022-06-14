@@ -1,0 +1,10 @@
+.logo {
+  height: 40px;
+  width: 120px;
+  background-color: red;
+}
+
+.logo a {
+  text-decoration: none;
+  color: black;
+}
