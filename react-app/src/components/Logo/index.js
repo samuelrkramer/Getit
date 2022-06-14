@@ -5,7 +5,7 @@ const Logo = () => {
   return(
     <div className="logo">
       <Link to="/">
-        🤣GETit
+        🤣 GETit
       </Link>
     </div>
   )
