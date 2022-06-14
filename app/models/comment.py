@@ -28,5 +28,6 @@ class Comment(db.Model):
             'parentId': self.parentId,
             'body': self.body,
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
+            'user': {'id': self.user.id, 'username': self.user.username}
         }
