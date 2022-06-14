@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { getAllPosts } from '../../store/post';
 
 function PostsList() {
@@ -21,9 +21,10 @@ function PostsList() {
   }, [dispatch]);
 
   const postComponents = postIds.map(i => {
+    const post = posts[i];
     return (
       <li key={i}>
-        <NavLink to={`/posts/${posts[i].id}`}>{posts[i].title}</NavLink> from ID#{posts[i].userId}
+        <NavLink to={`/posts/${post.id}`}>{post.title}</NavLink> from <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
       </li>
     );
   });

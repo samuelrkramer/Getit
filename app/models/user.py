@@ -1,4 +1,5 @@
 from .db import db
+from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 import datetime
@@ -14,6 +15,9 @@ class User(db.Model, UserMixin):
     
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now(), onupdate=datetime.datetime.now())
+
+    posts = relationship("Post", back_populates="user")
+    comments = relationship("Comment", back_populates="user")
 
     @property
     def password(self):
