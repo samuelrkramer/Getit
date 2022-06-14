@@ -11,6 +11,7 @@ import PostsList from './components/posts/PostsList';
 import SinglePost from './components/posts/SinglePost';
 import PostForm from './components/posts/PostForm';
 import { authenticate } from './store/session';
+import './Global.css';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -55,9 +56,9 @@ function App() {
         <Route path='/posts/:postId' exact={true} >
           <SinglePost />
         </Route>
-        <ProtectedRoute path='/' exact={true} >
+        <Route path='/' exact={true} >
           <h1>My Home Page</h1>
-        </ProtectedRoute>
+        </Route>
       </Switch>
     </BrowserRouter>
   );

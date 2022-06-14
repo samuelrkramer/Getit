@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+// import { Link } from 'react-router-dom';
 import { logout } from '../../store/session';
 
 const LogoutButton = () => {
@@ -8,7 +9,7 @@ const LogoutButton = () => {
     await dispatch(logout());
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return <a onClick={onLogout}>logout</a>;
 };
 
 export default LogoutButton;

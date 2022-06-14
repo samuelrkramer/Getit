@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'RockoFLF';
+  src:url('../../static/font/RockoFLF.ttf.woff') format('woff'),
+      url('../../static/font/RockoFLF.ttf.svg#RockoFLF') format('svg'),
+      url('../../static/font/RockoFLF.ttf.eot'),
+      url('../../static/font/RockoFLF.ttf.eot?#iefix') format('embedded-opentype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+.logo {
+  /* height: 40px; */
+  /* width: 120px; */
+  /* background-color: red; */
+  font-family: 'RockoFLF';
+  font-size: 2em;
+  margin-left: 4px;
+}
+
+.logo a {
+  text-decoration: none;
+  color: black;
+}

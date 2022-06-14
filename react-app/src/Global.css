@@ -1,0 +1,22 @@
+/* html,  */
+body {
+  /* position: absolute; */
+  /* top: 0; */
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+  min-height: 100%;
+  position: relative;
+
+  font: normal x-small;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #369;
+}
+
+ul, ol {
+  list-style: none;
+}

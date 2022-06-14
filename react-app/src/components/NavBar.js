@@ -1,59 +1,89 @@
 
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import { loginDemo } from '../store/session';
+import Logo from './Logo';
+import './NavBar.css';
 
 const NavBar = () => {
-  const user = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+
+  const separator = (<span className="separator">|</span>);
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(loginDemo());
+    return data;
+  };
+
   return (
     <nav>
-      <ul>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/posts' exact={true} activeClassName='active'>
-            Posts
-          </NavLink>
-        </li>
-        {user && (
-        <>
+      <div className="navleft">
+        <Logo />
+        <ul className="menu">
           <li>
-            <NavLink to='/posts/new' exact={true} activeClassName='active'>
-              Create Post
+            <NavLink to='/' exact={true} activeClassName='active'>
+              home
             </NavLink>
           </li>
           <li>
-            Logged in as <NavLink to={`/users/${user.id}`} >{user.username}</NavLink>
+            <NavLink to='/users' exact={true} activeClassName='active'>
+              users
+            </NavLink>
           </li>
           <li>
-            <LogoutButton />
+            <NavLink to='/posts' exact={true} activeClassName='active'>
+              posts
+            </NavLink>
           </li>
-        </>
-        )}
-        {!user && (
-          <>
+          {user && (
+            <>
             <li>
-              <NavLink to='/login' exact={true} activeClassName='active'>
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                Sign Up
+              <NavLink to='/posts/new' exact={true} activeClassName='active'>
+                create post
               </NavLink>
             </li>
           </>
-        )}
-      </ul>
+          )}
+        </ul>
+      </div>
+      <div className="sessionbox">
+        {/* <ul> */}
+          {user && (
+            <>
+              <span>
+                logged in as <Link to={`/users/${user.id}`} >{user.username}</Link>
+              </span>
+              {separator}
+              <span>
+                <LogoutButton />
+              </span>
+            </>
+          )}
+          {!user && (
+            <>
+              <span>
+                <NavLink to='/login' exact={true} activeClassName='active'>
+                  Login
+                </NavLink>
+              </span>
+                {separator}
+              <span>
+                <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                  Sign Up
+                </NavLink>
+              </span>
+              {separator}
+              <span className="bold">
+                <a onClick={demoLogin}>demo</a>
+              </span>
+            </>
+          )}
+        {/* </ul> */}
+      </div>
     </nav>
   );
 }
