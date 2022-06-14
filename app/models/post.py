@@ -24,6 +24,7 @@ class Post(db.Model):
             'userId': self.userId,
             'title': self.title,
             'body': self.body,
+            'user': {'id': self.user.id, 'username': self.user.username},
             'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'updated_at': self.updated_at,
         }
