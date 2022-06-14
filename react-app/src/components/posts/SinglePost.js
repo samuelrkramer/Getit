@@ -14,7 +14,7 @@ function SinglePost() {
 
   const [cForm, setCForm ] = useState(false);
   
-  const user = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session.user) || false;
 
   useEffect(() => {
     if (!post) {
@@ -31,6 +31,10 @@ function SinglePost() {
     dispatch(getPostsComments(postId))
   }, [postId, dispatch])
 
+  useEffect(() => {
+    if (!user) setCForm(false);
+  }, [user])
+
   if (!post) {
     return null;
   }
@@ -42,7 +46,7 @@ function SinglePost() {
           <strong>Post Id</strong> {postId}
         </li>
         <li>
-          <strong>User Id</strong> {post.userId}
+          <strong>User</strong> <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
         </li>
         <li>
           <strong>Title</strong> {post.title}
@@ -56,24 +60,26 @@ function SinglePost() {
           <Link to={`/posts/${post.id}/edit`} >Edit</Link>
           )}
       </ul>
-      { cForm !== true && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
+      { cForm !== true && user && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
       { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       {cIds.length > 0 && (
         <div>
           <h2>Comments:</h2>
-          {cIds.map(cId => (
+          {cIds.map(cId => {
+            const comment = comments[cId];
+            return (
             <div key={cId}>
-              {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comments[cId]} setCForm={setCForm} />)}
+              {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comment} setCForm={setCForm} />)}
               {cForm !== cId && (
                 <ul>
                   <li><i>Comment ID: {cId}</i></li>
-                  <li>{comments[cId].body}</li>
-                  <li><i>From: ID#{comments[cId].userId}</i></li>
-                  { comments[cId].userId === user.id && (<Link onClick={() => setCForm(cId)}>Edit</Link>)}
+                  <li>{comment.body}</li>
+                  <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li>
+                  { comment.userId === user.id && (<Link onClick={() => setCForm(cId)}>Edit</Link>)}
                 </ul>
               )}
             </div>
-          ))}
+          )})}
         </div>
       )}
     </>
