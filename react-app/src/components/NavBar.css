@@ -1,3 +1,78 @@
 nav {
-  
+  display: block;
+  /* flex-direction: row; */
+  position: relative;
+  background-color: #cee3f8;
+  border-bottom: 1px solid #5f99cf;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+}
+
+.navleft {
+  font-size: larger;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.navleft .logo {
+  display: inline-block;
+  vertical-align: bottom;
+  margin-bottom: 3px;
+}
+
+.menu {
+  list-style-type: none;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 5px 0 0 0;
+  /* margin-top: 5px; */
+  vertical-align: bottom;
+}
+
+.menu li {
+  display: inline;
+  /* font-weight: bold; */
+  margin: 0px 3px;
+}
+
+.menu li a.active {
+  color: orangered;
+  background-color: white;
+  border: 1px solid #5f99cf;
+  border-bottom: 1px solid white;
+  z-index: 20;
+}
+
+.menu li a {
+  padding: 2px 6px 0 6px;
+  background-color: #eff7ff;
+}
+
+.sessionbox {
+  display: block;
+  /* display: none; */
+  margin: 0;
+/* }
+
+.sessionbox { */
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  background-color: #eff7ff;
+  padding: 4px;
+  line-height: 12px;
+  border-top-left-radius: 7px;
+
+  color: gray;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.separator {
+  margin: 0 .7ex 0 .7ex;
+  cursor: default;
 }
