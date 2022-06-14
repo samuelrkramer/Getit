@@ -46,7 +46,7 @@ function SinglePost() {
           <strong>Post Id</strong> {postId}
         </li>
         <li>
-          <strong>User Id</strong> {post.userId}
+          <strong>User</strong> <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
         </li>
         <li>
           <strong>Title</strong> {post.title}
@@ -72,7 +72,7 @@ function SinglePost() {
                 <ul>
                   <li><i>Comment ID: {cId}</i></li>
                   <li>{comments[cId].body}</li>
-                  <li><i>From: ID#{comments[cId].userId}</i></li>
+                  <li><i>From: <Link to={`/users/${comments[cId].userId}`}>{comments[cId].user.username}</Link></i></li>
                   { comments[cId].userId === user.id && (<Link onClick={() => setCForm(cId)}>Edit</Link>)}
                 </ul>
               )}
