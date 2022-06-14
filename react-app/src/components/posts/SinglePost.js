@@ -65,19 +65,21 @@ function SinglePost() {
       {cIds.length > 0 && (
         <div>
           <h2>Comments:</h2>
-          {cIds.map(cId => (
+          {cIds.map(cId => {
+            const comment = comments[cId];
+            return (
             <div key={cId}>
-              {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comments[cId]} setCForm={setCForm} />)}
+              {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comment} setCForm={setCForm} />)}
               {cForm !== cId && (
                 <ul>
                   <li><i>Comment ID: {cId}</i></li>
-                  <li>{comments[cId].body}</li>
-                  <li><i>From: <Link to={`/users/${comments[cId].userId}`}>{comments[cId].user.username}</Link></i></li>
-                  { comments[cId].userId === user.id && (<Link onClick={() => setCForm(cId)}>Edit</Link>)}
+                  <li>{comment.body}</li>
+                  <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li>
+                  { comment.userId === user.id && (<Link onClick={() => setCForm(cId)}>Edit</Link>)}
                 </ul>
               )}
             </div>
-          ))}
+          )})}
         </div>
       )}
     </>
