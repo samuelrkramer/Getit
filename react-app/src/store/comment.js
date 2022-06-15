@@ -37,7 +37,13 @@ export const createComment = (comment) => async (dispatch) => {
     dispatch(addComment(newComment));
     return newComment;
   }
-  return response; // idk how this will work out so try and see for error handling
+  const data = await response.json();
+  if (data.errors) {
+    return data;
+  } else {
+    return {errors: ['An error occurred. Please try again.']}
+  }
+  // return response; // idk how this will work out so try and see for error handling
 }
 
 const addComment = (comment) => ({
@@ -57,7 +63,13 @@ export const editComment = (comment) => async (dispatch) => {
     dispatch(modifyComment(newComment));
     return newComment;
   }
-  return response; // idk how this will work out so try and see for error handling
+  const data = await response.json();
+  if (data.errors) {
+    return data;
+  } else {
+    return {errors: ['An error occurred. Please try again.']}
+  }
+  // return response; // idk how this will work out so try and see for error handling
 }
 
 const modifyComment = (comment) => ({
@@ -75,7 +87,13 @@ export const deleteComment = (commentId) => async (dispatch) => {
     dispatch(removeComment(commentId));
     return true;
   }
-  return response; // idk how this will work out so try and see for error handling
+  const data = await response.json();
+  if (data.errors) {
+    return data;
+  } else {
+    return {errors: ['An error occurred. Please try again.']}
+  }
+  // return response; // idk how this will work out so try and see for error handling
 }
 
 const removeComment = (commentId) => ({

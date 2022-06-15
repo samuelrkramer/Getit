@@ -37,8 +37,13 @@ const PostForm = ({mode}) => {
       result = await dispatch(createPost(newPost));
     }
     // const result = await dispatch(thunk(newPost));
-    if (result && result.errors) setErrors(result.errors);
+    if (result && result.errors) {
+      setErrors(result.errors);
+    }
+    // if (!errors) setErrors(["test error"]);
     else history.push(`/posts/${result.id}`)
+    // console.log("result:",result)
+    // console.log("res.errs:",result.errors)
   };
 
   const deleteHandler = async (e) => {
@@ -72,7 +77,7 @@ const PostForm = ({mode}) => {
         ))}
       </div>
       <div>
-        <label>Title*</label>
+        <label>*Title</label>
         <input
           type='text'
           name='title'
@@ -88,25 +93,7 @@ const PostForm = ({mode}) => {
           value={body}
         ></textarea>
       </div>
-      {/* <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div> */}
+      <span>*required</span>
       <button type='submit'>{mode} Post</button>
       {mode === "Edit" && (
         <button onClick={deleteHandler}>Delete</button>

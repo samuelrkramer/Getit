@@ -37,7 +37,13 @@ export const createPost = (post) => async (dispatch) => {
     dispatch(addPost(newPost));
     return newPost;
   }
-  return response; // idk how this will work out so try and see for error handling
+  const data = await response.json();
+  if (data.errors) {
+    return data;
+  } else {
+    return {errors: ['An error occurred. Please try again.']}
+  }
+  // return await response.body.json(); // idk how this will work out so try and see for error handling
 }
 
 const addPost = (post) => ({
@@ -57,7 +63,13 @@ export const editPost = (post) => async (dispatch) => {
     dispatch(modifyPost(newPost));
     return newPost;
   }
-  return response; // idk how this will work out so try and see for error handling
+  const data = await response.json();
+  if (data.errors) {
+    return data;
+  } else {
+    return {errors: ['An error occurred. Please try again.']}
+  }
+  // return response; // idk how this will work out so try and see for error handling
 }
 
 const modifyPost = (post) => ({
@@ -75,7 +87,13 @@ export const deletePost = (postId) => async (dispatch) => {
     dispatch(removePost(postId));
     return true;
   }
-  return response; // idk how this will work out so try and see for error handling
+  const data = await response.json();
+  if (data.errors) {
+    return data;
+  } else {
+    return {errors: ['An error occurred. Please try again.']}
+  }
+  // return response; // idk how this will work out so try and see for error handling
 }
 
 const removePost = (postId) => ({
