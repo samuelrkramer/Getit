@@ -31,7 +31,7 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
     setErrors([]);
     const result = await dispatch(deleteComment(comment.id));
     if (result && result.errors) setErrors(result.errors);
-    setCForm(false);
+    else setCForm(false);
   }
 
   const cancelHandler = e => {
