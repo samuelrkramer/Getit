@@ -47,13 +47,14 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
         ))}
       </div>
       <div>
-        <label>Body</label>
+        <label>*Body</label>
         <textarea
           name='body'
           onChange={ e => setBody(e.target.value) }
           value={body}
         ></textarea>
       </div>
+      <span>*required</span>
       <button type='submit'>{mode} Comment</button>
       {mode === "Edit" && (
         <button onClick={deleteHandler}>Delete</button>

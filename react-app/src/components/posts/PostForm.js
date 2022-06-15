@@ -77,7 +77,7 @@ const PostForm = ({mode}) => {
         ))}
       </div>
       <div>
-        <label>Title*</label>
+        <label>*Title</label>
         <input
           type='text'
           name='title'
@@ -93,6 +93,7 @@ const PostForm = ({mode}) => {
           value={body}
         ></textarea>
       </div>
+      <span>*required</span>
       <button type='submit'>{mode} Post</button>
       {mode === "Edit" && (
         <button onClick={deleteHandler}>Delete</button>
