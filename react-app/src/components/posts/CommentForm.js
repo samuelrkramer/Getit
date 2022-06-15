@@ -3,17 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { createComment, deleteComment, editComment } from '../../store/comment';
 
 const CommentForm = ({mode, postId, comment={}, setCForm }) => {
-
-  console.log("Comment form rendered with postId:", postId);
   const [errors, setErrors] = useState([]);
   const [body, setBody] = useState(comment.body || '');
+
   // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const submitHandler = async (e) => {
     e.preventDefault();
     setErrors([]);
-    console.log("comment submithandler fired, postId:", postId)
     const newComment = {
       postId, body
     };
@@ -25,7 +23,7 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
       result = await dispatch(createComment(newComment));
     }
     if (result && result.errors) setErrors(result.errors);
-    setCForm(false);
+    else setCForm(false);
   };
 
   const deleteHandler = async (e) => {
