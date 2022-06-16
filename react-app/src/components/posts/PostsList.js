@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Link } from 'react-router-dom';
 import { getAllPosts } from '../../store/post';
+import PostHeader from './PostHeader';
+import './PostsList.css';
 
 function PostsList() {
   const dispatch = useDispatch();
@@ -22,18 +23,14 @@ function PostsList() {
 
   const postComponents = postIds.map(i => {
     const post = posts[i];
-    return (
-      <li key={i}>
-        <NavLink to={`/posts/${post.id}`}>{post.title}</NavLink> from <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
-      </li>
-    );
+    return (<PostHeader key={i} post={post} i={i} />);
   });
 
   return (
-    <>
-      <h1>Post List: </h1>
+    <div className="postList">
+      {/* <h1>Post List: </h1> */}
       <ul>{postComponents}</ul>
-    </>
+    </div>
   );
 }
 
