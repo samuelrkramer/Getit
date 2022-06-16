@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { getPostsComments } from '../../store/comment';
+import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
 
 function SinglePost() {
@@ -41,8 +42,9 @@ function SinglePost() {
 
   return (
     <>
+      <PostHeader post={post} />
       <ul>
-        <li>
+        {/* <li>
           <strong>Post Id</strong> {postId}
         </li>
         <li>
@@ -50,7 +52,7 @@ function SinglePost() {
         </li>
         <li>
           <strong>Title</strong> {post.title}
-        </li>
+        </li> */}
         {post.body && (
           <li>
             <strong>Body</strong> {post.body}
