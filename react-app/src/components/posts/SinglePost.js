@@ -43,7 +43,7 @@ function SinglePost() {
   return (
     <>
       <PostHeader post={post} />
-      <ul>
+      {/* <ul> */}
         {/* <li>
           <strong>Post Id</strong> {postId}
         </li>
@@ -54,14 +54,19 @@ function SinglePost() {
           <strong>Title</strong> {post.title}
         </li> */}
         {post.body && (
-          <li>
-            <strong>Body</strong> {post.body}
-          </li>
+          <>
+          {/* <span class="rowIndex">{null}</span> */}
+          <div className="body" style={{marginLeft: "6.2ex"}}>
+            <p>
+              {post.body}
+            </p>
+          </div>
+          </>
         )}
         {post.userId === user.id && (
           <Link to={`/posts/${post.id}/edit`} >Edit</Link>
           )}
-      </ul>
+      {/* </ul> */}
       { cForm !== true && user && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
       { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       {cIds.length > 0 && (
