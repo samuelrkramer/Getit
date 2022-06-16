@@ -60,13 +60,6 @@ export const login = (email, password) => async (dispatch) => {
 export const loginDemo = () => async (dispatch) => {
   const response = await fetch('/api/auth/demologin', {
     method: 'POST',
-    // headers: {
-    //   'Content-Type': 'application/json'
-    // },
-    // body: JSON.stringify({
-    //   email,
-    //   password
-    // })
   });
   
   
