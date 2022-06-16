@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired, Email, ValidationError
 from app.models import User
+import re
 
 
 def user_exists(form, field):
@@ -24,9 +25,14 @@ def weak_password(form, field):
     if password == "123456":
         raise ValidationError("That's the only password I won't allow. Have you tried 'password' instead?")
 
+def valid_email(form, field):
+    email = field.data
+    if not bool(re.match(r"^\S+\@\S+(\.\S+)+$", email)):
+        raise ValidationError("Email address appears malformed.")
+
 
 class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists])
-    email = StringField('email', validators=[DataRequired(), user_exists])
+    email = StringField('email', validators=[DataRequired(), user_exists, valid_email])
     password = StringField('password', validators=[DataRequired(), weak_password])
