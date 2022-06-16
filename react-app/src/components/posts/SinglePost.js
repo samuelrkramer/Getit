@@ -35,9 +35,9 @@ function SinglePost() {
     if (!user) setCForm(false);
   }, [user])
 
-  if (!post) {
-    return null;
-  }
+  // if (!post) {
+  //   return null;
+  // }
 
   return (
     <>

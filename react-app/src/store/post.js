@@ -3,6 +3,7 @@ const clone = rfdc()
 
 // constants
 const LOAD_POSTS = 'posts/LOAD_POSTS';
+const LOAD_ONE_POST = 'posts/LOAD_ONE_POST';
 const ADD_POST = 'posts/ADD_POST';
 const EDIT_POST = 'posts/EDIT_POST';
 const DELETE_POST = 'posts/DELETE_POST';
@@ -23,6 +24,24 @@ export const getAllPosts = () => async (dispatch) => {
 const loadAllPosts = (payload) => ({
   type: LOAD_POSTS,
   posts: payload.posts,
+});
+
+// GET ONE POSTS
+export const getOnePost = (postId) => async (dispatch) => {
+  console.log("## getOnePost thunk fired, postId:", postId)
+  const response = await fetch(`/api/posts/${postId}`);
+  if (response.ok) {
+    const post = await response.json();
+    console.log("thunk got back post:", post)
+    dispatch(loadOnePost(post));
+    return post;
+  }
+  return response; // idk how this will work out so try and see for error handling
+}
+
+const loadOnePost = (payload) => ({
+  type: LOAD_ONE_POST,
+  post: payload,
 });
 
 // CREATE POST
@@ -113,8 +132,16 @@ export default function post_reducer(state = initialState, action) {
       // console.log(" %% LOAD_POSTS in reducer", action.posts)
       // newState.marker = "hey here's a marker";
       action.posts.forEach(post => {
-        newState.obj[post.id] = post
+        newState.obj[post.id] = post;
       });
+      return newState;
+    case LOAD_ONE_POST:
+      // console.log(" %% LOAD_POSTS in reducer", action.posts)
+      // newState.marker = "hey here's a marker";
+      // action.posts.forEach(post => {
+      const post = {...action.post}
+      newState.obj[post.id] = post;
+      // });
       return newState;
     case ADD_POST:
       newState.obj[action.post.id] = action.post;
