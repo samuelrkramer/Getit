@@ -36,7 +36,7 @@ function SinglePost() {
   }, [user])
 
   if (!post) {
-    return null;
+    return (<h4>No post to display. Please <Link to="/posts">go back</Link> and try again.</h4>);
   }
 
   return (
