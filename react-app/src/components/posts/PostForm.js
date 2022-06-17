@@ -69,6 +69,8 @@ const PostForm = ({mode}) => {
     }
   }, [mode]);
 
+  let bodyRemain = body.toLowerCase().startsWith("long")?body.length:1000-body.length;
+
   return (
     <form onSubmit={submitHandler}>
       <div className="errorBox">
@@ -84,7 +86,10 @@ const PostForm = ({mode}) => {
           className='field'
           onChange={ e => setTitle(e.target.value) }
           value={title}
-        ></input> {255-title.length}
+        ></input>
+        <span className={`xsmall ${title.length>255?"red":""}`}>
+          {255-title.length}
+        </span>
       </div>
       <div className="inputBox">
         <label>Body</label>
@@ -93,7 +98,10 @@ const PostForm = ({mode}) => {
           className='field'
           onChange={ e => setBody(e.target.value) }
           value={body}
-        ></textarea> {body.toLowerCase().startsWith("long")?body.length:1000-body.length}
+        ></textarea>
+        <span className={`xsmall ${bodyRemain<0?"red":""}`}>
+          {bodyRemain}
+        </span>
       </div>
       <span>*required</span><br />
       <button type='submit'>{mode} Post</button>
