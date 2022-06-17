@@ -46,15 +46,16 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
+      <div className="inputBox">
         <label><span className="red">*</span>Body</label>
         <textarea
           name='body'
+          className="field"
           onChange={ e => setBody(e.target.value) }
           value={body}
         ></textarea> {body.toLowerCase().startsWith("long")?body.length:1000-body.length}
       </div>
-      <span>*required</span>
+      <span>*required</span><br />
       <button type='submit'>{mode} Comment</button>
       {mode === "Edit" && (
         <button onClick={deleteHandler}>Delete</button>
