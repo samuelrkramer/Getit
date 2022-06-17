@@ -1,4 +1,3 @@
-from unittest.loader import VALID_MODULE_NAME
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, StringField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError
