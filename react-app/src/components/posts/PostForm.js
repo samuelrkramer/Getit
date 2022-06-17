@@ -71,27 +71,27 @@ const PostForm = ({mode}) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <div>
+      <div className="errorBox">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label>*Title</label>
+      <div className="inputBox">
+        <label><span className="red">*</span>Title</label>
         <input
           type='text'
           name='title'
-          onChange={ e => setTitle(e.target.value.slice(0,255)) }
+          onChange={ e => setTitle(e.target.value) }
           value={title}
-        ></input>
+        ></input> {255-title.length}
       </div>
-      <div>
+      <div className="inputBox">
         <label>Body</label>
         <textarea
           name='body'
           onChange={ e => setBody(e.target.value) }
           value={body}
-        ></textarea>
+        ></textarea> {body.toLowerCase().startsWith("long")?body.length:1000-body.length}
       </div>
       <span>*required</span>
       <button type='submit'>{mode} Post</button>
