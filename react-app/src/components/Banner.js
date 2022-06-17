@@ -3,7 +3,7 @@ import './Banner.css';
 
 const Banner = () => {
   return (
-    <div className="bannerBox">
+    <div className="bannerBox bigLeftMargin">
       <h2>Welcome to GETit</h2>
       <p>Come laugh with us!</p>
       {/* <img src={bgImg} /> */}
