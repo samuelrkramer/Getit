@@ -63,12 +63,16 @@ function SinglePost() {
           </div>
           </>
         )}
-        {post.userId === user.id && (
-          <Link to={`/posts/${post.id}/edit`} >Edit</Link>
+        <div className="bigLeftMargin">
+          {post.userId === user.id && (
+            <>
+            <Link to={`/posts/${post.id}/edit`} >Edit</Link><br />
+            </>
           )}
-      {/* </ul> */}
-      { cForm !== true && user && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
-      { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
+        {/* </ul> */}
+        { cForm !== true && user && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
+        { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
+      </div>
       {cIds.length > 0 && (
         <div>
           <h2>Comments:</h2>

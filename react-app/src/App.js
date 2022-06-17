@@ -10,6 +10,7 @@ import User from './components/User';
 import PostsList from './components/posts/PostsList';
 import SinglePost from './components/posts/SinglePost';
 import PostForm from './components/posts/PostForm';
+import Banner from './components/Banner';
 import { authenticate } from './store/session';
 import './Global.css';
 
@@ -60,6 +61,7 @@ function App() {
           <SinglePost />
         </Route>
         <Route path='/' exact={true} >
+          <Banner />
           <h1>My Home Page</h1>
         </Route>
       </Switch>

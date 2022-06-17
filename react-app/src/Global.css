@@ -8,8 +8,11 @@ body {
   min-height: 100%;
   position: relative;
 
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.xsmall {
   font: normal x-small verdana,arial,helvetica,sans-serif;
-  /* font-family: Verdana, Arial, Helvetica, sans-serif; */
 }
 
 a {
@@ -28,6 +31,10 @@ p {
 
 .red, .errorBox {
   color: red;
+}
+
+.bigLeftMargin {
+  margin-left: 51px;
 }
 
 .inputBox {
