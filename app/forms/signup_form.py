@@ -41,6 +41,8 @@ def valid_email(form, field):
     email = field.data
     if not bool(re.match(r"^\S+\@\S+(\.\S+)+$", email)):
         raise ValidationError("Email address appears malformed.")
+    if len(email) > 255:
+        raise ValidationError("Email address must be 255 or fewer characters.")
 
 
 class SignUpForm(FlaskForm):
