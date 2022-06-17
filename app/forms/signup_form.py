@@ -33,6 +33,9 @@ def weak_password(form, field):
         raise ValidationError("That's the only password I won't allow. Have you tried 'password' instead?")
     if len(password) < 5:
         raise ValidationError("Password must be longer than 5 characters")
+    # repeat_password = form.data['repeat_password']
+    # if password != repeat_password:
+    #     raise ValidationError("Password and confirmation must match.")
 
 def valid_email(form, field):
     email = field.data

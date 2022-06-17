@@ -14,11 +14,19 @@ const SignUpForm = () => {
 
   const onSignUp = async (e) => {
     e.preventDefault();
+    // console.log("handler")
     if (password === repeatPassword) {
+      // console.log("match")
       const data = await dispatch(signUp(username, email, password));
+      // console.log("thunked")
       if (data) {
+        // console.log("data")
         setErrors(data)
+        // console.log("errors", errors)
       }
+    } else {
+      // console.log("no match")
+      setErrors(["Password and confirmation must match.","After fixing this, other inputs will be checked."])
     }
   };
 
