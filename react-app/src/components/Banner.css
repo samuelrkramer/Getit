@@ -2,7 +2,30 @@
   /* background: url('../static/images/emoji_banner_getit_short.png') center right no-repeat #FFC801!important; */
   background-image: url('../static/images/emoji_banner_getit_short.png');
   background-position: center right;
-  background-size: auto 100px;
+  background-size: auto 100%;
   background-repeat: no-repeat;
   background-color: #FFC801;
+
+  padding: 4px 4px;
+  padding-left: 4px;
+}
+
+.bannerBox > p {
+  max-width: 500px;
+  /* font-weight: 150%; */
+}
+
+.bannerBox > button {
+  text-transform: uppercase;
+  font-weight: bold;
+  vertical-align: middle;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 4px 12px 3px;
+  font-size: 12px;
+  background-color: #369;
+  color: #ffffff;
+  margin-bottom: 2em;
+  border: 1px solid transparent;
+  border-radius: 3px;
 }
