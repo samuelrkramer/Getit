@@ -52,7 +52,7 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
           name='body'
           onChange={ e => setBody(e.target.value) }
           value={body}
-        ></textarea>
+        ></textarea> {body.toLowerCase().startsWith("long")?body.length:1000-body.length}
       </div>
       <span>*required</span>
       <button type='submit'>{mode} Comment</button>

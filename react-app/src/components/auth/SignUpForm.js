@@ -31,11 +31,11 @@ const SignUpForm = () => {
   };
 
   const updateUsername = (e) => {
-    setUsername(e.target.value.slice(0,40));
+    setUsername(e.target.value);
   };
 
   const updateEmail = (e) => {
-    setEmail(e.target.value.slice(0,255));
+    setEmail(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -64,7 +64,7 @@ const SignUpForm = () => {
           name='username'
           onChange={updateUsername}
           value={username}
-        ></input>
+        ></input> {40-username.length}
       </div>
       <div>
         <label>Email</label>
@@ -73,7 +73,7 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
-        ></input>
+        ></input> {255-email.length}
       </div>
       <div>
         <label>Password</label>
