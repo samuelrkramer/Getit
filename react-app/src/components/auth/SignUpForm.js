@@ -31,11 +31,11 @@ const SignUpForm = () => {
   };
 
   const updateUsername = (e) => {
-    setUsername(e.target.value);
+    setUsername(e.target.value.slice(0,40));
   };
 
   const updateEmail = (e) => {
-    setEmail(e.target.value);
+    setEmail(e.target.value.slice(0,255));
   };
 
   const updatePassword = (e) => {
