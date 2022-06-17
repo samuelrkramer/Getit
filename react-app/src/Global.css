@@ -20,3 +20,8 @@ a {
 ul, ol {
   list-style: none;
 }
+
+p {
+  font-size: 14px;
+  overflow: scroll;
+}

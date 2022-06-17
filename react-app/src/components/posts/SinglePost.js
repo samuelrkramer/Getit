@@ -56,7 +56,7 @@ function SinglePost() {
         {post.body && (
           <>
           {/* <span class="rowIndex">{null}</span> */}
-          <div className="body" style={{marginLeft: "6.2ex"}}>
+          <div className="body">
             <p>
               {post.body}
             </p>

@@ -49,9 +49,12 @@ p {
   margin-top: 5px;
   margin-bottom: 5px;
   padding: 5px 10px;
+
+  margin-left: 51px;
 }
 
 .body p {
-  font-size: 1em;
+  /* font-size: 1em; */
   line-height: 1.4286em;
+  /* font-size: 14px; */
 }
