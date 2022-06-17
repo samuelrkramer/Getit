@@ -39,6 +39,8 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
     setCForm(false);
   }
 
+  let bodyRemain = body.toLowerCase().startsWith("long")?body.length:1000-body.length;
+
   return (
     <form onSubmit={submitHandler}>
       <div className="errorBox">
@@ -53,7 +55,10 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
           className="field"
           onChange={ e => setBody(e.target.value) }
           value={body}
-        ></textarea> {body.toLowerCase().startsWith("long")?body.length:1000-body.length}
+        ></textarea>
+        <span className={`xsmall ${bodyRemain<0?"red":""}`}>
+          {bodyRemain}
+        </span>
       </div>
       <span>*required</span><br />
       <button type='submit'>{mode} Comment</button>

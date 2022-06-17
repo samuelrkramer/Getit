@@ -8,8 +8,10 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import PostsList from './components/posts/PostsList';
+import PostsNewest from './components/posts/PostsNewest';
 import SinglePost from './components/posts/SinglePost';
 import PostForm from './components/posts/PostForm';
+import Banner from './components/Banner';
 import { authenticate } from './store/session';
 import './Global.css';
 
@@ -47,6 +49,9 @@ function App() {
         <Route path='/posts' exact={true} >
           <PostsList />
         </Route>
+        <Route path='/newest' exact={true} >
+          <PostsNewest />
+        </Route>
         <ProtectedRoute path='/posts/undefined' exact={true} >
           You've been naughty to get to this point. I told you that the title was required!
         </ProtectedRoute>
@@ -60,7 +65,9 @@ function App() {
           <SinglePost />
         </Route>
         <Route path='/' exact={true} >
-          <h1>My Home Page</h1>
+          <Banner />
+          {/* <h1>My Home Page</h1> */}
+          <PostsList />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -1,0 +1,8 @@
+.bannerBox {
+  /* background: url('../static/images/emoji_banner_getit_short.png') center right no-repeat #FFC801!important; */
+  background-image: url('../static/images/emoji_banner_getit_short.png');
+  background-position: center right;
+  background-size: auto 100px;
+  background-repeat: no-repeat;
+  background-color: #FFC801;
+}
