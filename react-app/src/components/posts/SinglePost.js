@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getPostsComments } from '../../store/comment';
 import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
+import './SinglePost.css'
 
 function SinglePost() {
   let { postId } = useParams();
@@ -74,7 +75,7 @@ function SinglePost() {
         { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       </div>
       {cIds.length > 0 && (
-        <div>
+        <div className="bigLeftMargin">
           <h2>Comments:</h2>
           {cIds.map(cId => {
             const comment = comments[cId];
@@ -82,12 +83,15 @@ function SinglePost() {
             <div key={cId}>
               {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comment} setCForm={setCForm} />)}
               {cForm !== cId && (
-                <ul>
-                  <li><i>Comment ID: {cId}</i></li>
-                  <li>{comment.body}</li>
-                  <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li>
-                  { comment.userId === user.id && (<Link onClick={() => setCForm(cId)}>Edit</Link>)}
-                </ul>
+                <div className="oneComment">
+                  {/* <li><i>Comment ID: {cId}</i></li> */}
+                  <p className="tagline">
+                  <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> at {post.created_at}
+                  { comment.userId === user.id && (<Link onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</Link>)}
+                  </p>
+                  <p className="commBody">{comment.body}</p>
+                  {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}
+                </div>
               )}
             </div>
           )})}
