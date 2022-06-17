@@ -25,3 +25,7 @@ p {
   font-size: 14px;
   overflow: auto;
 }
+
+.red, .errorBox {
+  color: red;
+}

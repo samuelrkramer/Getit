@@ -41,13 +41,13 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <div>
+      <div className="errorBox">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
       <div>
-        <label>*Body</label>
+        <label><span className="red">*</span>Body</label>
         <textarea
           name='body'
           onChange={ e => setBody(e.target.value) }
