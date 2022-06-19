@@ -61,3 +61,16 @@ button {
   margin-left: 5px;
   margin-top: 5px;
 }
+
+.sidebar {
+  float: right;
+  background-color: white;
+  margin: 0 5px 0 5px;
+  width: 300px;
+  height: 1200px;
+  border: 1px solid #369;
+}
+
+.sidebar .vspace {
+  margin: 7px 0 12px 0;
+}
