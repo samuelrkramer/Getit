@@ -35,7 +35,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/posts' exact={true} activeClassName='active'>
+            <NavLink to='/posts' activeClassName='active'>
               POSTs
             </NavLink>
           </li>
