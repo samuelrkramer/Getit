@@ -35,7 +35,7 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/posts' exact={true} activeClassName='active'>
+            <NavLink to='/posts' activeClassName='active'>
               POSTs
             </NavLink>
           </li>
@@ -47,7 +47,7 @@ const NavBar = () => {
           {user && (
             <>
             <li>
-              <NavLink to='/posts/new' exact={true} activeClassName='active'>
+              <NavLink to='/newpost' exact={true} activeClassName='active'>
                 create POST
               </NavLink>
             </li>
