@@ -55,7 +55,7 @@ function App() {
         <ProtectedRoute path='/posts/undefined' exact={true} >
           You've been naughty to get to this point. I told you that the title was required!
         </ProtectedRoute>
-        <ProtectedRoute path='/posts/new' exact={true} >
+        <ProtectedRoute path='/newpost' exact={true} >
           <PostForm mode="Create" />
         </ProtectedRoute>
         <ProtectedRoute path='/posts/:postId/edit' exact={true} >
