@@ -11,7 +11,7 @@ const Banner = () => {
 
   const clickHandle = e => {
     e.preventDefault();
-    if (user.username) history.push("/newpost");
+    if (user.username) history.push("/posts/new");
     else history.push("/sign-up");
   }
 
