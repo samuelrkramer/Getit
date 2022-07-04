@@ -15,10 +15,16 @@
 .bannerInside {
   margin-left: 35px;
   max-width: 350px;
+  background-color: rgba(255,255,255,.6);
+  /* box-shadow: 35px 0 35px rgba(255,255,255,.6),
+              -35px 0 35px rgba(255,255,255,.6),
+              0 35px 35px rgba(255,255,255,.6),
+              0 -35px 35px rgba(255,255,255,.6); */
+  box-shadow: 0 0 25px 25px rgba(255,255,255,.6);
 }
 
 .bannerInside * {
-  text-shadow: 0 0 2px white;
+  /* text-shadow: 0 0 2px white; */
 }
 
 .devLinkBox {
@@ -27,6 +33,11 @@
   display: flex;
   justify-content: space-around;
 }
+
+/* .devLinkBox a img { */
+  /* background-color: white; */
+  /* box-shadow: white;   */
+/* } */
 
 /* .devLinkBox a {
   
