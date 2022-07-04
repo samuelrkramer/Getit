@@ -15,7 +15,17 @@
 .bannerInside {
   margin-left: 35px;
   max-width: 350px;
+  background-color: rgba(255,255,255,.6);
+  /* box-shadow: 35px 0 35px rgba(255,255,255,.6),
+              -35px 0 35px rgba(255,255,255,.6),
+              0 35px 35px rgba(255,255,255,.6),
+              0 -35px 35px rgba(255,255,255,.6); */
+  box-shadow: 0 0 25px 25px rgba(255,255,255,.6);
 }
+
+/* .bannerInside * { */
+  /* text-shadow: 0 0 2px white; */
+/* } */
 
 .devLinkBox {
   /* width: 300px; */
@@ -24,13 +34,16 @@
   justify-content: space-around;
 }
 
-/* .devLinkBox a {
-  
-} */
+.devLinkBox a img {
+  background-color: white;
+}
 
-/* .bannerInside > img {
-  font-weight: 150%;
-} */
+.devLinkBox a:first-child img {
+  border-radius: 50%;
+}
+.devLinkBox a:last-child img {
+  border-radius: 8px;
+}
 
 .bannerBox button {
   text-transform: uppercase;
@@ -45,4 +58,8 @@
   margin-bottom: 2em;
   border: 1px solid transparent;
   border-radius: 3px;
+}
+
+.bannerBox h3 {
+  text-align: center;
 }
