@@ -23,9 +23,9 @@
   box-shadow: 0 0 25px 25px rgba(255,255,255,.6);
 }
 
-.bannerInside * {
+/* .bannerInside * { */
   /* text-shadow: 0 0 2px white; */
-}
+/* } */
 
 .devLinkBox {
   /* width: 300px; */
@@ -39,9 +39,18 @@
   /* box-shadow: white;   */
 /* } */
 
-/* .devLinkBox a {
-  
+/* .devLinkBox:first-child img {
+  border-radius: 24px;
+}
+
+.devLinkBox:last-child img {
+  border-radius: 123px;
 } */
+
+/* .devLinkBox a img { */
+  /* background-color: white; */
+  /* border: 2px solid red; */
+/* } */
 
 /* .bannerInside > img {
   font-weight: 150%;
