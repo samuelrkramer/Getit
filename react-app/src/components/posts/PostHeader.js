@@ -1,5 +1,6 @@
 import { NavLink, Link } from 'react-router-dom';
 import './PostHeader.css';
+import { ago } from '../utils';
 
 const PostHeader = ({ post, i=null }) => {
   console.log(i, post);
@@ -11,7 +12,7 @@ const PostHeader = ({ post, i=null }) => {
           <NavLink to={`/posts/${post.id}`}>{post.title}</NavLink>
         </p>
         <p className="tagline">
-          submitted at {post.created_at} by <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
+          submitted at {ago(post.created_at)} by <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
         </p>
       </div>
     </div>
