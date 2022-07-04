@@ -30,13 +30,16 @@ const Banner = () => {
         <div className="bannerInside">
           <h3>Check out the developer!</h3>
           <div className='devLinkBox'>
-              <a href="https://github.com/samuelrkramer" target="_blank">
-                <img src={ghIcon} height="72px"></img>
-              </a>
-              <a href="https://www.linkedin.com/in/sam-kramer-3b20b1235/" target="_blank">
-                <img src={liIcon} height="72px"></img>
-              </a>
-            </div>
+            <a href="https://github.com/samuelrkramer" target="_blank">
+              <img src={ghIcon} height="72px"></img>
+            </a>
+            <a href="https://www.linkedin.com/in/sam-kramer-3b20b1235/" target="_blank">
+              <img src={liIcon} height="72px"></img>
+            </a>
+          </div>
+          <h3>
+            <a href="https://github.com/samuelrkramer/Getit">Project Repo</a>
+          </h3>
         </div>
       </div>
     </>

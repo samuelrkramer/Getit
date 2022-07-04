@@ -17,6 +17,10 @@
   max-width: 350px;
 }
 
+.bannerInside * {
+  text-shadow: 0 0 2px white;
+}
+
 .devLinkBox {
   /* width: 300px; */
   /* height: 150px; */
