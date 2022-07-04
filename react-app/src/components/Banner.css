@@ -70,3 +70,7 @@
   border: 1px solid transparent;
   border-radius: 3px;
 }
+
+.bannerBox h3 {
+  text-align: center;
+}
