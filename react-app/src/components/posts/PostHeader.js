@@ -1,6 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
 import './PostHeader.css';
-// import { ago } from '../utils';
 import humanizeDuration from 'humanize-duration';
 
 const PostHeader = ({ post, i=null }) => {
