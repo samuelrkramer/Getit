@@ -4,6 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import { getPostsComments } from '../../store/comment';
 import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
+import ReactMarkdown from 'react-markdown';
 import './SinglePost.css'
 import humanizeDuration from 'humanize-duration';
 
@@ -59,9 +60,9 @@ function SinglePost() {
           <>
           {/* <span class="rowIndex">{null}</span> */}
           <div className="body">
-            <p>
+            <ReactMarkdown>
               {post.body}
-            </p>
+            </ReactMarkdown>
           </div>
           </>
         )}
@@ -101,7 +102,7 @@ function SinglePost() {
                   </span>
                   { comment.userId === user.id && (<Link onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</Link>)}
                   </p>
-                  <p className="commBody">{comment.body}</p>
+                  <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
                   {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}
                 </div>
               )}
