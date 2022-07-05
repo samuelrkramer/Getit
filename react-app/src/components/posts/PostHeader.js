@@ -23,7 +23,7 @@ const PostHeader = ({ post, i=null }) => {
         </p>
         <p className="tagline">
           submitted <span title={dateString}>
-            {humanizeDuration(now-createDate, { largest: 1 } )+(edited?"*":"")} ago
+            {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
           </span> by <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
         </p>
       </div>

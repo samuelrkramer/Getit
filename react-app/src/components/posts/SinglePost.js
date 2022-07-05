@@ -98,7 +98,7 @@ function SinglePost() {
                   {/* <li><i>Comment ID: {cId}</i></li> */}
                   <p className="tagline">
                   <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
-                    {humanizeDuration(now-createDate, { largest: 1 } )+(edited?"*":"")} ago
+                    {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
                   </span>
                   { comment.userId === user.id && (<Link onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</Link>)}
                   </p>
