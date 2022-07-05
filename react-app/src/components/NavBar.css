@@ -39,6 +39,8 @@ nav {
 
 .menu li a.active {
   color: orangered;
+  /* font-weight: bold; */
+  /* ^ I don't like how this moves the other tabs slightly when the active one changes */
   background-color: white;
   border: 1px solid #5f99cf;
   border-bottom: 1px solid white;

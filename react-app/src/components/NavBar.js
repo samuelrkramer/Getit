@@ -35,15 +35,20 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/posts' exact={true} activeClassName='active'>
-              posts
+            <NavLink to='/posts' activeClassName='active'>
+              POSTs
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/newest' exact={true} activeClassName='active'>
+              newest
             </NavLink>
           </li>
           {user && (
             <>
             <li>
               <NavLink to='/posts/new' exact={true} activeClassName='active'>
-                create post
+                create POST
               </NavLink>
             </li>
           </>

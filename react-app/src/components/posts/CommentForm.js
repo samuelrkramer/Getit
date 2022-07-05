@@ -39,22 +39,28 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
     setCForm(false);
   }
 
+  let bodyRemain = body.toLowerCase().startsWith("long")?body.length:1000-body.length;
+
   return (
     <form onSubmit={submitHandler}>
-      <div>
+      <div className="errorBox">
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
-      <div>
-        <label>*Body</label>
+      <div className="inputBox">
+        <label><span className="red">*</span>Body</label>
         <textarea
           name='body'
+          className="field"
           onChange={ e => setBody(e.target.value) }
           value={body}
         ></textarea>
+        <span className={`xsmall ${bodyRemain<0?"red":""}`}>
+          {bodyRemain}
+        </span>
       </div>
-      <span>*required</span>
+      <span>*required</span><br />
       <button type='submit'>{mode} Comment</button>
       {mode === "Edit" && (
         <button onClick={deleteHandler}>Delete</button>

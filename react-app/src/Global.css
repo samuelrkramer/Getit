@@ -8,8 +8,11 @@ body {
   min-height: 100%;
   position: relative;
 
-  font: normal x-small;
   font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.xsmall {
+  font: normal x-small verdana,arial,helvetica,sans-serif;
 }
 
 a {
@@ -19,4 +22,42 @@ a {
 
 ul, ol {
   list-style: none;
+}
+
+p {
+  font-size: 14px;
+  overflow: auto;
+}
+
+.red, .errorBox {
+  color: red;
+}
+
+.bigLeftMargin {
+  margin-left: 51px;
+}
+
+.inputBox {
+  width: 500px;
+  background-color: #cee3f8;
+  border-radius: 4px;
+  padding: 5px 10px 10px 10px;
+  display: block;
+  margin-top: 15px;
+  /* margin-bottom: 15px; */
+}
+.inputBox label {
+  font-size: large;
+  margin-bottom: 5px;
+}
+
+.inputBox .field {
+  width: 492px;
+  padding: 3px;
+  border: 1px solid gray;
+}
+
+button {
+  margin-left: 5px;
+  margin-top: 5px;
 }

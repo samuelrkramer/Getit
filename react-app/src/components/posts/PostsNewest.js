@@ -4,12 +4,12 @@ import { getAllPosts } from '../../store/post';
 import PostHeader from './PostHeader';
 import './PostsList.css';
 
-function PostsList() {
+function PostsNewest() {
   const dispatch = useDispatch();
   // const [posts, setPosts] = useState([]);
 
   const posts = useSelector(state => state.posts.obj);
-  const postIds = Object.keys(posts);
+  const postIds = Object.keys(posts).reverse();
 
   useEffect(() => {
     // async function fetchData() {
@@ -34,4 +34,4 @@ function PostsList() {
   );
 }
 
-export default PostsList;
+export default PostsNewest;
