@@ -4,7 +4,7 @@ export function ago (s) {
   const now = new Date();
   const date = new Date(Date.parse(s))
 
-  console.log(humanizeDuration(now-date));
+  console.log(humanizeDuration(now-date, { largest: 2 }));
   // const months = [31,28+!(now.getFullYear()%4)-!(now.getFullYear()%100)+!(now.getFullYear()%1000),31,30,31,30,31,31,30,31,30,31]
 
   // const diff = {
