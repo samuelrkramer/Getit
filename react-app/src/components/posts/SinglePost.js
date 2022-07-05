@@ -4,7 +4,9 @@ import { useParams, Link } from 'react-router-dom';
 import { getPostsComments } from '../../store/comment';
 import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
+import ReactMarkdown from 'react-markdown';
 import './SinglePost.css'
+import humanizeDuration from 'humanize-duration';
 
 function SinglePost() {
   let { postId } = useParams();
@@ -58,9 +60,9 @@ function SinglePost() {
           <>
           {/* <span class="rowIndex">{null}</span> */}
           <div className="body">
-            <p>
+            <ReactMarkdown>
               {post.body}
-            </p>
+            </ReactMarkdown>
           </div>
           </>
         )}
@@ -79,6 +81,15 @@ function SinglePost() {
           <h2>Comments:</h2>
           {cIds.map(cId => {
             const comment = comments[cId];
+            const now = new Date();
+            const createDate = new Date(Date.parse(comment.created_at));
+            const editDate = new Date(Date.parse(comment.updated_at));
+            let edited = false;
+            let dateString = comment.created_at;
+            if (comment.updated_at != comment.created_at) {
+              dateString += ", edited "+comment.updated_at;
+              edited = true;
+            }
             return (
             <div key={cId}>
               {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comment} setCForm={setCForm} />)}
@@ -86,10 +97,12 @@ function SinglePost() {
                 <div className="oneComment">
                   {/* <li><i>Comment ID: {cId}</i></li> */}
                   <p className="tagline">
-                  <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> at {post.created_at}
+                  <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
+                    {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
+                  </span>
                   { comment.userId === user.id && (<Link onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</Link>)}
                   </p>
-                  <p className="commBody">{comment.body}</p>
+                  <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
                   {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}
                 </div>
               )}
