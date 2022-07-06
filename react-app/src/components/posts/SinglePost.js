@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
+import { getOnePost } from '../../store/post';
 import { getPostsComments } from '../../store/comment';
 import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
@@ -20,24 +21,20 @@ function SinglePost() {
   
   const user = useSelector(state => state.session.user) || false;
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!post) {
-      return ("Loading...");
+      dispatch(getOnePost(postId))
     }
-    // (async () => {
-    //   const response = await fetch(`/api/posts/${postId}`);
-    //   const post = await response.json();
-    //   setPost(post);
-    // })();
-  }, [post]);
+
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getPostsComments(postId))
-  }, [postId, dispatch])
+  }, [postId, dispatch]);
 
   useEffect(() => {
     if (!user) setCForm(false);
-  }, [user])
+  }, [user]);
 
   if (!post) {
     return (<h4>No post to display. Please <Link to="/posts">go back</Link> and try again.</h4>);
