@@ -55,7 +55,7 @@ function SinglePost() {
         </li> */}
         {post.body && (
           <>
-          {/* <span class="rowIndex">{null}</span> */}
+          {/* <span className="rowIndex">{null}</span> */}
           <div className="body">
             <ReactMarkdown>
               {post.body}
