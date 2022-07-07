@@ -71,6 +71,11 @@ button {
   border: 1px solid #369;
 }
 
-.sidebar .vspace {
+.sidebar .sideSpaced {
   margin: 7px 0 12px 0;
+}
+
+.sidebar input {
+  width: 300px;
+  background-color: red;
 }

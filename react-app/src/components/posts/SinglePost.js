@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { getOnePost } from '../../store/post';
 import { getPostsComments } from '../../store/comment';
 import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
-import ReactMarkdown from 'react-markdown';
+import { GetitContext } from '../context/GetitContext';
 import './SinglePost.css'
+import ReactMarkdown from 'react-markdown';
 import humanizeDuration from 'humanize-duration';
 
 function SinglePost() {
+  const { setSideAdd } = useContext(GetitContext);
   let { postId } = useParams();
   const dispatch = useDispatch();
   // postId = parseInt(postId);
@@ -35,6 +37,13 @@ function SinglePost() {
   useEffect(() => {
     if (!user) setCForm(false);
   }, [user]);
+
+  useEffect(() => {
+    setSideAdd([(
+      <div>{post.id} - {post.title}</div>
+    )])
+    return () => { setSideAdd([]);}
+  }, [post])
 
   if (!post) {
     return (<h4>No post to display. Please <Link to="/posts">go back</Link> and try again.</h4>);

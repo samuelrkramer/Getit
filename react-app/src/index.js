@@ -4,16 +4,16 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import configureStore from './store';
-import { SidebarContext } from './components/context/SidebarContext';
+import GetitProvider from './components/context/GetitContext';
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-        <SidebarContext.Provider value={{ sidebar: "<div>default test</div>" }}>
+        <GetitProvider>
           <App />
-        </SidebarContext.Provider>
+        </GetitProvider>
       </Provider>
   </React.StrictMode>,
   document.getElementById('root')
