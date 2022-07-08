@@ -40,6 +40,12 @@ function SinglePost() {
 
   useEffect(() => {
     // const postDate = new Date(Date.parse(post.date));
+    // const urlCLick = e => {
+    //   console.log("test urlclick");
+    //   // window.alert("urlclick fired")
+    //   // window.Clipboard.writeText(e.target.value);
+    // };
+
     if (post) {
         setSideAdd([(
         <div className="sideSpaced postCard">{post.id} - {post.title}<br />
@@ -49,7 +55,7 @@ function SinglePost() {
           type="text"
           disabled={true}
           value={`https://skgetit.heroku.com/posts/${post.id}`}
-          // onClick={e => Clipboard.writeText(e.target.value)}
+          // onMouseOver={urlCLick}
         />
         </div>
       )])
