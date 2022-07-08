@@ -44,7 +44,13 @@ function SinglePost() {
         setSideAdd([(
         <div className="sideSpaced">{post.id} - {post.title}<br />
         {/* Posted on {postDate.toDateString()}<br/> */}
-        <span>https://skgetit.heroku.com/posts/{post.id}</span>
+        {/* Click to copy URL to POST: */}
+        <input
+          type="text"
+          disabled={true}
+          value={`https://skgetit.heroku.com/posts/${post.id}`}
+          // onClick={e => Clipboard.writeText(e.target.value)}
+        />
         </div>
       )])
     }
