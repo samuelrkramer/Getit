@@ -2,6 +2,7 @@
 // import LoginForm from "./auth/LoginForm";
 import { useContext } from "react";
 import { GetitContext } from "./context/GetitContext";
+import Logo from "./Logo";
 
 const Sidebar = () => {
   const { sideAdd } = useContext(GetitContext);
@@ -15,6 +16,9 @@ const Sidebar = () => {
       Here's sidebar stuff
       </div>
       {sideAdd.map(el => (el))}
+      <div className="sideSpaced devCard">
+        <Logo /> is made by
+      </div>
     </div>
   )
 };
