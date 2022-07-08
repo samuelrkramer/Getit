@@ -76,5 +76,16 @@ button {
 }
 
 .sidebar input {
-  width: 292px;
+  /* width: 292px; */
+  width: auto;
+}
+
+.sidebar .postCard {
+  /* background-color: #cee3f8; */
+  padding: 5px;
+  border: 1px solid #5f99cf;
+  background-color: #EFF7FF;
+  font-family: arial,helvetica,sans-serif;
+  font-size: larger;
+  border-radius: 3px;
 }

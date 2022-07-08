@@ -42,7 +42,7 @@ function SinglePost() {
     // const postDate = new Date(Date.parse(post.date));
     if (post) {
         setSideAdd([(
-        <div className="sideSpaced">{post.id} - {post.title}<br />
+        <div className="sideSpaced postCard">{post.id} - {post.title}<br />
         {/* Posted on {postDate.toDateString()}<br/> */}
         {/* Click to copy URL to POST: */}
         <input
