@@ -39,9 +39,15 @@ function SinglePost() {
   }, [user]);
 
   useEffect(() => {
-    setSideAdd([(
-      <div>{post.id} - {post.title}</div>
-    )])
+    // const postDate = new Date(Date.parse(post.date));
+    if (post) {
+        setSideAdd([(
+        <div className="sideSpaced">{post.id} - {post.title}<br />
+        {/* Posted on {postDate.toDateString()}<br/> */}
+        <span>https://skgetit.heroku.com/posts/{post.id}</span>
+        </div>
+      )])
+    }
     return () => { setSideAdd([]);}
   }, [post])
 
