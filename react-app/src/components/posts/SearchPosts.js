@@ -25,7 +25,7 @@ function SearchPosts() {
     console.log("after thunk returned:", results)
     setPostIds(results.map(el=>el.id));
     setLoaded(true)
-  }, [dispatch]);
+  }, [dispatch, query]);
 
   return (
     <>
