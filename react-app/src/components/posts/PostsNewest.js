@@ -7,10 +7,10 @@ import './PostsList.css';
 
 function PostsNewest() {
   const dispatch = useDispatch();
-  const [loaded, setLoaded] = useState(false);
-
+  
   const posts = useSelector(state => state.posts.obj);
   const postIds = Object.keys(posts).reverse();
+  const [loaded, setLoaded] = useState(!!postIds.length);
 
   useEffect(() => {
     // async function fetchData() {

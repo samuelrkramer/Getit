@@ -7,13 +7,12 @@ import './PostsList.css';
 function SearchPosts() {
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get('query');
-
-  const [loaded, setLoaded] = useState(false);
-
+  
   const dispatch = useDispatch();
-
+  
   const posts = useSelector(state => state.posts.obj);
   const [postIds, setPostIds] = useState(Object.keys(posts));
+  const [loaded, setLoaded] = useState(!!postIds.length);
   
 
   useEffect(async () => {
