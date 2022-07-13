@@ -80,10 +80,10 @@ function SinglePost() {
             const comment = comments[cId];
             const now = new Date();
             const createDate = new Date(Date.parse(comment.created_at));
-            const editDate = new Date(Date.parse(comment.updated_at));
+            // const editDate = new Date(Date.parse(comment.updated_at));
             let edited = false;
             let dateString = comment.created_at;
-            if (comment.updated_at != comment.created_at) {
+            if (comment.updated_at !== comment.created_at) {
               dateString += ", edited "+comment.updated_at;
               edited = true;
             }

@@ -1,6 +1,6 @@
 // import bgImg from '../static/images/emoji_banner_getit_short.png'
 import { useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ghIcon from '../static/images/githubIcon.svg';
 import liIcon from '../static/images/linkedInIcon.png';
 import './Banner.css';
@@ -30,11 +30,11 @@ const Banner = () => {
         <div className="bannerInside">
           <h3>Check out the developer!</h3>
           <div className='devLinkBox'>
-            <a href="https://github.com/samuelrkramer" target="_blank">
-              <img src={ghIcon} height="72px"></img>
+            <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
+              <img src={ghIcon} height="72px" alt="GitHub"></img>
             </a>
-            <a href="https://www.linkedin.com/in/sam-kramer-3b20b1235/" target="_blank">
-              <img src={liIcon} height="72px"></img>
+            <a href="https://www.linkedin.com/in/sam-kramer-3b20b1235/" target="_blank" rel="noreferrer">
+              <img src={liIcon} height="72px" alt="LinkedIn"></img>
             </a>
           </div>
           <h3>

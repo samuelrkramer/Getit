@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+// import { useDispatch } from 'react-redux';
 // import { getAllPosts } from '../../store/post';
 import PostHeader from './PostHeader';
 import './PostsList.css';
 
 function PostsList({posts, postIds}) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const [posts, setPosts] = useState([]);
 
   // const posts = useSelector(state => state.posts.obj);
@@ -21,9 +21,9 @@ function PostsList({posts, postIds}) {
   //   dispatch(getAllPosts());
   // }, [dispatch]);
 
-  console.log("### IN POSTSLIST COMPONENT:")
-  console.log("postIds:", postIds)
-  console.log("posts:", posts)
+  // console.log("### IN POSTSLIST COMPONENT:")
+  // console.log("postIds:", postIds)
+  // console.log("posts:", posts)
 
   const postComponents = postIds.map(i => {
     const post = posts[i];

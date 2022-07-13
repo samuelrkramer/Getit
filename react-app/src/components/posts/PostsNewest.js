@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPosts } from '../../store/post';
-import PostHeader from './PostHeader';
+// import PostHeader from './PostHeader';
 import PostsList from './PostsList';
 import './PostsList.css';
 
