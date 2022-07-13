@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createComment, deleteComment, editComment } from '../../store/comment';
 
 const CommentForm = ({mode, postId, comment={}, setCForm }) => {

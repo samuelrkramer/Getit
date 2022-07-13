@@ -6,10 +6,10 @@ const PostHeader = ({ post, i=null }) => {
   // console.log(i, post);
   const now = new Date();
   const createDate = new Date(Date.parse(post.created_at));
-  const editDate = new Date(Date.parse(post.updated_at));
+  // const editDate = new Date(Date.parse(post.updated_at));
   let edited = false;
   let dateString = post.created_at;
-  if (post.updated_at != post.created_at) {
+  if (post.updated_at !== post.created_at) {
     dateString += ", edited "+post.updated_at;
     edited = true;
   }
