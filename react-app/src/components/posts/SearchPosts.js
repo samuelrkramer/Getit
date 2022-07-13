@@ -13,17 +13,18 @@ function SearchPosts() {
   // const [posts, setPosts] = useState([]);
 
   const posts = useSelector(state => state.posts.obj);
-  const [postIds, setPostIds] = useState([]);
+  const [postIds, setPostIds] = useState(Object.keys(posts));
   
 
-  useEffect(() => {
-    const doSearch = async query => {
+  useEffect(async () => {
+    // const doSearch = async query => {
       const results = await dispatch(searchPosts(query));
-      return results;
-    };
-    const results = doSearch(query);
+    //   return results;
+    // };
+    // const results = doSearch(query);
+    // const ids = await results;
     console.log("after thunk returned:", results)
-    setPostIds(results);
+    setPostIds(results.map(el=>el.id));
   }, [dispatch]);
 
   return (
