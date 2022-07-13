@@ -67,17 +67,40 @@ button {
   background-color: white;
   margin: 0 5px 0 5px;
   width: 300px;
-  height: 395px;
-  border: 1px solid #369;
+  /* height: 395px; */
+  /* border: 1px solid #369; */
 }
 
 .sidebar .sideSpaced {
   margin: 7px 0 12px 0;
 }
 
-.sidebar input {
-  /* width: 292px; */
-  width: auto;
+.searchForm input[type=text] {
+  border: 1px solid gray;
+  font-size: 13px;
+  font-family: verdana;
+  width: 300px;
+  /* width: auto; */
+  box-sizing: border-box;
+  padding: 6px;
+  padding-right: 25px;
+  padding-left: 9px;
+  vertical-align: middle;
+}
+.searchForm button {
+  background-color: transparent;
+  font-size: 13px;
+  height: 13px;
+  width: 13px;
+  border: none;
+  /* margin: 0; */
+  margin-left: -13px;
+  vertical-align: middle;
+  position: relative;
+  left: -13px;
+  top: -6px;
+  /* padding: 2px 6px 3px; */
+  cursor: pointer;
 }
 
 .sidebar .postCard {

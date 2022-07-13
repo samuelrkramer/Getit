@@ -20,7 +20,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sideSpaced">
-        <form action="/search" method="GET" onSubmit={searchHandler}>
+        <form className="searchForm" action="/search" method="GET" onSubmit={searchHandler}>
           <input type="text"
             name="query"
             placeholder="Search GETit"
@@ -28,6 +28,7 @@ const Sidebar = () => {
             onChange={e => setQuery(e.target.value)}
             // disabled={true}
           />
+          <button type="submit">🔍</button>
         </form>
       Here's sidebar stuff
       </div>
