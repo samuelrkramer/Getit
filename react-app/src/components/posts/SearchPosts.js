@@ -16,6 +16,7 @@ function SearchPosts() {
   
 
   useEffect(async () => {
+    console.log("useEffect fired, query changed?", query)
     // const doSearch = async query => {
       const results = await dispatch(searchPosts(query));
     //   return results;
@@ -26,13 +27,19 @@ function SearchPosts() {
     setLoaded(true)
   }, [dispatch, query]);
 
+  console.log("searchPosts rendered, query is:", query)
+
   return (
     <>
       {!loaded && (
         <h2>Loading...</h2>
       )}
       {loaded && (
-        <PostsList posts={posts} postIds={postIds} />
+        <>
+          <h1>Results for "{query}"</h1>
+          <h3>{postIds.length || "No"} result{postIds.length===1?null:"s"}</h3>
+          <PostsList posts={posts} postIds={postIds} />
+        </>
       )}
     </>
   );
