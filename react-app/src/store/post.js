@@ -23,15 +23,15 @@ export const getAllPosts = () => async (dispatch) => {
 
 // SEARCH POSTS
 export const searchPosts = (query) => async (dispatch) => {
-  console.log("## searchPosts thunk fired")
+  // console.log("## searchPosts thunk fired")
   const response = await fetch(`/api/search?query=${query}`);
   if (response.ok) {
     const results = await response.json();
     dispatch(loadAllPosts(results));
     // const out = results.posts.map(el => el.id)
-    const out = results.posts;
-    console.log("thunk boutta return:", out)
-    return out
+    return results.posts;
+    // console.log("thunk boutta return:", out)
+    // return out
   }
   return response; // idk how this will work out so try and see for error handling
 }
