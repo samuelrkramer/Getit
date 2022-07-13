@@ -7,8 +7,9 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
-import PostsList from './components/posts/PostsList';
+import PostsAll from './components/posts/PostsAll';
 import PostsNewest from './components/posts/PostsNewest';
+import SearchPosts from './components/posts/SearchPosts';
 import SinglePost from './components/posts/SinglePost';
 import PostForm from './components/posts/PostForm';
 import Banner from './components/Banner';
@@ -47,7 +48,7 @@ function App() {
           <User />
         </ProtectedRoute>
         <Route path='/posts' exact={true} >
-          <PostsList />
+          <PostsAll />
         </Route>
         <Route path='/newest' exact={true} >
           <PostsNewest />
@@ -64,10 +65,13 @@ function App() {
         <Route path='/posts/:postId' exact={true} >
           <SinglePost />
         </Route>
+        <Route path='/search' >
+          <SearchPosts />
+        </Route>
         <Route path='/' exact={true} >
           <Banner />
           {/* <h1>My Home Page</h1> */}
-          <PostsList />
+          <PostsAll />
         </Route>
       </Switch>
     </BrowserRouter>

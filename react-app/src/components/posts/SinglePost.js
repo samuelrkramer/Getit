@@ -14,6 +14,7 @@ function SinglePost() {
   const dispatch = useDispatch();
   // postId = parseInt(postId);
   const post = useSelector(state => state.posts.obj[postId]);
+  const [loaded, setLoaded] = useState(!!post);
   const comments = useSelector(state => state.comments.onPost[postId]);
   const cIds = Object.keys(comments || {});
 
@@ -23,18 +24,22 @@ function SinglePost() {
 
   useEffect(async () => {
     if (!post) {
-      dispatch(getOnePost(postId))
+      dispatch(getOnePost(postId));
     }
-
-  }, [dispatch]);
+    setLoaded(true);
+  }, [dispatch, post, postId]);
 
   useEffect(() => {
-    dispatch(getPostsComments(postId))
+    dispatch(getPostsComments(postId));
   }, [postId, dispatch]);
 
   useEffect(() => {
     if (!user) setCForm(false);
   }, [user]);
+
+  if (!loaded) {
+    return (<h2>Loading...</h2>)
+  }
 
   if (!post) {
     return (<h4>No post to display. Please <Link to="/posts">go back</Link> and try again.</h4>);
@@ -70,7 +75,7 @@ function SinglePost() {
             </>
           )}
         {/* </ul> */}
-        { cForm !== true && user && (<Link onClick={() => setCForm(true)}>Comment on this</Link>)}
+        { cForm !== true && user && (<a href="#" onClick={() => setCForm(true)}>Comment on this</a>)}
         { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       </div>
       {cIds.length > 0 && (
@@ -80,10 +85,10 @@ function SinglePost() {
             const comment = comments[cId];
             const now = new Date();
             const createDate = new Date(Date.parse(comment.created_at));
-            const editDate = new Date(Date.parse(comment.updated_at));
+            // const editDate = new Date(Date.parse(comment.updated_at));
             let edited = false;
             let dateString = comment.created_at;
-            if (comment.updated_at != comment.created_at) {
+            if (comment.updated_at !== comment.created_at) {
               dateString += ", edited "+comment.updated_at;
               edited = true;
             }
@@ -97,7 +102,7 @@ function SinglePost() {
                   <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
                     {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
                   </span>
-                  { comment.userId === user.id && (<Link onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</Link>)}
+                  { comment.userId === user.id && (<a href="#" onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</a>)}
                   </p>
                   <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
                   {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}

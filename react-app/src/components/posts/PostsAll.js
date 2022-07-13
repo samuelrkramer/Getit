@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPosts } from '../../store/post';
-// import PostHeader from './PostHeader';
 import PostsList from './PostsList';
 import './PostsList.css';
 
-function PostsNewest() {
+function PostsAll() {
   const dispatch = useDispatch();
   
   const posts = useSelector(state => state.posts.obj);
-  const postIds = Object.keys(posts).reverse();
+  const postIds = Object.keys(posts);
   const [loaded, setLoaded] = useState(!!postIds.length);
 
   useEffect(() => {
-    // async function fetchData() {
-    //   const response = await fetch('/api/posts/');
-    //   const responseData = await response.json();
-    //   setPosts(responseData.posts);
-    // }
-    // fetchData();
     dispatch(getAllPosts());
     setLoaded(true);
   }, [dispatch]);
-
-  // const postComponents = postIds.map(i => {
-  //   const post = posts[i];
-  //   return (<PostHeader key={i} post={post} i={i} />);
-  // });
 
   return (
     <>
@@ -40,4 +28,4 @@ function PostsNewest() {
   );
 }
 
-export default PostsNewest;
+export default PostsAll;

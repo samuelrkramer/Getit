@@ -67,7 +67,7 @@ const PostForm = ({mode}) => {
       setTitle(post.title);
       setBody(post.body);
     }
-  }, [mode]);
+  }, [mode, post.title, post.body]);
 
   let bodyRemain = body.toLowerCase().startsWith("long")?body.length:1000-body.length;
 
