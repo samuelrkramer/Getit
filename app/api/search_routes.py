@@ -12,10 +12,10 @@ search_routes = Blueprint('search', __name__)
 def search():
     query = request.args.get('query')
     posts = Post.query.filter(Post.title.ilike(f'%{query}%'))
-    comments = Comment.query.filter(Comment.body.ilike(f'%{query}%'))
+    # comments = Comment.query.filter(Comment.body.ilike(f'%{query}%'))
     return {
         'posts': [post.to_dict() for post in posts],
-        'comments:' [comment.to_dict() for comment in comments]
+        # 'comments:' [comment.to_dict() for comment in comments]
     }
 
 
