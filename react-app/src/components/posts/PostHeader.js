@@ -15,7 +15,7 @@ const PostHeader = ({ post, i=null }) => {
   }
   return (
     <div className="listRow" key={i}>
-      <span class="rowIndex">{i}</span>
+      <span className="rowIndex">{i}</span>
       <div className="rowItem">
         <p className="title">
           {!!i && (<NavLink to={`/posts/${post.id}`}>{post.title}</NavLink>)}
