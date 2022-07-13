@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPosts } from '../../store/post';
 import PostHeader from './PostHeader';
+import PostsList from './PostsList';
 import './PostsList.css';
 
 function PostsAll() {
@@ -21,16 +22,13 @@ function PostsAll() {
     dispatch(getAllPosts());
   }, [dispatch]);
 
-  const postComponents = postIds.map(i => {
-    const post = posts[i];
-    return (<PostHeader key={i} post={post} i={i} />);
-  });
+  // const postComponents = postIds.map(i => {
+  //   const post = posts[i];
+  //   return (<PostHeader key={i} post={post} i={i} />);
+  // });
 
   return (
-    <div className="postList">
-      {/* <h1>Post List: </h1> */}
-      <ul>{postComponents}</ul>
-    </div>
+    <PostsList posts={posts} postIds={postIds}/>
   );
 }
 
