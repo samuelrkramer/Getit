@@ -2,7 +2,7 @@
 // import LoginForm from "./auth/LoginForm";
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { GetitContext } from "./context/GetitContext";
+import { GetitContext } from "../context/GetitContext"
 import Logo from "./Logo";
 
 const Sidebar = () => {

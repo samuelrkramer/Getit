@@ -5,7 +5,7 @@ import { getOnePost } from '../../store/post';
 import { getPostsComments } from '../../store/comment';
 import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
-import { GetitContext } from '../context/GetitContext';
+import { GetitContext } from '../../context/GetitContext';
 import './SinglePost.css'
 import ReactMarkdown from 'react-markdown';
 import humanizeDuration from 'humanize-duration';
