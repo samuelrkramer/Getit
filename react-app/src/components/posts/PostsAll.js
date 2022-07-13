@@ -6,17 +6,25 @@ import './PostsList.css';
 
 function PostsAll() {
   const dispatch = useDispatch();
-  // const [posts, setPosts] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   const posts = useSelector(state => state.posts.obj);
   const postIds = Object.keys(posts);
 
   useEffect(() => {
     dispatch(getAllPosts());
+    setLoaded(true);
   }, [dispatch]);
 
   return (
-    <PostsList posts={posts} postIds={postIds}/>
+    <>
+      {!loaded && (
+        <h2>Loading...</h2>
+      )}
+      {loaded && (
+        <PostsList posts={posts} postIds={postIds} />
+      )}
+    </>
   );
 }
 

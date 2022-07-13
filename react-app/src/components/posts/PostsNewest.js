@@ -7,7 +7,7 @@ import './PostsList.css';
 
 function PostsNewest() {
   const dispatch = useDispatch();
-  // const [posts, setPosts] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   const posts = useSelector(state => state.posts.obj);
   const postIds = Object.keys(posts).reverse();
@@ -20,6 +20,7 @@ function PostsNewest() {
     // }
     // fetchData();
     dispatch(getAllPosts());
+    setLoaded(true);
   }, [dispatch]);
 
   // const postComponents = postIds.map(i => {
@@ -28,7 +29,14 @@ function PostsNewest() {
   // });
 
   return (
-    <PostsList posts={posts} postIds={postIds} />
+    <>
+      {!loaded && (
+        <h2>Loading...</h2>
+      )}
+      {loaded && (
+        <PostsList posts={posts} postIds={postIds} />
+      )}
+    </>
   );
 }
 
