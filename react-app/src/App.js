@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import PostsAll from './components/posts/PostsAll';
 import PostsNewest from './components/posts/PostsNewest';
+import SearchPosts from './components/posts/SearchPosts';
 import SinglePost from './components/posts/SinglePost';
 import PostForm from './components/posts/PostForm';
 import Banner from './components/Banner';
@@ -63,6 +64,9 @@ function App() {
         </ProtectedRoute>
         <Route path='/posts/:postId' exact={true} >
           <SinglePost />
+        </Route>
+        <Route path='/search' >
+          <SearchPosts />
         </Route>
         <Route path='/' exact={true} >
           <Banner />

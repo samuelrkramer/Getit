@@ -21,6 +21,10 @@ function PostsList({posts, postIds}) {
   //   dispatch(getAllPosts());
   // }, [dispatch]);
 
+  console.log("### IN POSTSLIST COMPONENT:")
+  console.log("postIds:", postIds)
+  console.log("posts:", posts)
+
   const postComponents = postIds.map(i => {
     const post = posts[i];
     return (<PostHeader key={i} post={post} i={i} />);

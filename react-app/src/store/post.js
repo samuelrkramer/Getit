@@ -21,6 +21,20 @@ export const getAllPosts = () => async (dispatch) => {
   return response; // idk how this will work out so try and see for error handling
 }
 
+// SEARCH POSTS
+export const searchPosts = (query) => async (dispatch) => {
+  console.log("## searchPosts thunk fired")
+  const response = await fetch(`/api/search?query=${query}`);
+  if (response.ok) {
+    const results = await response.json();
+    await dispatch(loadAllPosts(results));
+    const out = results.posts.map(el => el.id)
+    console.log("thunk botuta return:", out)
+    return out
+  }
+  return response; // idk how this will work out so try and see for error handling
+}
+
 const loadAllPosts = (payload) => ({
   type: LOAD_POSTS,
   posts: payload.posts,
