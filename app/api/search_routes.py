@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Post, Comment
+from app.models import comment, db, Post, Comment
 # from app.forms import PostForm
 # from .auth_routes import validation_errors_to_error_messages
 
@@ -12,7 +12,11 @@ search_routes = Blueprint('search', __name__)
 def search():
     query = request.args.get('query')
     posts = Post.query.filter(Post.title.ilike(f'%{query}%'))
-    return {'posts': [post.to_dict() for post in posts]}
+    comments = Comment.query.filter(Comment.body.ilike(f'%{query}%'))
+    return {
+        'posts': [post.to_dict() for post in posts],
+        'comments:' [comment.to_dict() for comment in comments]
+    }
 
 
 # @post_routes.route('', methods=['POST'])
