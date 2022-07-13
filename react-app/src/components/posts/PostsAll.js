@@ -4,7 +4,7 @@ import { getAllPosts } from '../../store/post';
 import PostHeader from './PostHeader';
 import './PostsList.css';
 
-function PostsList() {
+function PostsAll() {
   const dispatch = useDispatch();
   // const [posts, setPosts] = useState([]);
 
@@ -34,4 +34,4 @@ function PostsList() {
   );
 }
 
-export default PostsList;
+export default PostsAll;
