@@ -8,6 +8,8 @@ function SearchPosts() {
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get('query');
 
+  const [loaded, setLoaded] = useState(false);
+
   const dispatch = useDispatch();
 
   const posts = useSelector(state => state.posts.obj);
@@ -22,10 +24,18 @@ function SearchPosts() {
     // const results = doSearch(query);
     console.log("after thunk returned:", results)
     setPostIds(results.map(el=>el.id));
+    setLoaded(true)
   }, [dispatch]);
 
   return (
-    <PostsList posts={posts} postIds={postIds}/>
+    <>
+      {!loaded && (
+        <h2>Loading...</h2>
+      )}
+      {loaded && (
+        <PostsList posts={posts} postIds={postIds} />
+      )}
+    </>
   );
 }
 
