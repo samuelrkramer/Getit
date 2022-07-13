@@ -1,8 +1,8 @@
 // import bgImg from '../static/images/emoji_banner_getit_short.png'
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import ghIcon from '../static/images/githubIcon.svg';
-import liIcon from '../static/images/linkedInIcon.png';
+// import ghIcon from '../static/images/githubIcon.svg';
+// import liIcon from '../static/images/linkedInIcon.png';
 import './Banner.css';
 
 const Banner = () => {
@@ -27,7 +27,7 @@ const Banner = () => {
             {!!user.username?"Post something":"Create an account"} and get started!
           </button>
         </div>
-        <div className="bannerInside">
+        {/* <div className="bannerInside">
           <h3>Check out the developer!</h3>
           <div className='devLinkBox'>
             <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
@@ -40,7 +40,7 @@ const Banner = () => {
           <h3>
             <a href="https://github.com/samuelrkramer/Getit">Project Repo</a>
           </h3>
-        </div>
+        </div> */}
       </div>
     </>
   )
