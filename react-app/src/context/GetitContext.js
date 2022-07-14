@@ -5,7 +5,7 @@ export const GetitContext = createContext();
 
 const GetitProvider = props => {
   const modalRef = useRef();
-  const [modalVal, setModalVal] = useState();
+  const [modalNode, setModalVal] = useState();
 
   // const dummy = (<div>dummy sidebar context stuff</div>);
   const [sideAdd, setSideAdd] = useState([]);
@@ -19,7 +19,7 @@ const GetitProvider = props => {
   return (
     <>
       <GetitContext.Provider value={
-        { modalVal, sideAdd, setSideAdd, searchQuery, setSearchQuery }
+        { modalNode, sideAdd, setSideAdd, searchQuery, setSearchQuery }
       }>
         {props.children}
       </GetitContext.Provider>
@@ -29,8 +29,8 @@ const GetitProvider = props => {
 };
 
 export const Modal = ({onClose, children}) => {
-  const {modalVal} = useContext(GetitContext);
-  if (!modalVal) return null;
+  const {modalNode} = useContext(GetitContext);
+  if (!modalNode) return null;
 
   return ReactDOM.createPortal(
     <div id="modal">
@@ -39,7 +39,7 @@ export const Modal = ({onClose, children}) => {
         {children}
       </div>
     </div>,
-    modalVal
+    modalNode
   );
 };
 
