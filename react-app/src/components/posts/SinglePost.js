@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { getOnePost } from '../../store/post';
 import { getPostsComments } from '../../store/comment';
 import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
-import ReactMarkdown from 'react-markdown';
+import { GetitContext } from '../../context/GetitContext';
 import './SinglePost.css'
+import ReactMarkdown from 'react-markdown';
 import humanizeDuration from 'humanize-duration';
 
 function SinglePost() {
+  const { setSideAdd } = useContext(GetitContext);
   let { postId } = useParams();
   const dispatch = useDispatch();
   // postId = parseInt(postId);
@@ -37,6 +39,37 @@ function SinglePost() {
     if (!user) setCForm(false);
   }, [user]);
 
+  useEffect(() => {
+    // const postDate = new Date(Date.parse(post.date));
+    // const urlCLick = e => {
+    //   console.log("test urlclick");
+    //   // window.alert("urlclick fired")
+    //   // window.Clipboard.writeText(e.target.value);
+    // };
+
+    if (post) {
+      const createDate = new Date(Date.parse(post.created_at));
+      setSideAdd([(
+        <div className="sideSpaced postCard">
+          <span className="tagline">This POST was submitted on {createDate.toLocaleDateString()}</span><br />
+          {post.id} - {post.title}<br />
+          {/* Posted on {postDate.toDateString()}<br/> */}
+          {/* Click to copy URL to POST: */}
+          <span className="tagline">Shareable URL:</span>
+          <input
+            type="text"
+            disabled={true}
+            // value={`https://skgetit.heroku.com/posts/${post.id}`}
+            value={window.location.href}
+            style={{width: "280px"}}
+            // onMouseOver={urlCLick}
+          />
+        </div>
+      )])
+    }
+    return () => { setSideAdd([]);}
+  }, [post]);
+  
   if (!loaded) {
     return (<h2>Loading...</h2>)
   }
@@ -60,7 +93,7 @@ function SinglePost() {
         </li> */}
         {post.body && (
           <>
-          {/* <span class="rowIndex">{null}</span> */}
+          {/* <span className="rowIndex">{null}</span> */}
           <div className="body">
             <ReactMarkdown>
               {post.body}
