@@ -9,7 +9,7 @@ import liIcon from '../static/images/linkedInIcon.png';
 
 
 const Sidebar = () => {
-  const { sideAdd } = useContext(GetitContext);
+  const { sideAdd, searchQuery, setSearchQuery } = useContext(GetitContext);
 
   const [query, setQuery] = useState("");
   const history = useHistory();
@@ -17,7 +17,10 @@ const Sidebar = () => {
   const searchHandler = e => {
     e.preventDefault();
     console.log(query, e);
+    setSearchQuery(query);
     history.push(`/search?query=${encodeURIComponent(query)}`);
+    setQuery("");
+    // console.log("yep, this still executes")
   }
 
   return (
