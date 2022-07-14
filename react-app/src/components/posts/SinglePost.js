@@ -48,19 +48,22 @@ function SinglePost() {
     // };
 
     if (post) {
-        setSideAdd([(
-        <div className="sideSpaced postCard">{post.id} - {post.title}<br />
-        {/* Posted on {postDate.toDateString()}<br/> */}
-        {/* Click to copy URL to POST: */}
-        <span className="tagline">Shareable URL:</span>
-        <input
-          type="text"
-          disabled={true}
-          // value={`https://skgetit.heroku.com/posts/${post.id}`}
-          value={window.location.href}
-          style={{width: "280px"}}
-          // onMouseOver={urlCLick}
-        />
+      const createDate = new Date(Date.parse(post.created_at));
+      setSideAdd([(
+        <div className="sideSpaced postCard">
+          <span className="tagline">This POST was submitted on {createDate.toLocaleDateString()}</span><br />
+          {post.id} - {post.title}<br />
+          {/* Posted on {postDate.toDateString()}<br/> */}
+          {/* Click to copy URL to POST: */}
+          <span className="tagline">Shareable URL:</span>
+          <input
+            type="text"
+            disabled={true}
+            // value={`https://skgetit.heroku.com/posts/${post.id}`}
+            value={window.location.href}
+            style={{width: "280px"}}
+            // onMouseOver={urlCLick}
+          />
         </div>
       )])
     }
