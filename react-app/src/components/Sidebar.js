@@ -33,7 +33,7 @@ const Sidebar = () => {
           />
           <button type="submit">🔍</button>
         </form>
-      Here's sidebar stuff
+      {/* Here's sidebar stuff */}
       </div>
       {sideAdd.map(el => (el))}
       <div className="sideSpaced devCard">

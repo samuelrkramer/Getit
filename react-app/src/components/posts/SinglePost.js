@@ -55,7 +55,9 @@ function SinglePost() {
         <input
           type="text"
           disabled={true}
-          value={`https://skgetit.heroku.com/posts/${post.id}`}
+          // value={`https://skgetit.heroku.com/posts/${post.id}`}
+          value={window.location.href}
+          style={{width: "280px"}}
           // onMouseOver={urlCLick}
         />
         </div>
