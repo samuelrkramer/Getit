@@ -52,6 +52,7 @@ function SinglePost() {
         <div className="sideSpaced postCard">{post.id} - {post.title}<br />
         {/* Posted on {postDate.toDateString()}<br/> */}
         {/* Click to copy URL to POST: */}
+        <span className="tagline">Shareable URL:</span>
         <input
           type="text"
           disabled={true}
