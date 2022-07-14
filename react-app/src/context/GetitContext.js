@@ -9,6 +9,8 @@ const GetitProvider = props => {
 
   // const dummy = (<div>dummy sidebar context stuff</div>);
   const [sideAdd, setSideAdd] = useState([]);
+  
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setModalVal(modalRef.current);
@@ -16,7 +18,9 @@ const GetitProvider = props => {
 
   return (
     <>
-      <GetitContext.Provider value={{ modalVal, sideAdd, setSideAdd }}>
+      <GetitContext.Provider value={
+        { modalVal, sideAdd, setSideAdd, searchQuery, setSearchQuery }
+      }>
         {props.children}
       </GetitContext.Provider>
       <div ref={modalRef} />

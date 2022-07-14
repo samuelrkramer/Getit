@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchPosts } from '../../store/post';
 import PostsList from './PostsList';
+import { GetitContext } from '../../context/GetitContext';
 import './PostsList.css';
 
 function SearchPosts() {
+  const { searchQuery } = useContext(GetitContext);
   const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get('query');
+  const query = searchQuery || urlParams.get('query');
   
   const dispatch = useDispatch();
   
