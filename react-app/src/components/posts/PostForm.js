@@ -120,15 +120,15 @@ const PostForm = ({mode}) => {
       )}
       <button onClick={cancelHandler}>Cancel</button>
     </form>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <div className="confirm">
-            <p>Are you sure you want to delete this?</p>
-            <button onClick={() => setShowModal(false)} >Cancel</button>
-            <button onClick={deleteHandler} >Delete</button>
-          </div>
-        </Modal>
-      )}
+    {showModal && (
+      <Modal onClose={() => setShowModal(false)}>
+        <div className="confirm">
+          <p>Are you sure you want to delete this?</p>
+          <button onClick={() => setShowModal(false)} >Cancel</button>
+          <button onClick={deleteHandler} >Delete</button>
+        </div>
+      </Modal>
+    )}
     </>
   );
 };
