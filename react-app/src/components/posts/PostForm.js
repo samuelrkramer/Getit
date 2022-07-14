@@ -122,7 +122,11 @@ const PostForm = ({mode}) => {
     </form>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          This is a test
+          <div className="confirm">
+            <p>Are you sure you want to delete this?</p>
+            <button onClick={() => setShowModal(false)} >Cancel</button>
+            <button onClick={deleteHandler} >Delete</button>
+          </div>
         </Modal>
       )}
     </>
