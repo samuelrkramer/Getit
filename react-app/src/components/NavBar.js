@@ -83,7 +83,7 @@ const NavBar = () => {
               </span>
               {separator}
               <span className="bold">
-                <a href="#" onClick={demoLogin}>demo</a>
+                <a onClick={demoLogin}>demo</a>
               </span>
             </>
           )}
