@@ -19,6 +19,7 @@ function SinglePost() {
   const [loaded, setLoaded] = useState(!!post);
   const comments = useSelector(state => state.comments.onPost[postId]);
   const cIds = Object.keys(comments || {});
+  const shareURL = window.location.href.replace(/[\?\#].*$/,"");
 
   const [cForm, setCForm ] = useState(false);
   
@@ -41,11 +42,13 @@ function SinglePost() {
 
   useEffect(() => {
     // const postDate = new Date(Date.parse(post.date));
-    // const urlCLick = e => {
-    //   console.log("test urlclick");
-    //   // window.alert("urlclick fired")
-    //   // window.Clipboard.writeText(e.target.value);
-    // };
+    const urlClick = e => {
+      // console.log("test urlclick");
+      // console.log(e.target);
+      // window.alert("urlclick fired")
+      navigator.clipboard.writeText(shareURL);
+      e.target.innerHTML = "(copied)"
+    };
 
     if (post) {
       const createDate = new Date(Date.parse(post.created_at));
@@ -55,14 +58,15 @@ function SinglePost() {
           {post.id} - {post.title}<br />
           {/* Posted on {postDate.toDateString()}<br/> */}
           {/* Click to copy URL to POST: */}
-          <span className="tagline">Shareable URL:</span>
+          <span className="tagline">Shareable URL: <a onClick={urlClick}>(copy)</a></span>
           <input
             type="text"
+            className="shareURL"
             disabled={true}
             // value={`https://skgetit.heroku.com/posts/${post.id}`}
-            value={window.location.href.replace(/[\?\#].*$/,"")}
-            style={{width: "280px"}}
-            // onMouseOver={urlCLick}
+            value={shareURL}
+            // style={{width: "280px"}}
+            onClick={ () => console.log("omg it clicked") }
           />
         </div>
       )])
