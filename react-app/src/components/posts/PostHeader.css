@@ -30,7 +30,8 @@ p {
 .title {
   font-size: medium;
   font-weight: normal;
-  margin-bottom: 1px;
+  /* margin-bottom: 1px; */
+  margin: 1px 0;
   color: #0000ff;
   outline: none;
   margin-right: 0.4em;
@@ -40,6 +41,7 @@ p {
 .tagline {
   color: #888;
   font-size: x-small;
+  margin: 4px 0;
 }
 
 .body {

@@ -12,7 +12,8 @@ body {
 }
 
 main {
-  margin: 0 30px;
+  /* margin: 0 30px; */
+  margin: 7px 5px 0 15px;
 }
 
 .xsmall {
