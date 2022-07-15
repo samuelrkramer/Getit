@@ -36,46 +36,48 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Sidebar />
-      <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <Route path='/posts' exact={true} >
-          <PostsAll />
-        </Route>
-        <Route path='/newest' exact={true} >
-          <PostsNewest />
-        </Route>
-        <ProtectedRoute path='/posts/undefined' exact={true} >
-          You've been naughty to get to this point. I told you that the title was required!
-        </ProtectedRoute>
-        <ProtectedRoute path='/posts/new' exact={true} >
-          <PostForm mode="Create" />
-        </ProtectedRoute>
-        <ProtectedRoute path='/posts/:postId/edit' exact={true} >
-          <PostForm mode="Edit" />
-        </ProtectedRoute>
-        <Route path='/posts/:postId' exact={true} >
-          <SinglePost />
-        </Route>
-        <Route path='/search' >
-          <SearchPosts />
-        </Route>
-        <Route path='/' exact={true} >
-          <Banner />
-          {/* <h1>My Home Page</h1> */}
-          <PostsAll />
-        </Route>
-      </Switch>
+      <main>
+        <Switch>
+          <Route path='/login' exact={true}>
+            <LoginForm />
+          </Route>
+          <Route path='/sign-up' exact={true}>
+            <SignUpForm />
+          </Route>
+          <ProtectedRoute path='/users' exact={true} >
+            <UsersList/>
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId' exact={true} >
+            <User />
+          </ProtectedRoute>
+          <Route path='/posts' exact={true} >
+            <PostsAll />
+          </Route>
+          <Route path='/newest' exact={true} >
+            <PostsNewest />
+          </Route>
+          <ProtectedRoute path='/posts/undefined' exact={true} >
+            You've been naughty to get to this point. I told you that the title was required!
+          </ProtectedRoute>
+          <ProtectedRoute path='/posts/new' exact={true} >
+            <PostForm mode="Create" />
+          </ProtectedRoute>
+          <ProtectedRoute path='/posts/:postId/edit' exact={true} >
+            <PostForm mode="Edit" />
+          </ProtectedRoute>
+          <Route path='/posts/:postId' exact={true} >
+            <SinglePost />
+          </Route>
+          <Route path='/search' >
+            <SearchPosts />
+          </Route>
+          <Route path='/' exact={true} >
+            <Banner />
+            {/* <h1>My Home Page</h1> */}
+            <PostsAll />
+          </Route>
+        </Switch>
+      </main>
     </BrowserRouter>
   );
 }

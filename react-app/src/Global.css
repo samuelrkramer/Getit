@@ -11,6 +11,11 @@ body {
   font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
+main {
+  /* margin: 0 30px; */
+  margin: 7px 5px 0 15px;
+}
+
 .xsmall {
   font: normal x-small verdana,arial,helvetica,sans-serif;
 }
@@ -18,6 +23,7 @@ body {
 a {
   text-decoration: none;
   color: #369;
+  cursor: pointer;
 }
 
 ul, ol {
@@ -31,10 +37,6 @@ p {
 
 .red, .errorBox {
   color: red;
-}
-
-.bigLeftMargin {
-  margin-left: 51px;
 }
 
 .inputBox {

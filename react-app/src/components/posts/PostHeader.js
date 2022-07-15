@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './PostHeader.css';
 import humanizeDuration from 'humanize-duration';
 
@@ -15,11 +15,14 @@ const PostHeader = ({ post, i=null }) => {
   }
   return (
     <div className="listRow" key={i}>
-      <span className="rowIndex">{i}</span>
+      {i && (
+        <span className="rowIndex">{i}</span>
+      )}
       <div className="rowItem">
         <p className="title">
-          {!!i && (<NavLink to={`/posts/${post.id}`}>{post.title}</NavLink>)}
-          {!i && post.title}
+          {/* {i && (<NavLink to={`/posts/${post.id}`}>{post.title}</NavLink>)} */}
+          {/* {!i && post.title} */}
+          <Link to={`/posts/${post.id}`}>{post.title}</Link>
         </p>
         <p className="tagline">
           submitted <span title={dateString}>
