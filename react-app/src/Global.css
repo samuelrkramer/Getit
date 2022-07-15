@@ -11,6 +11,10 @@ body {
   font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
+main {
+  margin: 0 30px;
+}
+
 .xsmall {
   font: normal x-small verdana,arial,helvetica,sans-serif;
 }
@@ -34,9 +38,9 @@ p {
   color: red;
 }
 
-.bigLeftMargin {
+/* .bigLeftMargin {
   margin-left: 51px;
-}
+} */
 
 .inputBox {
   width: 500px;
