@@ -17,7 +17,7 @@ const Banner = () => {
 
   return (
     <>
-      {/* <div className="bannerBox bigLeftMargin"> */}
+      {/* <div className="bannerBox"> */}
       <div className="bannerBox">
         <div className="bannerInside">
           <h2>Welcome to GETit</h2>

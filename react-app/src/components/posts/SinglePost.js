@@ -105,7 +105,7 @@ function SinglePost() {
           </div>
           </>
         )}
-        <div className="bigLeftMargin">
+        <div>
           {post.userId === user.id && (
             <>
             <Link to={`/posts/${post.id}/edit`} >Edit</Link><br />
@@ -116,8 +116,9 @@ function SinglePost() {
         { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       </div>
       {cIds.length > 0 && (
-        <div className="bigLeftMargin">
-          <h2>Comments:</h2>
+        <>
+        <h2>Comments:</h2>
+        <div>
           {cIds.map(cId => {
             const comment = comments[cId];
             const now = new Date();
@@ -130,10 +131,10 @@ function SinglePost() {
               edited = true;
             }
             return (
-            <div key={cId}>
+            <div key={cId} className="oneComment">
               {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comment} setCForm={setCForm} />)}
               {cForm !== cId && (
-                <div className="oneComment">
+                <>
                   {/* <li><i>Comment ID: {cId}</i></li> */}
                   <p className="tagline">
                   <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
@@ -143,11 +144,12 @@ function SinglePost() {
                   </p>
                   <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
                   {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}
-                </div>
+                </>
               )}
             </div>
           )})}
         </div>
+        </>
       )}
     </>
   );
