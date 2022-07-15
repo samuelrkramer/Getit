@@ -60,7 +60,7 @@ function SinglePost() {
             type="text"
             disabled={true}
             // value={`https://skgetit.heroku.com/posts/${post.id}`}
-            value={window.location.href}
+            value={window.location.href.replace(/[\?\#].*$/,"")}
             style={{width: "280px"}}
             // onMouseOver={urlCLick}
           />
@@ -108,7 +108,7 @@ function SinglePost() {
             </>
           )}
         {/* </ul> */}
-        { cForm !== true && user && (<a href="#" onClick={() => setCForm(true)}>Comment on this</a>)}
+        { cForm !== true && user && (<a onClick={() => setCForm(true)}>Comment on this</a>)}
         { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       </div>
       {cIds.length > 0 && (
@@ -135,7 +135,7 @@ function SinglePost() {
                   <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
                     {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
                   </span>
-                  { comment.userId === user.id && (<a href="#" onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</a>)}
+                  { comment.userId === user.id && (<a onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</a>)}
                   </p>
                   <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
                   {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}

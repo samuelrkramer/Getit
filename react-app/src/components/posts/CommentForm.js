@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { createComment, deleteComment, editComment } from '../../store/comment';
+import { Modal } from '../../context/GetitContext';
 
 const CommentForm = ({mode, postId, comment={}, setCForm }) => {
   const [errors, setErrors] = useState([]);
   const [body, setBody] = useState(comment.body || '');
+  const [showModal, setShowModal] = useState(false);
 
   // const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -26,6 +28,11 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
     else setCForm(false);
   };
 
+  const deleteConfirm = e => {
+    e.preventDefault();
+    setShowModal(true);
+  }
+
   const deleteHandler = async (e) => {
     e.preventDefault();
     setErrors([]);
@@ -42,6 +49,7 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
   let bodyRemain = body.toLowerCase().startsWith("long")?body.length:1000-body.length;
 
   return (
+    <>
     <form onSubmit={submitHandler}>
       <div className="errorBox">
         {errors.map((error, ind) => (
@@ -63,10 +71,20 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
       <span>*required</span><br />
       <button type='submit'>{mode} Comment</button>
       {mode === "Edit" && (
-        <button onClick={deleteHandler}>Delete</button>
+        <button onClick={deleteConfirm}>Delete</button>
       )}
       <button onClick={cancelHandler}>Cancel</button>
     </form>
+    {showModal && (
+      <Modal onClose={() => setShowModal(false)}>
+        <div className="confirm">
+          <p>Are you sure you want to delete this?</p>
+          <button onClick={() => setShowModal(false)} >Cancel</button>
+          <button onClick={deleteHandler} >Delete</button>
+        </div>
+      </Modal>
+    )}
+    </>
   );
 };
 

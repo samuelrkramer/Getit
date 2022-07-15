@@ -4,7 +4,7 @@ nav {
   position: relative;
   background-color: #cee3f8;
   border-bottom: 1px solid #5f99cf;
-  z-index: 10;
+  /* z-index: 10; */
   margin: 0;
   padding: 0;
 }
@@ -44,7 +44,7 @@ nav {
   background-color: white;
   border: 1px solid #5f99cf;
   border-bottom: 1px solid white;
-  z-index: 20;
+  /* z-index: 20; */
 }
 
 .menu li a {
