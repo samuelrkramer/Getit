@@ -60,7 +60,7 @@ function SinglePost() {
             type="text"
             disabled={true}
             // value={`https://skgetit.heroku.com/posts/${post.id}`}
-            value={window.location.href.replace(/\#.*$/,"")}
+            value={window.location.href.replace(/[\?\#].*$/,"")}
             style={{width: "280px"}}
             // onMouseOver={urlCLick}
           />
