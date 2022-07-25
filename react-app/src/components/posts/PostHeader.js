@@ -3,6 +3,7 @@ import './PostHeader.css';
 import humanizeDuration from 'humanize-duration';
 
 const PostHeader = ({ post, i=null }) => {
+  const user = useSelector(state => state.session.user) || false;
   // console.log(i, post);
   const now = new Date();
   const createDate = new Date(Date.parse(post.created_at));
@@ -44,6 +45,11 @@ const PostHeader = ({ post, i=null }) => {
           <li>
             <a onClick={shareHandler}>share</a>
           </li>
+          {post.userId === user.id && (
+            <li>
+              <Link to={`/posts/${post.id}/edit`}>edit</Link><br />
+            </li>
+          )}
         </ul>
       </div>
     </div>
