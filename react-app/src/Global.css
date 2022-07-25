@@ -172,3 +172,21 @@ button {
 .sidebar .devCard .logo a {
   color: white;
 }
+
+.thingMenu {
+  display: block;
+  padding: 1px 0;
+  font: normal x-small verdana,arial,helvetica,sans-serif;
+}
+
+.thingMenu li {
+  display: inline-block;
+  border: none;
+  padding-right: 4px;
+  line-height: 1em;
+}
+
+.thingMenu a {
+  color: #888;
+  font-weight: bold;
+}
