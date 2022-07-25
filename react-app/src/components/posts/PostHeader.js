@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './PostHeader.css';
 import humanizeDuration from 'humanize-duration';
 
