@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import CommentForm from './CommentForm';
 import ReactMarkdown from 'react-markdown';
 import humanizeDuration from 'humanize-duration';
 
@@ -14,16 +16,16 @@ const ShowComment = ({comment, cForm, setCForm}) => {
     edited = true;
   }
   return (
-  <div key={cId} className="oneComment">
-    {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comment} setCForm={setCForm} />)}
-    {cForm !== cId && (
+  <div key={comment.id} className="oneComment">
+    {cForm === comment.id && (<CommentForm mode="Edit" postId={comment.postId} comment={comment} setCForm={setCForm} />)}
+    {cForm !== comment.id && (
       <>
-        {/* <li><i>Comment ID: {cId}</i></li> */}
+        {/* <li><i>Comment ID: {comment.id}</i></li> */}
         <p className="tagline">
         <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
           {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
         </span>
-        { comment.userId === user.id && (<a onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</a>)}
+        { comment.userId === user.id && (<a onClick={() => setCForm(comment.id)} className="xsmall minMarg">Edit</a>)}
         </p>
         <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
         {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}
