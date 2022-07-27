@@ -86,34 +86,21 @@ function SinglePost() {
   return (
     <>
       <PostHeader post={post} numComments={cIds.length} />
-      {/* <ul> */}
-        {/* <li>
-          <strong>Post Id</strong> {postId}
-        </li>
-        <li>
-          <strong>User</strong> <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
-        </li>
-        <li>
-          <strong>Title</strong> {post.title}
-        </li> */}
-        {post.body && (
-          <>
-          {/* <span className="rowIndex">{null}</span> */}
-          <div className="body">
-            <ReactMarkdown>
-              {post.body}
-            </ReactMarkdown>
-          </div>
-          </>
-        )}
+      {post.body && (
+        <>
+        {/* <span className="rowIndex">{null}</span> */}
+        <div className="body">
+          <ReactMarkdown>
+            {post.body}
+          </ReactMarkdown>
+        </div>
+        </>
+      )}
+      {/* {post.userId === user.id && (
         <div>
-          {post.userId === user.id && (
-            <>
-            <Link to={`/posts/${post.id}/edit`} >Edit</Link><br />
-            </>
-          )}
-        {/* </ul> */}
-      </div>
+          <Link to={`/posts/${post.id}/edit`} >Edit</Link><br />
+        </div>
+      )} */}
       <span className="title">{cIds.length?`viewing ${cIds.length} comments`:"no comments (yet)"}</span>
       { cForm !== true && user && (<>|| <a onClick={() => setCForm(true)}>comment on this</a></>)}
       { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
@@ -122,33 +109,6 @@ function SinglePost() {
           <div>
             {cIds.map(cId => {
               const comment = comments[cId];
-              // const now = new Date();
-              // const createDate = new Date(Date.parse(comment.created_at));
-              // // const editDate = new Date(Date.parse(comment.updated_at));
-              // let edited = false;
-              // let dateString = comment.created_at;
-              // if (comment.updated_at !== comment.created_at) {
-              //   dateString += ", edited "+comment.updated_at;
-              //   edited = true;
-              // }
-              // return (
-              // <div key={cId} className="oneComment">
-              //   {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comment} setCForm={setCForm} />)}
-              //   {cForm !== cId && (
-              //     <>
-              //       {/* <li><i>Comment ID: {cId}</i></li> */}
-              //       <p className="tagline">
-              //       <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
-              //         {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
-              //       </span>
-              //       { comment.userId === user.id && (<a onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</a>)}
-              //       </p>
-              //       <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
-              //       {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}
-              //     </>
-              //   )}
-              // </div>
-              // )}
               return (
                 <ShowComment comment={comment} cForm={cForm} setCForm={setCForm} />
               )
