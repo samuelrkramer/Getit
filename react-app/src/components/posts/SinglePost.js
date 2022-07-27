@@ -113,12 +113,12 @@ function SinglePost() {
             </>
           )}
         {/* </ul> */}
-        { cForm !== true && user && (<a onClick={() => setCForm(true)}>Comment on this</a>)}
-        { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       </div>
+      <span className="title">{cIds.length?`viewing ${cIds.length} comments`:"no comments (yet)"}</span>
+      { cForm !== true && user && (<>|| <a onClick={() => setCForm(true)}>comment on this</a></>)}
+      { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       {cIds.length > 0 && (
         <>
-          <h2>Comments:</h2>
           <div>
             {cIds.map(cId => {
               const comment = comments[cId];
