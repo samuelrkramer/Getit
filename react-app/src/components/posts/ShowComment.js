@@ -37,11 +37,11 @@ const ShowComment = ({comment, cForm, setCForm}) => {
           {/* <li>
             <a onClick={shareHandler}>share</a>
           </li> */}
-          {/* {comment.userId === user.id && (
+          {comment.userId === user.id && (
             <li>
-              <Link to={`/posts/${post.id}/edit`}>edit</Link><br />
+              <a onClick={() => setCForm(comment.id)}>edit</a>
             </li>
-          )} */}
+          )}
         </ul>
       </>
     )}
