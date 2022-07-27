@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import './PostHeader.css';
 import humanizeDuration from 'humanize-duration';
 
-const PostHeader = ({ post, i=null }) => {
+const PostHeader = ({ post, i=null, numComments }) => {
   const user = useSelector(state => state.session.user) || false;
   // console.log(i, post);
   const now = new Date();
   const createDate = new Date(Date.parse(post.created_at));
   // const editDate = new Date(Date.parse(post.updated_at));
   const postUrl = `/posts/${post.id}`;
-  const numComments = Object.keys(post.comments).length;
+  numComments = numComments || Object.keys(post.comments).length;
   let edited = false;
   let dateString = post.created_at;
   if (post.updated_at !== post.created_at) {

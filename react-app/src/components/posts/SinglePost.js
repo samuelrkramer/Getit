@@ -85,7 +85,7 @@ function SinglePost() {
 
   return (
     <>
-      <PostHeader post={post} />
+      <PostHeader post={post} numComments={cIds.length} />
       {/* <ul> */}
         {/* <li>
           <strong>Post Id</strong> {postId}
