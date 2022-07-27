@@ -16,19 +16,32 @@ const ShowComment = ({comment, cForm, setCForm}) => {
     edited = true;
   }
   return (
-  <div key={comment.id} className="oneComment">
+  <div key={comment.id} className="oneComment" name={`c${comment.id}`}>
     {cForm === comment.id && (<CommentForm mode="Edit" postId={comment.postId} comment={comment} setCForm={setCForm} />)}
     {cForm !== comment.id && (
       <>
         {/* <li><i>Comment ID: {comment.id}</i></li> */}
         <p className="tagline">
-        <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
-          {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
-        </span>
-        { comment.userId === user.id && (<a onClick={() => setCForm(comment.id)} className="xsmall minMarg">Edit</a>)}
+          <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
+            {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
+          </span>
+          { comment.userId === user.id && (<a onClick={() => setCForm(comment.id)} className="xsmall minMarg">Edit</a>)}
         </p>
         <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
         {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}
+        <ul className="thingMenu">
+          <li>
+            <Link to={`/posts/${comment.postId}#c${comment.id}`}>permalink</Link>
+          </li>
+          {/* <li>
+            <a onClick={shareHandler}>share</a>
+          </li> */}
+          {/* {comment.userId === user.id && (
+            <li>
+              <Link to={`/posts/${post.id}/edit`}>edit</Link><br />
+            </li>
+          )} */}
+        </ul>
       </>
     )}
   </div>
