@@ -16,7 +16,8 @@ const ShowComment = ({comment, cForm, setCForm}) => {
     edited = true;
   }
   return (
-  <div key={comment.id} className="oneComment" name={`c${comment.id}`}>
+  <div key={comment.id} className="oneComment">
+    <a name={`c${comment.id}`} />
     {cForm === comment.id && (<CommentForm mode="Edit" postId={comment.postId} comment={comment} setCForm={setCForm} />)}
     {cForm !== comment.id && (
       <>
