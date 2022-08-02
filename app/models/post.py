@@ -17,6 +17,7 @@ class Post(db.Model):
 
     user = relationship("User")#, back_populates="posts")
     comments = relationship("Comment", cascade="all, delete-orphan")#, back_populates="post")
+    votes = relationship("Vote", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
@@ -25,6 +26,7 @@ class Post(db.Model):
             'title': self.title,
             'body': self.body,
             'user': {'id': self.user.id, 'username': self.user.username},
+            'votes': self.votes,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }

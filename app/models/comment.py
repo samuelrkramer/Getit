@@ -19,6 +19,7 @@ class Comment(db.Model):
     user = relationship("User")#, back_populates="posts")
     post = relationship("Post")#, back_populates="comments")
     # comments = relationship("Comment", back_populates="parent")
+    votes = relationship("Vote", cascade="all, delete-orphan")
     
     def to_dict(self):
         return {
@@ -28,6 +29,7 @@ class Comment(db.Model):
             'parentId': self.parentId,
             'body': self.body,
             'user': {'id': self.user.id, 'username': self.user.username},
+            'votes': self.votes,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }

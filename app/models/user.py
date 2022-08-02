@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
 
     posts = relationship("Post", back_populates="user")
     comments = relationship("Comment", back_populates="user")
+    votes = relationship("Vote", back_populates="user")
 
     @property
     def password(self):
@@ -34,5 +35,6 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'votes': self.votes
         }
