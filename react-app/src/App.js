@@ -28,6 +28,11 @@ function App() {
     })();
   }, [dispatch]);
 
+  useEffect(() => {
+    fetch('https://wineauxapp.herokuapp.com/api/wakeup', {mode: 'no-cors'});
+    fetch('https://sk-kelp.herokuapp.com/api/wakeup', {mode: 'no-cors'});
+  }, []);
+
   if (!loaded) {
     return null;
   }
