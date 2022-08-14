@@ -37,6 +37,11 @@ app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(post_routes, url_prefix='/api/posts')
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
 app.register_blueprint(search_routes, url_prefix='/api/search')
+
+@app.route('/api/wake<path:path>')
+def api_wakeup_path(path):
+    return {"woke": "I'm awake"}
+
 db.init_app(app)
 Migrate(app, db)
 
