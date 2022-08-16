@@ -26,7 +26,7 @@ class Post(db.Model):
             'title': self.title,
             'body': self.body,
             'user': {'id': self.user.id, 'username': self.user.username},
-            'votes': self.votes,
+            'votes': [vote.value for vote in self.votes],
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
