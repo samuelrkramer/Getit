@@ -15,15 +15,25 @@ const PostHeader = ({ post, i=null }) => {
     edited = true;
   }
   const [score, setScore] = useState(post.score);
+  const [vote, setVote] = useState(0);
+
+  const voteUp = () => {
+    setVote(vote!==1?1:0);
+    setScore(score+2*(.5-vote));
+  }
+  const voteDown = () => {
+    setVote(vote!==-1?-1:0);
+    setScore(score-2*(.5+vote));
+  }
   return (
     <div className="listRow" key={i}>
       {i && (
         <span className="rowIndex">{i}</span>
       )}
-      <div className="voteBox">
-        <div className="voteUp">⬆</div>
+      <div className={`voteBox voted${vote}`}>
+        <div className="voteArrow voteUp" onClick={voteUp}>⬆</div>
         <span className="voteScore">{score}</span>
-        <div className="voteDown">⬇</div>
+        <div className="voteArrow voteDown" onClick={voteDown}>⬇</div>
       </div>
       <div className="rowItem">
         <p className="title">
