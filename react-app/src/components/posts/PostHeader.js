@@ -13,11 +13,15 @@ const PostHeader = ({ post, i=null }) => {
     dateString += ", edited "+post.updated_at;
     edited = true;
   }
+  const score = Object.values(post.votes).reduce((sum, v) => sum+v, 0);
   return (
     <div className="listRow" key={i}>
       {i && (
         <span className="rowIndex">{i}</span>
       )}
+      <div className="voteBox">
+        {score}
+      </div>
       <div className="rowItem">
         <p className="title">
           {/* {i && (<NavLink to={`/posts/${post.id}`}>{post.title}</NavLink>)} */}
