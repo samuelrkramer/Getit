@@ -148,8 +148,9 @@ button {
   border-radius: 3px;
 }
 
-.sidebar .devCard {
+.devCard {
   padding: 16px 28px 20px;
+  /* margin: 4px 4px; */
   background: #1C2A38;
   position: relative;
   text-align: center;
@@ -159,16 +160,24 @@ button {
   /* box-sizing: border-box; */
 }
 
-.devCard::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  bottom: 3px;
-  right: 3px;
-  left: 3px;
-  border: 1px solid white;
+.devCardBorder {
+  /* content: ''; */
+  /* position: absolute; */
+  /* top: -3px; */
+  /* bottom: -3px; */
+  /* right: -3px; */
+  /* left: -3px; */
+  border: 3px solid #1C2A38;
+  /* z-index: -1; */
+  padding: 1px;
+  background-color: white;
 }
 
-.sidebar .devCard .logo a {
+/* .devCard div,
+.devCard div {
+  z-index: 100;
+} */
+
+.devCard .logo a {
   color: white;
 }
