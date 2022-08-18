@@ -10,9 +10,9 @@ p {
   margin-inline-end: 0px;
 }
 
-/* .listRow {
-  display: flex;
-} */
+.listRow {
+  min-height: 56px;
+}
 
 .rowIndex {
   float: left;
