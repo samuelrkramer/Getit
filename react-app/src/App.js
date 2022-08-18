@@ -31,7 +31,8 @@ function App() {
   }, [dispatch]);
 
   useEffect(() => {
-    if (!params.get('nowake')) {
+    if ((window.location.hostname.startsWith("skgetit") && !params.get('nowake')) || params.get('wake')) {
+      // only send automatic wakeup on production, but dev can do it with ?wake=truthy
       fetch('https://wineauxapp.herokuapp.com/api/wakeup', {mode: 'no-cors'});
       fetch('https://sk-kelp.herokuapp.com/api/wakeup', {mode: 'no-cors'});
     }
