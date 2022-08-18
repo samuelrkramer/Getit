@@ -18,7 +18,7 @@ class Vote(db.Model):
 
     # user = relationship("User")#, back_populates="posts")
     post = relationship("Post", back_populates="votes")
-    # comments = relationship("Comment", back_populates="parent")
+    comment = relationship("Comment", back_populates="votes")
     
     def to_dict(self):
         return {
