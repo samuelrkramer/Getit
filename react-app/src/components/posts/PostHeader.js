@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './PostHeader.css';
 import humanizeDuration from 'humanize-duration';
@@ -13,14 +14,16 @@ const PostHeader = ({ post, i=null }) => {
     dateString += ", edited "+post.updated_at;
     edited = true;
   }
-  const score = Object.values(post.votes).reduce((sum, v) => sum+v, 0);
+  const [score, setScore] = useState(post.score);
   return (
     <div className="listRow" key={i}>
       {i && (
         <span className="rowIndex">{i}</span>
       )}
       <div className="voteBox">
-        {score}
+        <div className="voteUp">⬆</div>
+        <span className="voteScore">{score}</span>
+        <div className="voteDown">⬇</div>
       </div>
       <div className="rowItem">
         <p className="title">
