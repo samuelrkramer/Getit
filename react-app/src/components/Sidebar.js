@@ -39,9 +39,10 @@ const Sidebar = () => {
       {/* Here's sidebar stuff */}
       </div>
       {sideAdd.map(el => (el))}
-      <div className="sideSpaced devCard">
-        <Logo />
-        <p>Check out the developer, who is eager to join your company.</p>
+      <div className="sideSpaced devCardBorder">
+        <div className="devCard">
+          <Logo />
+          <p>Check out the developer, who is eager to join your company.</p>
           <div className='devLinkBox'>
             <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
               <img src={ghIcon} height="72px" alt="GitHub"></img>
@@ -54,6 +55,7 @@ const Sidebar = () => {
           {/* <h3> */}
             <a href="https://github.com/samuelrkramer/Getit" target="_blank" rel="noreferrer">Project Repo</a>
           {/* </h3> */}
+        </div>
       </div>
     </div>
   )
