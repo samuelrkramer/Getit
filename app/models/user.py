@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
 
     posts = relationship("Post", back_populates="user")
     comments = relationship("Comment", back_populates="user")
-    # votes = relationship("Vote", back_populates="user")
+    votes = relationship("Vote", back_populates="user")
 
     @property
     def password(self):
@@ -36,5 +36,5 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'votes': self.votes
+            'votes': {vote.id: vote.to_dict() for vote in self.votes},
         }

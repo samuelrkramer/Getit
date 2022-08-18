@@ -16,7 +16,7 @@ class Vote(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    # user = relationship("User")#, back_populates="posts")
+    user = relationship("User", back_populates="votes")
     post = relationship("Post", back_populates="votes")
     comment = relationship("Comment", back_populates="votes")
     
