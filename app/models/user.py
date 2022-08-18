@@ -1,7 +1,7 @@
 from .db import db
 from sqlalchemy.orm import relationship
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 import datetime
 
 
@@ -32,9 +32,12 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        return {
+        out = {
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'votes': {vote.id: vote.to_dict() for vote in self.votes},
+            'votes': {},
         }
+        if self.id is current_user.id:
+            out['votes'] = {vote.id: vote.to_dict() for vote in self.votes}
+        return out
