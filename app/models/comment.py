@@ -22,14 +22,20 @@ class Comment(db.Model):
     votes = relationship("Vote", back_populates="comment", cascade="all, delete-orphan")
     
     def to_dict(self):
-        return {
+        out = {
             'id': self.id,
             'userId': self.userId,
             'postId': self.postId,
             'parentId': self.parentId,
             'body': self.body,
             'user': {'id': self.user.id, 'username': self.user.username},
-            'votes': {vote.id: vote.value for vote in self.votes},
+            'votes': {},
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
+        score = 0
+        for vote in self.votes:
+            out['votes'][vote.id] = vote.value
+            score += vote.value
+        out['score'] = score
+        return out

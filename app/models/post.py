@@ -20,14 +20,20 @@ class Post(db.Model):
     votes = relationship("Vote", back_populates="post", cascade="all, delete-orphan")
 
     def to_dict(self):
-        return {
+        out = {
             'id': self.id,
             'userId': self.userId,
             'title': self.title,
             'body': self.body,
             'user': {'id': self.user.id, 'username': self.user.username},
-            'votes': {vote.id: vote.value for vote in self.votes if not(vote.commentId)},
-            # 'votes': self.votes,
+            'votes': {},
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
+        score = 0
+        for vote in self.votes:
+            if not(vote.commentId):
+                out['votes'][vote.id] = vote.value
+                score += vote.value
+        out['score'] = score
+        return out
