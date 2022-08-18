@@ -17,7 +17,7 @@ class Vote(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     # user = relationship("User")#, back_populates="posts")
-    # post = relationship("Post")#, back_populates="comments")
+    post = relationship("Post", back_populates="votes")
     # comments = relationship("Comment", back_populates="parent")
     
     def to_dict(self):

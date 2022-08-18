@@ -17,7 +17,7 @@ class Post(db.Model):
 
     user = relationship("User")#, back_populates="posts")
     comments = relationship("Comment", cascade="all, delete-orphan")#, back_populates="post")
-    # votes = relationship("Vote", cascade="all, delete-orphan")
+    votes = relationship("Vote", back_populates="post", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
