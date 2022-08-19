@@ -16,6 +16,6 @@ def valid_vote(form, field):
 
 class VoteForm(FlaskForm):
     userId = IntegerField('userId' )#, validators=[DataRequired() ])#, user_exists])
-    postId = IntegerField('postId' , validators=[DataRequired() ])#, post_exists])
+    postId = IntegerField('postId' )#, validators=[DataRequired() ])#, post_exists])
     commentId = IntegerField('postId' )#, validators=[DataRequired() ])#, post_exists])
     value = IntegerField('value', validators=[DataRequired(), valid_vote])

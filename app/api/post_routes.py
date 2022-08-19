@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Post, Comment
-from app.forms import PostForm
+from app.models import db, Post, Comment, Vote
+from app.forms import PostForm, VoteForm
 from .auth_routes import validation_errors_to_error_messages
 
 post_routes = Blueprint('posts', __name__)
@@ -77,3 +77,27 @@ def comments(postId):
     comments = Comment.query.filter(Comment.postId == postId)
     # return jsonify({comm.id: comm.to_dict() for comm in comments})
     return {'comments': [comment.to_dict() for comment in comments]}
+
+
+@post_routes.route('/<int:postId>/vote', methods=['POST'])
+@login_required
+def new_vote(postId):
+    vote = Vote.query.filter(Vote.userId==current_user.id) \
+                        .filter(Vote.postId==postId) \
+                        .filter(Vote.commentId==None) \
+                        .first()
+    if vote:
+        return {'errors': 'conflicting vote found'}, 409
+    form = VoteForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        vote = Vote(
+            # userId=form.data['userId'],  # console.log() and print() so I can find this line later
+            userId=current_user.id,
+            postId=postId,
+            value=form.data['value']
+        )
+        db.session.add(vote)
+        db.session.commit()
+        return vote.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
