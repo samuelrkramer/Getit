@@ -122,7 +122,7 @@ export const deletePost = (postId) => async (dispatch) => {
   if (response.ok) {
     // const newPost = await response.json();
     dispatch(removePost(postId));
-    return true;
+    return {value: 0};
   }
   const data = await response.json();
   if (data.errors) {
