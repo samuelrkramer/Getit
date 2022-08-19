@@ -21,6 +21,13 @@ def new_post():
         )
         db.session.add(post)
         db.session.commit()
+        vote = Vote(
+            userId=current_user.id,
+            postId=post.id,
+            value=1
+        )
+        db.session.add(vote)
+        db.session.commit()
         return post.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
