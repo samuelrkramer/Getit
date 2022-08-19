@@ -89,29 +89,34 @@ const PostForm = ({mode}) => {
         ))}
       </div>
       <div className="inputBox">
-        <label><span className="red">*</span>Title</label>
-        <input
-          type='text'
-          name='title'
-          className='field'
-          onChange={ e => setTitle(e.target.value) }
-          value={title}
-        ></input>
-        <span className={`xsmall ${title.length>255?"red":""}`}>
-          {255-title.length}
-        </span>
+        <div>
+          <label><span className="red">*</span>Title</label>
+          <textarea
+            rows='2'
+            type='text'
+            name='title'
+            className='field'
+            onChange={ e => setTitle(e.target.value) }
+            value={title}
+            ></textarea>
+          <span className={`xsmall ${title.length>255?"red":""}`}>
+            {255-title.length}
+          </span>
+        </div>
       </div>
       <div className="inputBox">
-        <label>Body</label>
-        <textarea
-          name='body'
-          className='field'
-          onChange={ e => setBody(e.target.value) }
-          value={body}
-        ></textarea>
-        <span className={`xsmall ${bodyRemain<0?"red":""}`}>
-          {bodyRemain}
-        </span>
+        <div>
+          <label>Body</label>
+          <textarea
+            name='body'
+            className='field tallField'
+            onChange={ e => setBody(e.target.value) }
+            value={body}
+            ></textarea>
+          <span className={`xsmall ${bodyRemain<0?"red":""}`}>
+            {bodyRemain}
+          </span>
+        </div>
       </div>
       <span>*required</span><br />
       <button type='submit'>{mode} Post</button>

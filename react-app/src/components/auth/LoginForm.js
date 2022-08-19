@@ -66,10 +66,10 @@ const LoginForm = () => {
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
-        <button onClick={demoLogin}>Demo</button>
-        <span className="xsmall"> Don't have an account? <Link to="/sign-up">Sign Up</Link></span>
       </div>
+      <button type='submit'>Login</button>
+      <button onClick={demoLogin}>Demo</button>
+      <span className="xsmall"> Don't have an account? <Link to="/sign-up">Sign Up</Link></span>
     </form>
   );
 };

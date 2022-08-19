@@ -48,15 +48,29 @@ p {
   margin-top: 15px;
   /* margin-bottom: 15px; */
 }
+
+.inputBox div {
+  display: flex;
+  flex-direction: column;
+}
+
 .inputBox label {
   font-size: large;
   margin-bottom: 5px;
 }
 
 .inputBox .field {
-  width: 492px;
+  max-width: 492px;
   padding: 3px;
   border: 1px solid gray;
+}
+
+.inputBox textarea {
+  font: normal small verdana,arial,helvetica,sans-serif;
+}
+
+.tallField {
+  height: 100px;
 }
 
 button {
