@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { postVote } from '../../store/post';
 import './PostHeader.css';
 import humanizeDuration from 'humanize-duration';
@@ -8,6 +8,8 @@ import humanizeDuration from 'humanize-duration';
 const PostHeader = ({ post, i=null }) => {
   // console.log(i, post);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector(state => state.session.user) || false;
 
   const now = new Date();
   const createDate = new Date(Date.parse(post.created_at));
@@ -22,6 +24,7 @@ const PostHeader = ({ post, i=null }) => {
   const [vote, setVote] = useState(post.myVote?.value || 0);
 
   const voteUp = async () => {
+    if (!user) return history.push("/sign-up");
     const result = await dispatch(postVote(post.id, vote!==1?1:0, post.myVote));
     if (result && result.errors) {
       for (let err of result.errors) {
@@ -35,6 +38,7 @@ const PostHeader = ({ post, i=null }) => {
     }
   }
   const voteDown = async () => {
+    if (!user) return history.push("/sign-up");
     const result = await dispatch(postVote(post.id, vote!==-1?-1:0, post.myVote));
     if (result && result.errors) {
       for (let err of result.errors) {
