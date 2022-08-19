@@ -248,11 +248,14 @@ export default function post_reducer(state = initialState, action) {
       return newState;
     case ADD_POST_VOTE:
       newState.obj[action.postId].myVote = action.vote;
+      newState.obj[action.postId].score += action.vote.value;
       return newState;
-    case EDIT_POST:
+    case EDIT_POST_VOTE:
       newState.obj[action.postId].myVote = action.vote;
+      newState.obj[action.postId].score += 2*action.vote.value;
       return newState;
     case DELETE_POST_VOTE:
+      newState.obj[action.postId].score -= newState.obj[action.postId].myVote.value;
       delete newState.obj[action.postId].myVote;
       return newState;
     // case REMOVE_USER:
