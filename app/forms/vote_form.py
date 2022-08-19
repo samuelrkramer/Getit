@@ -8,7 +8,9 @@ from app.forms.post_form import long_text
 # from app.models import Comment
 
 def valid_vote(form, field):
-    if not(field.data in (-1,0,1)):
+    if field.data is 0:
+        raise ValidationErr("Delete cancelled vote instead of storing neutral vote")
+    if not(field.data in (-1,1)):
         raise ValidationErr("Invalid vote value")
 
 # here's a print() and a console.log() so I can search for this later
