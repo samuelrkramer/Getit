@@ -15,15 +15,15 @@ const PostHeader = ({ post, i=null }) => {
     edited = true;
   }
   const [score, setScore] = useState(post.score);
-  const [vote, setVote] = useState(0);
+  const [vote, setVote] = useState(post.myVote?.value || 0);
 
   const voteUp = () => {
+    setScore(score-vote+(vote<=0));
     setVote(vote!==1?1:0);
-    setScore(score+2*(.5-vote));
   }
   const voteDown = () => {
+    setScore(score-vote-(vote>=0));
     setVote(vote!==-1?-1:0);
-    setScore(score-2*(.5+vote));
   }
   return (
     <div className="listRow" key={i}>
