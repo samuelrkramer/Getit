@@ -57,16 +57,18 @@ const CommentForm = ({mode, postId, comment={}, setCForm }) => {
         ))}
       </div>
       <div className="inputBox">
-        <label><span className="red">*</span>Body</label>
-        <textarea
-          name='body'
-          className="field"
-          onChange={ e => setBody(e.target.value) }
-          value={body}
-        ></textarea>
-        <span className={`xsmall ${bodyRemain<0?"red":""}`}>
-          {bodyRemain}
-        </span>
+        <div>
+          <label><span className="red">*</span>Body</label>
+          <textarea
+            name='body'
+            className="field bodyField"
+            onChange={ e => setBody(e.target.value) }
+            value={body}
+          ></textarea>
+          <span className={`xsmall ${bodyRemain<0?"red":""}`}>
+            {bodyRemain}
+          </span>
+        </div>
       </div>
       <span>*required</span><br />
       <button type='submit'>{mode} Comment</button>
