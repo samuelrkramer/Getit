@@ -87,7 +87,7 @@ def new_vote(postId):
                         .filter(Vote.commentId==None) \
                         .first()
     if vote:
-        return {'errors': 'conflicting vote found'}, 409
+        return {'errors': ['conflicting vote found']}, 409
     form = VoteForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -98,6 +98,25 @@ def new_vote(postId):
             value=form.data['value']
         )
         db.session.add(vote)
+        db.session.commit()
+        return vote.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@post_routes.route('/<int:postId>/vote/<int:voteId>', methods=['PUT'])
+@login_required
+def edit_vote(postId,voteId):
+    vote = Vote.query.get(voteId)
+    if not vote:
+        return {'errors': ["not found"]}, 404
+    if vote.postId != postId:
+        return {'errors': ["postId doesn't match and I'm just disappointed in you"]}, 422
+    if vote.userId != current_user.id:
+        return {'errors': ["not yours"]}, 403
+    form = VoteForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        vote.value = form.data['value']
+        # db.session.add(post)
         db.session.commit()
         return vote.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
