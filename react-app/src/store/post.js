@@ -7,6 +7,9 @@ const LOAD_ONE_POST = 'posts/LOAD_ONE_POST';
 const ADD_POST = 'posts/ADD_POST';
 const EDIT_POST = 'posts/EDIT_POST';
 const DELETE_POST = 'posts/DELETE_POST';
+const ADD_POST_VOTE = 'posts/ADD_POST_VOTE';
+const EDIT_POST_VOTE = 'posts/EDIT_POST_VOTE';
+const DELETE_POST_VOTE = 'posts/DELETE_POST_VOTE';
 // const REMOVE_USER = 'session/REMOVE_USER';
 
 // GET ALL POSTS
@@ -119,7 +122,7 @@ export const deletePost = (postId) => async (dispatch) => {
   if (response.ok) {
     // const newPost = await response.json();
     dispatch(removePost(postId));
-    return true;
+    return {value: 0};
   }
   const data = await response.json();
   if (data.errors) {
@@ -134,6 +137,79 @@ const removePost = (postId) => ({
   type: DELETE_POST,
   postId,
 });
+
+export const postVote = (postId, value, myVote) => async (dispatch) => {
+  if (value === 0) {
+    const response = await fetch(`/api/posts/${postId}/vote/${myVote.id}`, {
+      method: "DELETE"
+    });
+    if (response.ok) {
+      dispatch(removePostVote(postId));
+      return true;
+    }
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    } else {
+      return {errors: ['An error occurred. Please try again.']}
+    }
+  }
+
+  if (!myVote) {
+    const response = await fetch(`/api/posts/${postId}/vote`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({value}),
+    });
+    if (response.ok) {
+      const newVote = await response.json();
+      dispatch(addPostVote(postId, newVote));
+      return newVote;
+    }
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    } else {
+      return {errors: ['An error occurred. Please try again.']}
+    }
+  }
+
+  else {
+    const response = await fetch(`/api/posts/${postId}/vote/${myVote.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({value}),
+    });
+    if (response.ok) {
+      const newVote = await response.json();
+      dispatch(modifyPostVote(postId, newVote));
+      return newVote;
+    }
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    } else {
+      return {errors: ['An error occurred. Please try again.']}
+    }
+  }
+}
+
+const addPostVote = (postId, vote) => ({
+  type: ADD_POST_VOTE,
+  postId,
+  vote,
+});
+
+const modifyPostVote = (postId, vote) => ({
+  type: EDIT_POST_VOTE,
+  postId,
+  vote,
+});
+
+const removePostVote = (postId) => ({
+  type: DELETE_POST_VOTE,
+  postId,
+})
 
 const initialState = {
   // postsArr: [],
@@ -169,6 +245,18 @@ export default function post_reducer(state = initialState, action) {
     case DELETE_POST:
       // console.log(action.postId);
       delete newState.obj[action.postId];
+      return newState;
+    case ADD_POST_VOTE:
+      newState.obj[action.postId].myVote = action.vote;
+      newState.obj[action.postId].score += action.vote.value;
+      return newState;
+    case EDIT_POST_VOTE:
+      newState.obj[action.postId].myVote = action.vote;
+      newState.obj[action.postId].score += 2*action.vote.value;
+      return newState;
+    case DELETE_POST_VOTE:
+      newState.obj[action.postId].score -= newState.obj[action.postId].myVote.value;
+      delete newState.obj[action.postId].myVote;
       return newState;
     // case REMOVE_USER:
     //   return { user: null }
