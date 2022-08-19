@@ -31,7 +31,7 @@ const PostHeader = ({ post, i=null }) => {
     // if (!errors) setErrors(["test error"]);
     else {
       setScore(score-vote+(vote<=0));
-      setVote(result.value);
+      setVote(result.value || 0);
     }
   }
   const voteDown = async () => {
@@ -44,7 +44,7 @@ const PostHeader = ({ post, i=null }) => {
     // if (!errors) setErrors(["test error"]);
     else {
       setScore(score-vote-(vote>=0));
-      setVote(result.value);
+      setVote(result.value || 0);
     }
   }
   return (
