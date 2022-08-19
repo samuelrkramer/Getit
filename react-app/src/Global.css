@@ -69,7 +69,11 @@ p {
   font: normal small verdana,arial,helvetica,sans-serif;
 }
 
-.tallField {
+.titleField {
+  font-size: 100% !important;
+}
+
+.bodyField {
   height: 100px;
 }
 

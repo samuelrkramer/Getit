@@ -95,8 +95,8 @@ const PostForm = ({mode}) => {
             rows='2'
             type='text'
             name='title'
-            className='field'
-            onChange={ e => setTitle(e.target.value) }
+            className='field titleField'
+            onChange={ e => setTitle(e.target.value.replace(/\n/,"")) }
             value={title}
             ></textarea>
           <span className={`xsmall ${title.length>255?"red":""}`}>
@@ -109,7 +109,7 @@ const PostForm = ({mode}) => {
           <label>Body</label>
           <textarea
             name='body'
-            className='field tallField'
+            className='field bodyField'
             onChange={ e => setBody(e.target.value) }
             value={body}
             ></textarea>
