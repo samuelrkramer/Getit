@@ -7,6 +7,9 @@ const LOAD_ONE_POST = 'posts/LOAD_ONE_POST';
 const ADD_POST = 'posts/ADD_POST';
 const EDIT_POST = 'posts/EDIT_POST';
 const DELETE_POST = 'posts/DELETE_POST';
+const ADD_POST_VOTE = 'posts/ADD_POST_VOTE';
+const EDIT_POST_VOTE = 'posts/EDIT_POST_VOTE';
+const DELETE_POST_VOTE = 'posts/DELETE_POST_VOTE';
 // const REMOVE_USER = 'session/REMOVE_USER';
 
 // GET ALL POSTS
@@ -135,6 +138,29 @@ const removePost = (postId) => ({
   postId,
 });
 
+export const postVote = (postId, value, myVote) => async (dispatch) => {
+  if (value === 0) {
+    const response = await fetch(`/api/posts/${postId}/vote/${myVote.id}`, {
+      method: "DELETE"
+    });
+    if (response.ok) {
+      dispatch(removePostVote(postId));
+      return true;
+    }
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    } else {
+      return {errors: ['An error occurred. Please try again.']}
+    }
+  }
+}
+
+const removePostVote = (postId) => ({
+  type: DELETE_POST_VOTE,
+  postId,
+})
+
 const initialState = {
   // postsArr: [],
   obj: {},
@@ -169,6 +195,9 @@ export default function post_reducer(state = initialState, action) {
     case DELETE_POST:
       // console.log(action.postId);
       delete newState.obj[action.postId];
+      return newState;
+    case DELETE_POST_VOTE:
+      delete newState.obj[action.postId].myVote;
       return newState;
     // case REMOVE_USER:
     //   return { user: null }
