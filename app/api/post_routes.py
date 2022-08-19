@@ -116,6 +116,8 @@ def edit_vote(postId,voteId):
     form = VoteForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        if form.data['value'] == vote.value:
+            return {'errors': ["value unchanged"]}, 422
         vote.value = form.data['value']
         # db.session.add(post)
         db.session.commit()
