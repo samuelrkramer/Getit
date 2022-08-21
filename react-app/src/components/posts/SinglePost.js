@@ -101,24 +101,20 @@ function SinglePost() {
           <Link to={`/posts/${post.id}/edit`} >Edit</Link><br />
         </div>
       )} */}
-      <br />
       <div className="title">
         {cIds.length?`viewing ${cIds.length} comments`:"no comments (yet)"}
-        { cForm !== true && user && (<> || <a onClick={() => setCForm(true)}>comment on this</a></>)}
-      {/* <br /> */}
+        { cForm !== true && user && (<> | <a onClick={() => setCForm(true)}>comment on this</a></>)}
       { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       </div>
       {cIds.length > 0 && (
-        <>
-          <div>
-            {cIds.map(cId => {
-              const comment = comments[cId];
-              return (
-                <ShowComment comment={comment} cForm={cForm} setCForm={setCForm} />
-              )
-            })}
-          </div>
-        </>
+        <div>
+          {cIds.map(cId => {
+            const comment = comments[cId];
+            return (
+              <ShowComment comment={comment} cForm={cForm} setCForm={setCForm} />
+            )
+          })}
+        </div>
       )}
     </>
   );
