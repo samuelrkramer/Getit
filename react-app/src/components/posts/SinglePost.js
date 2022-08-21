@@ -102,12 +102,12 @@ function SinglePost() {
         </div>
       )} */}
       <br />
-      <span className="title">
+      <div className="title">
         {cIds.length?`viewing ${cIds.length} comments`:"no comments (yet)"}
         { cForm !== true && user && (<> || <a onClick={() => setCForm(true)}>comment on this</a></>)}
-      </span>
-      <br />
+      {/* <br /> */}
       { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
+      </div>
       {cIds.length > 0 && (
         <>
           <div>
