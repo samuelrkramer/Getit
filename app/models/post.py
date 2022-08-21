@@ -28,6 +28,7 @@ class Post(db.Model):
             'body': self.body,
             'user': {'id': self.user.id, 'username': self.user.username},
             'votes': {},
+            'comments': {c.id: c.to_dict() for c in self.comments},
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
