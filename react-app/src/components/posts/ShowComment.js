@@ -19,6 +19,8 @@ const ShowComment = ({comment, cForm, setCForm}) => {
 
   const [score, setScore] = useState(comment.score);
   const [vote, setVote] = useState(comment.myVote?.value || 0);
+  let pointString = `${score} point`;
+  if (score !== 1) pointString += 's';
 
   const voteClick = async (val) => {
     setScore(score-vote+(vote!==val?val:0));
@@ -51,7 +53,9 @@ const ShowComment = ({comment, cForm, setCForm}) => {
         {/* <li><i>Comment ID: {comment.id}</i></li> */}
         <div className="commentStuff">
           <p className="tagline">
-            <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
+            <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link>
+            <span title={score}>{pointString}</span>
+            <span title={dateString}>
               {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
             </span>
             { comment.userId === user.id && (<a onClick={() => setCForm(comment.id)} className="xsmall minMarg">Edit</a>)}

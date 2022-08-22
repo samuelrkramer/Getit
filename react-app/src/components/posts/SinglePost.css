@@ -12,6 +12,14 @@
   margin-left: 3px;
 }
 
+.commentStuff .tagline a {
+  font-weight: bold;
+}
+
+.commentStuff .tagline * {
+  margin-right: 5px;
+}
+
 .commBody {
   color: #222222;
 }
