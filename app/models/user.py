@@ -36,8 +36,8 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'votes': {},
+            # 'votes': {},
         }
-        if self.id is current_user.id:
-            out['votes'] = {vote.id: vote.to_dict() for vote in self.votes}
+        # if self.id is current_user.id:
+            # out['votes'] = {vote.id: vote.to_dict() for vote in self.votes}
         return out
