@@ -201,14 +201,20 @@ export default function comment_reducer(state = initialState, action) {
     case ADD_COMMENT_VOTE:
       newState.obj[action.commentId].myVote = action.vote;
       newState.obj[action.commentId].score += action.vote.value;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].myVote = action.vote;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].score += action.vote.value;
       return newState;
     case EDIT_COMMENT_VOTE:
       newState.obj[action.commentId].myVote = action.vote;
       newState.obj[action.commentId].score += 2*action.vote.value;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].myVote = action.vote;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].score += 2*action.vote.value;
       return newState;
     case DELETE_COMMENT_VOTE:
       newState.obj[action.commentId].score -= newState.obj[action.commentId].myVote.value;
       delete newState.obj[action.commentId].myVote;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].score -= action.vote.value;
+      delete newState.onPost[newState.obj[action.commentId].postId][action.commentId].myVote;
       return newState;
     default:
       return state;
