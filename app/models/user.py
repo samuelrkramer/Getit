@@ -41,3 +41,11 @@ class User(db.Model, UserMixin):
         # if self.id is current_user.id:
             # out['votes'] = {vote.id: vote.to_dict() for vote in self.votes}
         return out
+
+    def userpage_dict(self):
+        return {
+            'id': self.id,
+            'username': self.username,
+            'posts': {post.id: post.to_dict() for post in self.posts},
+            'comments': {comment.id: comment.to_dict() for comment in self.comments},
+        }
