@@ -55,8 +55,12 @@ function SinglePost() {
       const createDate = new Date(Date.parse(post.created_at));
       setSideAdd([(
         <div className="sideSpaced postCard">
-          <span className="tagline">This POST was submitted on {createDate.toLocaleDateString()}</span><br />
-          {post.id} - {post.title}<br />
+          <span className="xsmall">This POST was submitted on {createDate.toLocaleDateString()}</span><br />
+          <div className="scoreCard">
+            <b>
+              {post.score} point{post.score!==1 && (<>s</>)}
+            </b> <span className="xsmall">({Math.round(100*(post.upvotes/Object.keys(post.votes).length || 0))}% upvoted)</span>
+          </div>
           {/* Posted on {postDate.toDateString()}<br/> */}
           {/* Click to copy URL to POST: */}
           <span className="tagline">Shareable URL: <a onClick={urlClick}>(copy)</a></span>

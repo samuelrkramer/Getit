@@ -33,12 +33,15 @@ class Post(db.Model):
             'updated_at': self.updated_at,
         }
         score = 0
+        ups = 0
         for vote in self.votes:
             if not(vote.commentId):
                 out['votes'][vote.id] = vote.value
                 score += vote.value
+                ups += (vote.value == 1)
                 if current_user.is_authenticated:
                     if (vote.userId is current_user.id):
                         out['myVote'] = vote.to_dict()
         out['score'] = score
+        out['upvotes'] = ups
         return out
