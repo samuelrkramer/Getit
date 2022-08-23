@@ -1,11 +1,15 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import CommentForm from './CommentForm';
+import { commentVote } from '../../store/comment';
 import ReactMarkdown from 'react-markdown';
 import humanizeDuration from 'humanize-duration';
 
 const ShowComment = ({comment, cForm, setCForm}) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const user = useSelector(state => state.session.user) || false;
   const now = new Date();
   const createDate = new Date(Date.parse(comment.created_at));
@@ -23,20 +27,20 @@ const ShowComment = ({comment, cForm, setCForm}) => {
   if (score !== 1) pointString += 's';
 
   const voteClick = async (val) => {
-    setScore(score-vote+(vote!==val?val:0));
-    setVote(vote!==val?val:0);
+    // setScore(score-vote+(vote!==val?val:0));
+    // setVote(vote!==val?val:0);
 
-    // if (!user) return history.push("/sign-up");
-    // const result = await dispatch(postVote(post.id, vote!==val?val:0, post.myVote));
-    // if (result && result.errors) {
-    //   for (let err of result.errors) {
-    //     window.alert(err);
-    //   }
-    // }
-    // else {
-    //   setScore(score-vote+(vote!==val?val:0));
-    //   setVote(result.value || 0);
-    // }
+    if (!user) return history.push("/sign-up");
+    const result = await dispatch(commentVote(comment.id, vote!==val?val:0, comment.myVote));
+    if (result && result.errors) {
+      for (let err of result.errors) {
+        window.alert(err);
+      }
+    }
+    else {
+      setScore(score-vote+(vote!==val?val:0));
+      setVote(result.value || 0);
+    }
   }
 
   return (
