@@ -21,6 +21,13 @@ def new_comment():
         )
         db.session.add(comment)
         db.session.commit()
+        vote = Vote(
+            userId=current_user.id,
+            commentId=comment.id,
+            value=1
+        )
+        db.session.add(vote)
+        db.session.commit()
         return comment.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
