@@ -62,10 +62,13 @@ p {
   font-weight: normal;
   /* margin-bottom: 1px; */
   margin: 1px 0;
-  color: #0000ff;
   outline: none;
   margin-right: 0.4em;
   overflow: hidden;
+}
+
+.title a {
+  color: #0000ff;
 }
 
 .tagline {

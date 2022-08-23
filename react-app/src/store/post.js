@@ -195,7 +195,7 @@ const modifyPostVote = (postId, vote) => ({
 const removePostVote = (postId) => ({
   type: DELETE_POST_VOTE,
   postId,
-})
+});
 
 const initialState = {
   // postsArr: [],

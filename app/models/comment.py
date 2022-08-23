@@ -2,6 +2,7 @@ from sqlalchemy.orm import relationship
 from sqlalchemy.schema import ForeignKey
 from .db import db
 from datetime import datetime
+from flask_login import current_user
 
 
 class Comment(db.Model):
@@ -37,5 +38,8 @@ class Comment(db.Model):
         for vote in self.votes:
             out['votes'][vote.id] = vote.value
             score += vote.value
+            if current_user.is_authenticated:
+                if (vote.userId is current_user.id):
+                    out['myVote'] = vote.to_dict()
         out['score'] = score
         return out

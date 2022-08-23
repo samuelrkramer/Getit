@@ -2,6 +2,24 @@
   border-top: 1px solid #c6c6c6;
 }
 
+.oneComment .voteBox {
+  margin-left: 0px;
+  width: 15px;
+}
+
+.commentStuff {
+  overflow: hidden;
+  margin-left: 3px;
+}
+
+.commentStuff .tagline a {
+  font-weight: bold;
+}
+
+.commentStuff .tagline * {
+  margin-right: 5px;
+}
+
 .commBody {
   color: #222222;
 }
@@ -13,4 +31,12 @@
 .shareURL {
   width: 280px;
   
+}
+
+div.title {
+  /* padding: 100px 0; */
+  /* content: "<br />"; */
+  border-bottom: 1px dotted black;
+  padding-bottom: .5em;
+  margin-bottom: .5em;
 }
