@@ -16,7 +16,7 @@ def new_comment():
         comment = Comment(
             # userId=form.data['userId'],  # console.log() and print() so I can find this line later
             userId=current_user.id,
-            commentId=form.data['commentId'],
+            postId=form.data['postId'],
             body=form.data['body']
         )
         db.session.add(comment)
