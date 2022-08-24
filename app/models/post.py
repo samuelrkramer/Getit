@@ -27,8 +27,10 @@ class Post(db.Model):
             'title': self.title,
             'body': self.body,
             'user': {'id': self.user.id, 'username': self.user.username},
-            'votes': {},
+            'nComments': len(self.comments),
             'comments': {c.id: c.to_dict() for c in self.comments},
+            'nVotes': len(self.votes),
+            # 'votes': {},
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
@@ -36,9 +38,10 @@ class Post(db.Model):
         ups = 0
         for vote in self.votes:
             if not(vote.commentId):
-                out['votes'][vote.id] = vote.value
+                # out['votes'][vote.id] = vote.value
                 score += vote.value
                 ups += (vote.value == 1)
+
                 if current_user.is_authenticated:
                     if (vote.userId is current_user.id):
                         out['myVote'] = vote.to_dict()
