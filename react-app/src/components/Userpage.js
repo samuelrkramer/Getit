@@ -3,13 +3,15 @@ import { useSelector } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
 
-function User() {
+function Userpage() {
   const [loaded, setLoaded] = useState(false);
   const [user, setUser] = useState({});
   const { userId }  = useParams();
 
-  const allItems = useSelector({posts: state.posts.obj, comments: state.comments.obj});
-  console.log(allItems);
+  const allPs = useSelector(state => state.posts.obj);
+  const allCs = useSelector(state => state.comments.obj);
+  console.log("allPs:", allPs);
+  console.log("allCs:", allCs);
 
   useEffect(() => {
     if (!userId) {
@@ -46,4 +48,4 @@ function User() {
     </ul>
   );
 }
-export default User;
+export default Userpage;

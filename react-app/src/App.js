@@ -8,6 +8,7 @@ import Sidebar from './components/Sidebar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import Userpage from './components/Userpage';
 import PostsAll from './components/posts/PostsAll';
 import PostsNewest from './components/posts/PostsNewest';
 import SearchPosts from './components/posts/SearchPosts';
@@ -58,7 +59,10 @@ function App() {
             <UsersList/>
           </ProtectedRoute>
           <ProtectedRoute path='/users/:userId' exact={true} >
-            <User />
+            {/* <User />
+          </ProtectedRoute>
+          <ProtectedRoute path='/u/:userId' exact={true} > */}
+            <Userpage />
           </ProtectedRoute>
           <Route path='/posts' exact={true} >
             <PostsAll />
