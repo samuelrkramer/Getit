@@ -32,7 +32,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        out = {
+        return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
@@ -40,6 +40,17 @@ class User(db.Model, UserMixin):
         }
         # if self.id is current_user.id:
             # out['votes'] = {vote.id: vote.to_dict() for vote in self.votes}
+
+    def userpage_dict(self):
+        out = {
+            'id': self.id,
+            'username': self.username,
+            'email': "<hidden>",
+            'votes': {},
+        }
+        if self.id is current_user.id:
+            out['email'] = self.email
+            out['votes'] = {vote.id: vote.to_dict() for vote in self.votes}
         return out
 
     def userpage_dict(self):
