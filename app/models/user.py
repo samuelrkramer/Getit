@@ -47,8 +47,10 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': "<hidden>",
             'votes': {},
-            'posts': {post.id: post.to_dict() for post in self.posts},
-            'comments': {comment.id: comment.to_dict() for comment in self.comments},
+            # 'posts': {post.id: post.to_dict() for post in self.posts},
+            # 'comments': {comment.id: comment.to_dict() for comment in self.comments},
+            'pIds': [post.id for post in self.posts],
+            'cIds': [comment.id for comment in self.comments],
         }
         if self.id is current_user.id:
             out['email'] = self.email
