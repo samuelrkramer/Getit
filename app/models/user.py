@@ -32,10 +32,17 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        out = {
+        return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
+        }
+
+    def userpage_dict(self):
+        out = {
+            'id': self.id,
+            'username': self.username,
+            # 'email': self.email,
             'votes': {},
         }
         if self.id is current_user.id:
