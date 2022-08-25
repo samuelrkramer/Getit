@@ -42,9 +42,10 @@ class User(db.Model, UserMixin):
         out = {
             'id': self.id,
             'username': self.username,
-            # 'email': self.email,
+            'email': "<hidden>",
             'votes': {},
         }
         if self.id is current_user.id:
+            out['email'] = self.email
             out['votes'] = {vote.id: vote.to_dict() for vote in self.votes}
         return out
