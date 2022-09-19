@@ -34,6 +34,8 @@ function Userpage() {
     return null;
   }
 
+  const allItems = [...(user.pIds||[]).map(n => allPs[n]), ...(user.cIds||[]).map(n => allCs[n])];
+
   return (
     <ul>
       <li>
@@ -45,6 +47,13 @@ function Userpage() {
       <li>
         <strong>Email</strong> {user.email}
       </li>
+    {/* </ul>
+    <ul> */}
+      {allItems.map(el => (
+        <li key={el.id+el.title||"c"}>
+          {el.created_at || "idk"} - {el.body}
+        </li>
+      ))}
     </ul>
   );
 }
