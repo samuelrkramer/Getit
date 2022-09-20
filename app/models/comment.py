@@ -25,6 +25,7 @@ class Comment(db.Model):
     def to_dict(self):
         out = {
             'id': self.id,
+            'type': 'c',
             'userId': self.userId,
             'postId': self.postId,
             'parentId': self.parentId,

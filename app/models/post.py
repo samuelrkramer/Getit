@@ -23,6 +23,7 @@ class Post(db.Model):
     def to_dict(self):
         out = {
             'id': self.id,
+            'type': 'p',
             'userId': self.userId,
             'title': self.title,
             'body': self.body,
