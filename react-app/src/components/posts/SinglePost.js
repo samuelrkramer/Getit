@@ -59,7 +59,7 @@ function SinglePost() {
           <div className="scoreCard">
             <b>
               {post.score} point{post.score!==1 && (<>s</>)}
-            </b> <span className="xsmall">({Math.round(100*(post.upvotes/Object.keys(post.votes).length || 0))}% upvoted)</span>
+            </b> <span className="xsmall">({Math.round(100*(post.upvotes/post.nVotes || 0))}% upvoted)</span>
           </div>
           {/* Posted on {postDate.toDateString()}<br/> */}
           {/* Click to copy URL to POST: */}
@@ -115,7 +115,7 @@ function SinglePost() {
           {cIds.map(cId => {
             const comment = comments[cId];
             return (
-              <ShowComment comment={comment} cForm={cForm} setCForm={setCForm} />
+              <ShowComment key={cId} comment={comment} cForm={cForm} setCForm={setCForm} />
             )
           })}
         </div>
