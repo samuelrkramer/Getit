@@ -25,18 +25,19 @@ class Comment(db.Model):
     def to_dict(self):
         out = {
             'id': self.id,
+            'type': 'c',
             'userId': self.userId,
             'postId': self.postId,
             'parentId': self.parentId,
             'body': self.body,
             'user': {'id': self.user.id, 'username': self.user.username},
-            'votes': {},
+            # 'votes': {},
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
         score = 0
         for vote in self.votes:
-            out['votes'][vote.id] = vote.value
+            # out['votes'][vote.id] = vote.value
             score += vote.value
             if current_user.is_authenticated:
                 if (vote.userId is current_user.id):
