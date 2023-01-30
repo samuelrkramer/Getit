@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { postVote } from '../../store/post';
@@ -45,6 +45,10 @@ const PostHeader = ({ post, i=null, numComments }) => {
     navigator.clipboard.writeText(`https://skgetit.herokuapp.com${postUrl}`);
     e.target.innerHTML = "copied"
   }
+
+  useEffect(() => {
+    setVote((user && post.myVote?.value) || 0)
+  }, [user]);
 
   return (
     <div className="listRow" key={i}>
