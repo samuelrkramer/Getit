@@ -46,7 +46,7 @@ const Sidebar = () => {
             <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
               <img src={ghIcon} height="72px" alt="GitHub"></img>
             </a>
-            <a href="https://www.linkedin.com/in/sam-kramer-3b20b1235/" target="_blank" rel="noreferrer">
+            <a href="https://www.linkedin.com/in/samrkramer" target="_blank" rel="noreferrer">
               <img src={liIcon} height="72px" alt="LinkedIn"></img>
             </a>
           </div>
