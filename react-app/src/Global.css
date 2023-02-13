@@ -24,7 +24,7 @@ ul, ol {
   list-style: none;
 }
 
-p {
+p, .devCardText {
   font-size: 14px;
   overflow: auto;
 }
@@ -122,6 +122,11 @@ button {
   border-radius: 8px;
 }
 
+.devCard span a {
+  color: orangered;
+  font-weight: bold;
+}
+
 .devCard > a:last-child {
   /* width: 204px; */
   height: 32px;
@@ -162,7 +167,7 @@ button {
   /* box-sizing: border-box; */
 }
 
-.devCard::before {
+/* .devCard::before {
   content: '';
   position: absolute;
   top: 3px;
@@ -171,7 +176,7 @@ button {
   left: 3px;
   border: 1px solid white;
   display: none;
-}
+} */
 
 .sidebar .devCard .logo a {
   color: white;

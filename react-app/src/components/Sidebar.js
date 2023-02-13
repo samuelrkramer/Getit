@@ -41,6 +41,9 @@ const Sidebar = () => {
       {sideAdd.map(el => (el))}
       <div className="sideSpaced devCard">
         <Logo />
+        <span class="devCardText">
+          is styled after <a href="https://old.reddit.com" target="_blank">Old Reddit</a>.
+        </span>
         <p>Check out the developer, who is eager to join your company.</p>
           <div className='devLinkBox'>
             <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
