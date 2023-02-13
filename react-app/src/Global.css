@@ -154,6 +154,9 @@ button {
   color: white;
   border: 1px solid white;
   outline: 3px solid #1C2A38;
+  width: 236px;
+  left: 3px;
+  right: 3px;
   /* border: thick double #1C2A38; */
   /* margin: 8px solid #1C2A38; */
   /* box-sizing: border-box; */
