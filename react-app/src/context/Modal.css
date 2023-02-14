@@ -1,0 +1,38 @@
+#modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.7);
+}
+
+#modal-content {
+  position: absolute;
+  background-color: white;
+  border-radius: 7px;
+  border: 1px solid black;
+  box-shadow: 0 0 20px black;
+}
+
+.confirm {
+  padding: 6px 20px 10px;
+  /* justify-content: center; */
+  text-align: center;
+}
+.confirm button {
+  /* width: 90px; */
+  /* padding: 3px 8px; */
+  margin: 0px 10%;
+}

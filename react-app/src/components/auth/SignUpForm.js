@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { Link, Redirect } from 'react-router-dom';
+import { loginDemo, signUp } from '../../store/session';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -27,6 +27,14 @@ const SignUpForm = () => {
     } else {
       // console.log("no match")
       setErrors(["Password and confirmation must match.","After fixing this, other inputs will be checked."])
+    }
+  };
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(loginDemo());
+    if (data) {
+      setErrors(data);
     }
   };
 
@@ -105,6 +113,8 @@ const SignUpForm = () => {
         ></input>
       </div>
       <button type='submit'>Sign Up</button>
+      <button onClick={demoLogin}>Demo</button>
+      <span className="xsmall"> Already have an account? <Link to="/login">Log In</Link></span>
     </form>
   );
 };

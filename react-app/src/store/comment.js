@@ -6,6 +6,9 @@ const LOAD_POST_COMMENTS = 'comments/LOAD_POST_COMMENTS';
 const ADD_COMMENT = 'comments/ADD_COMMENT';
 const EDIT_COMMENT = 'comments/EDIT_COMMENT';
 const DELETE_COMMENT = 'comments/DELETE_COMMENT';
+const ADD_COMMENT_VOTE = 'posts/ADD_COMMENT_VOTE';
+const EDIT_COMMENT_VOTE = 'posts/EDIT_COMMENT_VOTE';
+const DELETE_COMMENT_VOTE = 'posts/DELETE_COMMENT_VOTE';
 
 // GET ALL COMMENTTS
 export const getPostsComments = (postId) => async (dispatch) => {
@@ -101,6 +104,65 @@ const removeComment = (commentId) => ({
   commentId,
 });
 
+export const commentVote = (commentId, value, myVote) => async (dispatch) => {
+  let response;
+  if (value === 0) {
+    response = await fetch(`/api/comments/${commentId}/vote/${myVote.id}`, {
+      method: "DELETE"
+    });
+    if (response.ok) {
+      dispatch(removeCommentVote(commentId));
+      return true;
+    }
+  } else if (!myVote) {
+    response = await fetch(`/api/comments/${commentId}/vote`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({value}),
+    });
+    if (response.ok) {
+      const newVote = await response.json();
+      dispatch(addCommentVote(commentId, newVote));
+      return newVote;
+    }
+  } else {
+    response = await fetch(`/api/comments/${commentId}/vote/${myVote.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({value}),
+    });
+    if (response.ok) {
+      const newVote = await response.json();
+      dispatch(modifyCommentVote(commentId, newVote));
+      return newVote;
+    }
+  }
+
+  const data = await response.json();
+  if (data.errors) {
+    return data;
+  } else {
+    return {errors: ['An error occurred. Please try again.']}
+  }
+}
+
+const addCommentVote = (commentId, vote) => ({
+  type: ADD_COMMENT_VOTE,
+  commentId,
+  vote,
+});
+
+const modifyCommentVote = (commentId, vote) => ({
+  type: EDIT_COMMENT_VOTE,
+  commentId,
+  vote,
+});
+
+const removeCommentVote = (commentId) => ({
+  type: DELETE_COMMENT_VOTE,
+  commentId,
+});
+
 const initialState = {
   // postsArr: [],
   obj: {},
@@ -136,98 +198,25 @@ export default function comment_reducer(state = initialState, action) {
         delete newState.onPost[i][action.commentId];
       }
       return newState;
-    // case REMOVE_USER:
-    //   return { user: null }
+    case ADD_COMMENT_VOTE:
+      newState.obj[action.commentId].myVote = action.vote;
+      newState.obj[action.commentId].score += action.vote.value;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].myVote = action.vote;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].score += action.vote.value;
+      return newState;
+    case EDIT_COMMENT_VOTE:
+      newState.obj[action.commentId].myVote = action.vote;
+      newState.obj[action.commentId].score += 2*action.vote.value;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].myVote = action.vote;
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].score += 2*action.vote.value;
+      return newState;
+    case DELETE_COMMENT_VOTE:
+      newState.onPost[newState.obj[action.commentId].postId][action.commentId].score -= newState.obj[action.commentId].myVote.value;
+      delete newState.onPost[newState.obj[action.commentId].postId][action.commentId].myVote;
+      newState.obj[action.commentId].score -= newState.obj[action.commentId].myVote.value;
+      delete newState.obj[action.commentId].myVote;
+      return newState;
     default:
       return state;
   }
 }
-
-        // const removeUser = () => ({
-        //   type: REMOVE_USER,
-        // })
-        
-        
-        // export const authenticate = () => async (dispatch) => {
-        //   const response = await fetch('/api/auth/', {
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     }
-        //   });
-        //   if (response.ok) {
-        //     const data = await response.json();
-        //     if (data.errors) {
-        //       return;
-        //     }
-          
-        //     dispatch(setUser(data));
-        //   }
-        // }
-        
-        // export const login = (email, password) => async (dispatch) => {
-        //   const response = await fetch('/api/auth/login', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //       email,
-        //       password
-        //     })
-        //   });
-          
-          
-        //   if (response.ok) {
-        //     const data = await response.json();
-        //     dispatch(setUser(data))
-        //     return null;
-        //   } else if (response.status < 500) {
-        //     const data = await response.json();
-        //     if (data.errors) {
-        //       return data.errors;
-        //     }
-        //   } else {
-        //     return ['An error occurred. Please try again.']
-        //   }
-        
-        // }
-        
-        // export const logout = () => async (dispatch) => {
-        //   const response = await fetch('/api/auth/logout', {
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     }
-        //   });
-        
-        //   if (response.ok) {
-        //     dispatch(removeUser());
-        //   }
-        // };
-        
-        
-        // export const signUp = (username, email, password) => async (dispatch) => {
-        //   const response = await fetch('/api/auth/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //       username,
-        //       email,
-        //       password,
-        //     }),
-        //   });
-          
-        //   if (response.ok) {
-        //     const data = await response.json();
-        //     dispatch(setUser(data))
-        //     return null;
-        //   } else if (response.status < 500) {
-        //     const data = await response.json();
-        //     if (data.errors) {
-        //       return data.errors;
-        //     }
-        //   } else {
-        //     return ['An error occurred. Please try again.']
-        //   }
-        // }

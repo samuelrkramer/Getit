@@ -30,11 +30,6 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/users' exact={true} activeClassName='active'>
-              users
-            </NavLink>
-          </li>
-          <li>
             <NavLink to='/posts' activeClassName='active'>
               POSTs
             </NavLink>
@@ -83,7 +78,7 @@ const NavBar = () => {
               </span>
               {separator}
               <span className="bold">
-                <a href="#" onClick={demoLogin}>demo</a>
+                <a onClick={demoLogin}>demo</a>
               </span>
             </>
           )}

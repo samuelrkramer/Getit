@@ -7,6 +7,9 @@ const LOAD_ONE_POST = 'posts/LOAD_ONE_POST';
 const ADD_POST = 'posts/ADD_POST';
 const EDIT_POST = 'posts/EDIT_POST';
 const DELETE_POST = 'posts/DELETE_POST';
+const ADD_POST_VOTE = 'posts/ADD_POST_VOTE';
+const EDIT_POST_VOTE = 'posts/EDIT_POST_VOTE';
+const DELETE_POST_VOTE = 'posts/DELETE_POST_VOTE';
 // const REMOVE_USER = 'session/REMOVE_USER';
 
 // GET ALL POSTS
@@ -119,7 +122,7 @@ export const deletePost = (postId) => async (dispatch) => {
   if (response.ok) {
     // const newPost = await response.json();
     dispatch(removePost(postId));
-    return true;
+    return {value: 0};
   }
   const data = await response.json();
   if (data.errors) {
@@ -132,6 +135,65 @@ export const deletePost = (postId) => async (dispatch) => {
 
 const removePost = (postId) => ({
   type: DELETE_POST,
+  postId,
+});
+
+export const postVote = (postId, value, myVote) => async (dispatch) => {
+  let response;
+  if (value === 0) {
+    response = await fetch(`/api/posts/${postId}/vote/${myVote.id}`, {
+      method: "DELETE"
+    });
+    if (response.ok) {
+      dispatch(removePostVote(postId));
+      return true;
+    }
+  } else if (!myVote) {
+    response = await fetch(`/api/posts/${postId}/vote`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({value}),
+    });
+    if (response.ok) {
+      const newVote = await response.json();
+      dispatch(addPostVote(postId, newVote));
+      return newVote;
+    }
+  } else {
+    response = await fetch(`/api/posts/${postId}/vote/${myVote.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({value}),
+    });
+    if (response.ok) {
+      const newVote = await response.json();
+      dispatch(modifyPostVote(postId, newVote));
+      return newVote;
+    }
+  }
+
+  const data = await response.json();
+  if (data.errors) {
+    return data;
+  } else {
+    return {errors: ['An error occurred. Please try again.']}
+  }
+}
+
+const addPostVote = (postId, vote) => ({
+  type: ADD_POST_VOTE,
+  postId,
+  vote,
+});
+
+const modifyPostVote = (postId, vote) => ({
+  type: EDIT_POST_VOTE,
+  postId,
+  vote,
+});
+
+const removePostVote = (postId) => ({
+  type: DELETE_POST_VOTE,
   postId,
 });
 
@@ -170,98 +232,19 @@ export default function post_reducer(state = initialState, action) {
       // console.log(action.postId);
       delete newState.obj[action.postId];
       return newState;
-    // case REMOVE_USER:
-    //   return { user: null }
+    case ADD_POST_VOTE:
+      newState.obj[action.postId].myVote = action.vote;
+      newState.obj[action.postId].score += action.vote.value;
+      return newState;
+    case EDIT_POST_VOTE:
+      newState.obj[action.postId].myVote = action.vote;
+      newState.obj[action.postId].score += 2*action.vote.value;
+      return newState;
+    case DELETE_POST_VOTE:
+      newState.obj[action.postId].score -= newState.obj[action.postId].myVote.value;
+      delete newState.obj[action.postId].myVote;
+      return newState;
     default:
       return state;
   }
 }
-
-        // const removeUser = () => ({
-        //   type: REMOVE_USER,
-        // })
-        
-        
-        // export const authenticate = () => async (dispatch) => {
-        //   const response = await fetch('/api/auth/', {
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     }
-        //   });
-        //   if (response.ok) {
-        //     const data = await response.json();
-        //     if (data.errors) {
-        //       return;
-        //     }
-          
-        //     dispatch(setUser(data));
-        //   }
-        // }
-        
-        // export const login = (email, password) => async (dispatch) => {
-        //   const response = await fetch('/api/auth/login', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify({
-        //       email,
-        //       password
-        //     })
-        //   });
-          
-          
-        //   if (response.ok) {
-        //     const data = await response.json();
-        //     dispatch(setUser(data))
-        //     return null;
-        //   } else if (response.status < 500) {
-        //     const data = await response.json();
-        //     if (data.errors) {
-        //       return data.errors;
-        //     }
-        //   } else {
-        //     return ['An error occurred. Please try again.']
-        //   }
-        
-        // }
-        
-        // export const logout = () => async (dispatch) => {
-        //   const response = await fetch('/api/auth/logout', {
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     }
-        //   });
-        
-        //   if (response.ok) {
-        //     dispatch(removeUser());
-        //   }
-        // };
-        
-        
-        // export const signUp = (username, email, password) => async (dispatch) => {
-        //   const response = await fetch('/api/auth/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //       'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //       username,
-        //       email,
-        //       password,
-        //     }),
-        //   });
-          
-        //   if (response.ok) {
-        //     const data = await response.json();
-        //     dispatch(setUser(data))
-        //     return null;
-        //   } else if (response.status < 500) {
-        //     const data = await response.json();
-        //     if (data.errors) {
-        //       return data.errors;
-        //     }
-        //   } else {
-        //     return ['An error occurred. Please try again.']
-        //   }
-        // }

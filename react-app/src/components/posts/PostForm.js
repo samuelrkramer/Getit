@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom';
 import { createPost, deletePost, editPost } from '../../store/post'
+import { Modal } from '../../context/GetitContext';
 
 const PostForm = ({mode}) => {
   let { postId } = useParams();
@@ -18,6 +19,9 @@ const PostForm = ({mode}) => {
   // const [password, setPassword] = useState('');
   // const [repeatPassword, setRepeatPassword] = useState('');
   // const user = useSelector(state => state.session.user);
+
+  const [showModal, setShowModal] = useState(false);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -46,6 +50,11 @@ const PostForm = ({mode}) => {
     // console.log("res.errs:",result.errors)
   };
 
+  const deleteConfirm = e => {
+    e.preventDefault();
+    setShowModal(true);
+  }
+
   const deleteHandler = async (e) => {
     e.preventDefault();
     setErrors([]);
@@ -72,6 +81,7 @@ const PostForm = ({mode}) => {
   let bodyRemain = body.toLowerCase().startsWith("long")?body.length:1000-body.length;
 
   return (
+    <>
     <form onSubmit={submitHandler}>
       <div className="errorBox">
         {errors.map((error, ind) => (
@@ -79,37 +89,52 @@ const PostForm = ({mode}) => {
         ))}
       </div>
       <div className="inputBox">
-        <label><span className="red">*</span>Title</label>
-        <input
-          type='text'
-          name='title'
-          className='field'
-          onChange={ e => setTitle(e.target.value) }
-          value={title}
-        ></input>
-        <span className={`xsmall ${title.length>255?"red":""}`}>
-          {255-title.length}
-        </span>
+        <div>
+          <label><span className="red">*</span>Title</label>
+          <textarea
+            rows='2'
+            type='text'
+            name='title'
+            className='field titleField'
+            onChange={ e => setTitle(e.target.value.replace(/\n/,"")) }
+            value={title}
+            ></textarea>
+          <span className={`xsmall ${title.length>255?"red":""}`}>
+            {255-title.length}
+          </span>
+        </div>
       </div>
       <div className="inputBox">
-        <label>Body</label>
-        <textarea
-          name='body'
-          className='field'
-          onChange={ e => setBody(e.target.value) }
-          value={body}
-        ></textarea>
-        <span className={`xsmall ${bodyRemain<0?"red":""}`}>
-          {bodyRemain}
-        </span>
+        <div>
+          <label>Body</label>
+          <textarea
+            name='body'
+            className='field bodyField'
+            onChange={ e => setBody(e.target.value) }
+            value={body}
+            ></textarea>
+          <span className={`xsmall ${bodyRemain<0?"red":""}`}>
+            {bodyRemain}
+          </span>
+        </div>
       </div>
       <span>*required</span><br />
       <button type='submit'>{mode} Post</button>
       {mode === "Edit" && (
-        <button onClick={deleteHandler}>Delete</button>
+        <button onClick={deleteConfirm}>Delete</button>
       )}
       <button onClick={cancelHandler}>Cancel</button>
     </form>
+    {showModal && (
+      <Modal onClose={() => setShowModal(false)}>
+        <div className="confirm">
+          <p>Are you sure you want to delete this?</p>
+          <button onClick={() => setShowModal(false)} >Cancel</button>
+          <button onClick={deleteHandler} >Delete</button>
+        </div>
+      </Modal>
+    )}
+    </>
   );
 };
 

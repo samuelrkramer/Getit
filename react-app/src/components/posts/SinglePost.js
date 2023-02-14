@@ -5,10 +5,11 @@ import { getOnePost } from '../../store/post';
 import { getPostsComments } from '../../store/comment';
 import PostHeader from './PostHeader';
 import CommentForm from './CommentForm';
+import ShowComment from './ShowComment';
 import { GetitContext } from '../../context/GetitContext';
 import './SinglePost.css'
 import ReactMarkdown from 'react-markdown';
-import humanizeDuration from 'humanize-duration';
+// import humanizeDuration from 'humanize-duration';
 
 function SinglePost() {
   const { setSideAdd } = useContext(GetitContext);
@@ -19,6 +20,7 @@ function SinglePost() {
   const [loaded, setLoaded] = useState(!!post);
   const comments = useSelector(state => state.comments.onPost[postId]);
   const cIds = Object.keys(comments || {});
+  const shareURL = window.location.href.replace(/[\?\#].*$/,"");
 
   const [cForm, setCForm ] = useState(false);
   
@@ -41,28 +43,35 @@ function SinglePost() {
 
   useEffect(() => {
     // const postDate = new Date(Date.parse(post.date));
-    // const urlCLick = e => {
-    //   console.log("test urlclick");
-    //   // window.alert("urlclick fired")
-    //   // window.Clipboard.writeText(e.target.value);
-    // };
+    const urlClick = e => {
+      // console.log("test urlclick");
+      // console.log(e.target);
+      // window.alert("urlclick fired")
+      navigator.clipboard.writeText(shareURL);
+      e.target.innerHTML = "(copied)"
+    };
 
     if (post) {
       const createDate = new Date(Date.parse(post.created_at));
       setSideAdd([(
         <div className="sideSpaced postCard">
-          <span className="tagline">This POST was submitted on {createDate.toLocaleDateString()}</span><br />
-          {post.id} - {post.title}<br />
+          <span className="xsmall">This POST was submitted on {createDate.toLocaleDateString()}</span><br />
+          <div className="scoreCard">
+            <b>
+              {post.score} point{post.score!==1 && (<>s</>)}
+            </b> <span className="xsmall">({Math.round(100*(post.upvotes/post.nVotes || 0))}% upvoted)</span>
+          </div>
           {/* Posted on {postDate.toDateString()}<br/> */}
           {/* Click to copy URL to POST: */}
-          <span className="tagline">Shareable URL:</span>
+          <span className="tagline">Shareable URL: <a onClick={urlClick}>(copy)</a></span>
           <input
             type="text"
+            className="shareURL"
             disabled={true}
             // value={`https://skgetit.heroku.com/posts/${post.id}`}
-            value={window.location.href}
-            style={{width: "280px"}}
-            // onMouseOver={urlCLick}
+            value={shareURL}
+            // style={{width: "280px"}}
+            onClick={ () => console.log("omg it clicked") }
           />
         </div>
       )])
@@ -80,69 +89,35 @@ function SinglePost() {
 
   return (
     <>
-      <PostHeader post={post} />
-      {/* <ul> */}
-        {/* <li>
-          <strong>Post Id</strong> {postId}
-        </li>
-        <li>
-          <strong>User</strong> <Link to={`/users/${post.userId}`}>{post.user.username}</Link>
-        </li>
-        <li>
-          <strong>Title</strong> {post.title}
-        </li> */}
-        {post.body && (
-          <>
-          {/* <span className="rowIndex">{null}</span> */}
-          <div className="body">
-            <ReactMarkdown>
-              {post.body}
-            </ReactMarkdown>
-          </div>
-          </>
-        )}
-        <div className="bigLeftMargin">
-          {post.userId === user.id && (
-            <>
-            <Link to={`/posts/${post.id}/edit`} >Edit</Link><br />
-            </>
-          )}
-        {/* </ul> */}
-        { cForm !== true && user && (<a href="#" onClick={() => setCForm(true)}>Comment on this</a>)}
-        { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
+      <PostHeader post={post} numComments={cIds.length} />
+      {post.body && (
+        <>
+        {/* <span className="rowIndex">{null}</span> */}
+        <div className="body">
+          <ReactMarkdown>
+            {post.body}
+          </ReactMarkdown>
+        </div>
+        </>
+      )}
+      {/* {post.userId === user.id && (
+        <div>
+          <Link to={`/posts/${post.id}/edit`} >Edit</Link><br />
+        </div>
+      )} */}
+      <div className="title">
+        {cIds.length?`viewing ${cIds.length} comments`:"no comments (yet)"}
+        { cForm !== true && user && (<> | <a onClick={() => setCForm(true)}>comment on this</a></>)}
+      { cForm === true && (<CommentForm mode="Create" postId={postId} setCForm={setCForm} />)}
       </div>
       {cIds.length > 0 && (
-        <div className="bigLeftMargin">
-          <h2>Comments:</h2>
+        <div>
           {cIds.map(cId => {
             const comment = comments[cId];
-            const now = new Date();
-            const createDate = new Date(Date.parse(comment.created_at));
-            // const editDate = new Date(Date.parse(comment.updated_at));
-            let edited = false;
-            let dateString = comment.created_at;
-            if (comment.updated_at !== comment.created_at) {
-              dateString += ", edited "+comment.updated_at;
-              edited = true;
-            }
             return (
-            <div key={cId}>
-              {cForm === cId && (<CommentForm mode="Edit" postId={postId} comment={comment} setCForm={setCForm} />)}
-              {cForm !== cId && (
-                <div className="oneComment">
-                  {/* <li><i>Comment ID: {cId}</i></li> */}
-                  <p className="tagline">
-                  <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link> <span title={dateString}>
-                    {humanizeDuration(now-createDate, { largest: 1 } )} ago{edited?"*":""}
-                  </span>
-                  { comment.userId === user.id && (<a href="#" onClick={() => setCForm(cId)} className="xsmall minMarg">Edit</a>)}
-                  </p>
-                  <ReactMarkdown className="commBody">{comment.body}</ReactMarkdown>
-                  {/* <li><i>From: <Link to={`/users/${comment.userId}`}>{comment.user.username}</Link></i></li> */}
-                </div>
-              )}
-            </div>
-          )})}
+              <ShowComment key={cId} comment={comment} cForm={cForm} setCForm={setCForm} />
+            )
+          })}
         </div>
       )}
     </>
