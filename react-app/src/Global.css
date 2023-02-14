@@ -162,21 +162,7 @@ button {
   width: 236px;
   left: 3px;
   right: 3px;
-  /* border: thick double #1C2A38; */
-  /* margin: 8px solid #1C2A38; */
-  /* box-sizing: border-box; */
 }
-
-/* .devCard::before {
-  content: '';
-  position: absolute;
-  top: 3px;
-  bottom: 3px;
-  right: 3px;
-  left: 3px;
-  border: 1px solid white;
-  display: none;
-} */
 
 .sidebar .devCard .logo a {
   color: white;
