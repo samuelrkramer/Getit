@@ -45,18 +45,16 @@ const Sidebar = () => {
           is styled after <a href="https://old.reddit.com" target="_blank">Old Reddit</a>.
         </span>
         <p>Check out the developer, who is eager to join your company.</p>
-          <div className='devLinkBox'>
-            <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
-              <img src={ghIcon} height="72px" alt="GitHub"></img>
-            </a>
-            <a href="https://www.linkedin.com/in/samrkramer" target="_blank" rel="noreferrer">
-              <img src={liIcon} height="72px" alt="LinkedIn"></img>
-            </a>
-          </div>
-          <br />
-          {/* <h3> */}
-            <a href="https://github.com/samuelrkramer/Getit" target="_blank" rel="noreferrer">Project Repo</a>
-          {/* </h3> */}
+        <div className='devLinkBox'>
+          <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
+            <img src={ghIcon} height="72px" alt="GitHub"></img>
+          </a>
+          <a href="https://www.linkedin.com/in/samrkramer" target="_blank" rel="noreferrer">
+            <img src={liIcon} height="72px" alt="LinkedIn"></img>
+          </a>
+        </div>
+        <br />
+        <a href="https://github.com/samuelrkramer/Getit" target="_blank" rel="noreferrer">Project Repo</a>
       </div>
     </div>
   )
