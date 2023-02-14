@@ -155,13 +155,13 @@ button {
   padding: 16px 28px 20px;
   background: #1C2A38;
   position: relative;
-  text-align: center;
-  color: white;
-  border: 1px solid white;
-  outline: 3px solid #1C2A38;
-  width: 236px;
   left: 3px;
   right: 3px;
+  width: 236px;
+  text-align: center;
+  color: white;
+  outline: 3px solid #1C2A38;
+  border: 1px solid white;
 }
 
 .sidebar .devCard .logo a {
