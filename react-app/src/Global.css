@@ -30,7 +30,7 @@ ul, ol {
   list-style: none;
 }
 
-p {
+p, .devCardText {
   font-size: 14px;
   overflow: auto;
   margin-top: 0.35714285714285715em;
@@ -144,6 +144,11 @@ button {
   border-radius: 8px;
 }
 
+.devCard span a {
+  color: orangered;
+  font-weight: bold;
+}
+
 .devCard > a:last-child {
   /* width: 204px; */
   height: 32px;
@@ -173,24 +178,13 @@ button {
   /* margin: 4px 4px; */
   background: #1C2A38;
   position: relative;
+  left: 3px;
+  right: 3px;
+  width: 236px;
   text-align: center;
   color: white;
-  /* border: thick double #1C2A38; */
-  /* margin: 8px solid #1C2A38; */
-  /* box-sizing: border-box; */
-}
-
-.devCardBorder {
-  /* content: ''; */
-  /* position: absolute; */
-  /* top: -3px; */
-  /* bottom: -3px; */
-  /* right: -3px; */
-  /* left: -3px; */
-  border: 3px solid #1C2A38;
-  /* z-index: -1; */
-  padding: 1px;
-  background-color: white;
+  outline: 3px solid #1C2A38;
+  border: 1px solid white;
 }
 
 /* .devCard div,

@@ -39,23 +39,22 @@ const Sidebar = () => {
       {/* Here's sidebar stuff */}
       </div>
       {sideAdd.map(el => (el))}
-      <div className="sideSpaced devCardBorder">
-        <div className="devCard">
-          <Logo />
-          <p>Check out the developer, who is eager to join your company.</p>
-          <div className='devLinkBox'>
-            <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
-              <img src={ghIcon} height="72px" alt="GitHub"></img>
-            </a>
-            <a href="https://www.linkedin.com/in/sam-kramer-3b20b1235/" target="_blank" rel="noreferrer">
-              <img src={liIcon} height="72px" alt="LinkedIn"></img>
-            </a>
-          </div>
-          <br />
-          {/* <h3> */}
-            <a href="https://github.com/samuelrkramer/Getit" target="_blank" rel="noreferrer">Project Repo</a>
-          {/* </h3> */}
+      <div className="sideSpaced devCard">
+        <Logo />
+        <span class="devCardText">
+          is styled after <a href="https://old.reddit.com" target="_blank">Classic Reddit</a>.
+        </span>
+        <p>Check out the developer, who is eager to join your company.</p>
+        <div className='devLinkBox'>
+          <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
+            <img src={ghIcon} height="72px" alt="GitHub"></img>
+          </a>
+          <a href="https://www.linkedin.com/in/samrkramer" target="_blank" rel="noreferrer">
+            <img src={liIcon} height="72px" alt="LinkedIn"></img>
+          </a>
         </div>
+        <br />
+        <a href="https://github.com/samuelrkramer/Getit" target="_blank" rel="noreferrer">Project Repo</a>
       </div>
     </div>
   )
