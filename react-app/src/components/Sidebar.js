@@ -44,7 +44,7 @@ const Sidebar = () => {
         <span class="devCardText">
           is styled after <a href="https://old.reddit.com" target="_blank">Classic Reddit</a>.
         </span>
-        <p>Check out the developer, who is eager to join your company.</p>
+        <p>Check out the <a href="https://samuelrkramer.github.io">developer</a>, who is eager to join your company.</p>
         <div className='devLinkBox'>
           <a href="https://github.com/samuelrkramer" target="_blank" rel="noreferrer">
             <img src={ghIcon} height="72px" alt="GitHub"></img>
