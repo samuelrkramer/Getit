@@ -3,8 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <title>GETit</title>
+    <!-- test output -->
+    <script>
+      console.log("here I am", Date.now());
+      window.addEventListener("load", e => {
+        console.log("onload",Date.now(),e);
+      });
+    </script>
   </head>
   <body>
+    <span id="test">
+      testing
+    </span>
     <div id="root"></div>
   </body>
 </html>
