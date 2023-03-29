@@ -8,6 +8,11 @@
       console.log("here I am", Date.now());
       window.addEventListener("load", e => {
         console.log("onload",Date.now(),e);
+        const span = document.getElementById("test");
+        span.addEventListener("click", e => {
+          e.preventDefault();
+          console.log("clicked!", Date.now());
+        })
       });
     </script>
   </head>
